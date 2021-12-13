@@ -34,9 +34,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.message.text.find('進度') > 0:
-        get_message = "臺南市政府社會局審件中！！\n廠協會籌備會於2021/11/26(五)提出申請，2021/12/10(五)取得社會局修改建議後修改送出審核中！" + event.message.text
-    elif event.message.text == "2":
-        get_message = "廠協會2：" + event.message.text
+        get_message = "『臺南市新吉工業區廠協會』申請進度：\n臺南市政府社會局審件中！！\n廠協會籌備會於2021/11/26(五)提出申請，2021/12/10(五)取得社會局修改建議後修改送出審核中！" + event.message.text
+    elif event.message.text.find('成立時間') > 0:
+        get_message = "『臺南市新吉工業區廠協會』成立時間：\n目前審件中，預定2022/01/01正式開始營運！！"
     else:
         get_message = "廠協會：" + event.message.text
 
