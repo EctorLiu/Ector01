@@ -37,7 +37,7 @@ def handle_message(event):
         get_message = "廠協會1：" + event.message.text
     elif event.message.text == "2":
         get_message = "廠協會2：" + event.message.text
-    else
+    else:
         get_message = "廠協會：" + event.message.text
 
     # Send To Line
