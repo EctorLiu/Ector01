@@ -55,7 +55,7 @@ def handle_message(event):
     elif (temp_message.count('理事長') > 0) and ('誰' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
     elif temp_message.count('版本') > 0:
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC14)0810'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC14)0815'
     else:
         get_message = '『臺南市新吉工業區廠協會』：您好！這是理事長信箱！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！'
 
