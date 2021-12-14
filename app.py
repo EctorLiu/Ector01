@@ -48,7 +48,9 @@ def handle_message(event):
         get_message = '『臺南市新吉工業區廠協會』加入：\n請您在這邊先留言「公司名稱/公司代表姓名/公司代表職稱」或「Line之外的聯絡方式」\n我們將儘速提供您『申請表格』\n感謝您的支持！'
     elif ('理事' in temp_message or '監事' in temp_message or '理監事' in temp_message) and ('名單' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』理監事名單：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉結果：\n理事長 林宗德\n常務理事 洪靖惠\n常務理事 吳依龍\n理事 張崑裕\n理事 陳結和\n理事 吳冠霖\n理事	薛智煜\n理事 郭志霄\n理事 李漢章\n常務監事 黃信夫\n監事 洪愛雅\n監事 洪志豪'
-    elif temp_message.count('理事長') > 0:
+    elif ('總幹事' in temp_message) and ('誰' in temp_message):
+        get_message = '『臺南市新吉工業區廠協會』總幹事：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
+    elif (temp_message.count('理事長') > 0) and ('誰' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
     elif temp_message.count('版本') > 0:
         get_message = '『臺南市新吉工業區廠協會』版本：\n(LC13)1558'
