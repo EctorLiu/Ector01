@@ -43,9 +43,9 @@ def handle_message(event):
         # (B)成立資訊
         get_message = '『臺南市新吉工業區廠協會』成立：\n臺南市政府社會局審件中...\n廠協會籌備會於2021/11/26(五)提出申請\n2021/12/10(五)社會局通知需修改部分內容\n修改V2審核中...\n\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n(最新狀態)目前立案申請審件之中，預定2022/01/01正式開始營運！！'
 
-    elif '如何加入' in temp_message or '加入廠協會' in temp_message:
+    elif ('廠協會' in temp_message) and ('如何加入' in temp_message or '加入會員' in temp_message):
         # (C)如何加入
-        get_message = '『臺南市新吉工業區廠協會』加入：\n請您在這邊先留言「公司名稱/公司代表姓名/公司代表職稱」或「Line之外的聯絡方式」\n我們將儘速提供您『申請表格』\n感謝您的支持！'
+        get_message = '『臺南市新吉工業區廠協會』加入：\n請您使用下方超連結：\nhttps://forms.gle/bxDLMLgA2fSLCDia9\n(1)以表單內超連結下載『會員入會申請書』\n(2)請填寫內容並用印(大小章)\n(3)請完成入會申請費用之繳納\n(4)請於表單中回傳『會員入會申請書（含大小章）』之掃描檔\n..與『匯款單』之照片或掃描檔\n我們會盡快處理並回覆！\n感謝您的支持！'
     elif ('廠協會' in temp_message) and ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or '在哪' in temp_message or '在那' in temp_message):
         # (E)廠協會會址
         get_message = '『臺南市新吉工業區廠協會』地址：\n臺南市新吉工業區新吉三路55號\n歡迎您的蒞臨指教！'
