@@ -45,7 +45,7 @@ def handle_message(event):
 
     elif ('廠協會' in temp_message) and ('如何加入' in temp_message or '加入會員' in temp_message):
         # (C)如何加入
-        get_message = '『臺南市新吉工業區廠協會』加入：\n\n(Step01)請下載並填寫『會員入會申請書』紙本\nhttps://bit.ly/3EZjgpO\n請填寫內容並用印(大小章)\n\n(Step02)請使用超連結：\nhttps://forms.gle/bxDLMLgA2fSLCDia9\n上方有廠協會帳戶資訊：\n匯款後請以手機或掃描方式留存匯款資料\n(Step03)請使用同一超連結：\nhttps://forms.gle/bxDLMLgA2fSLCDia9\n『會員入會申請書（含大小章）』之掃描檔\n以及『匯款單』之照片或掃描檔\n\n我們會盡快通知理事會並處理回覆！\n感謝您的支持！'
+        get_message = '『臺南市新吉工業區廠協會』加入：\n\n(Step01)請下載並填寫『會員入會申請書』紙本\nhttps://bit.ly/3EZjgpO\n請填寫內容並用印(大小章)\n\n(Step02)請用超連結：\nhttps://forms.gle/bxDLMLgA2fSLCDia9\n最上方處有廠協會帳戶資訊\n匯款後請以手機或掃描方式留存匯款資料\n\n(Step03)請用同超連結：\nhttps://forms.gle/bxDLMLgA2fSLCDia9\n上傳『會員入會申請書(用印)』之掃描檔\n以及『匯款單』之照片或掃描檔\n\n我們會盡快通知理事會並回覆！\n感謝您的支持！'
     elif ('廠協會' in temp_message) and ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or '在哪' in temp_message or '在那' in temp_message):
         # (E)廠協會會址
         get_message = '『臺南市新吉工業區廠協會』地址：\n臺南市新吉工業區新吉三路55號\n歡迎您的蒞臨指教！'
@@ -65,7 +65,7 @@ def handle_message(event):
 
     elif temp_message.count('Ver') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC16)1210'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC16)1220'
 
     else:
         get_message = '『臺南市新吉工業區廠協會』：\n您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n=====\n也許您可用下述常用關鍵字查詢：\n「廠協會立案進度」\n「如何加入廠協會」\n「廠協會地址」\n「廠協會會員名單」\n「理監事名單」\n「理事長由誰擔任」等..'
