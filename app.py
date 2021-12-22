@@ -118,7 +118,10 @@ def handle_message(event):
         # 冠伶權杖：
         token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
         lineNotifyMessage(token, message)
-        
+        # 昆霖權杖：
+        token = 'DlnuXIvVIjAMW5NUzhiv1GgOzTKjxBBLYyUwr7mWFRG'
+        lineNotifyMessage(token, message)
+
         # lineNotifyMessage(token, message)
         
         #文字訊息
