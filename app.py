@@ -111,8 +111,13 @@ def handle_message(event):
         message = get_message
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
-        # lineNotifyMessage(token, message)
         lineNotifyMessage(token, message)
+        # CF權杖：
+        token = 'O3ZJibttyDdM5BXAaDvAK1EMCAlWA8DwnwnCpFslcoP'
+        lineNotifyMessage(token, message)
+        
+        # lineNotifyMessage(token, message)
+        
         #文字訊息
         # reply = TextSendMessage(text=f"{get_message}")
         # line_bot_api.reply_message(event.reply_token,  reply)
