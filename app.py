@@ -112,6 +112,9 @@ def handle_message(event):
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
         lineNotifyMessage(token, message)
+        # 智弘權杖：
+        token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
+        lineNotifyMessage(token, message)
         # 冠伶權杖：
         token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
         lineNotifyMessage(token, message)
