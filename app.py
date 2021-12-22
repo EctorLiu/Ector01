@@ -119,7 +119,7 @@ def handle_message(event):
         token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
         lineNotifyMessage(token, message)
         # 昆霖權杖：
-        token = 'DlnuXIvVIjAMW5NUzhiv1GgOzTKjxBBLYyUwr7mWFRG'
+        token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
         lineNotifyMessage(token, message)
 
         # lineNotifyMessage(token, message)
