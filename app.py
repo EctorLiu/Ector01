@@ -110,7 +110,7 @@ def handle_message(event):
         # 修改為你要傳送的訊息內容
         message = get_message
         # EctorLiu權杖：
-        token = 'TG4MfU7vPQd1c9ic4gcFUwxLAlEpPSY5GJ63vl5z0Ll'
+        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
         # lineNotifyMessage(token, message)
         lineNotifyMessage(token, message)
         #文字訊息
