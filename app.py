@@ -1,3 +1,6 @@
+# 推播
+import requests
+
 import os
 from datetime import datetime
 
@@ -13,6 +16,18 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
 
+    ###################################################
+# 推播相關部分
+def lineNotifyMessage(token, msg):
+    headers = {
+      "Authorization": "Bearer " + token, 
+      "Content-Type" : "application/x-www-form-urlencoded"
+    }
+    payload = {'message': msg}
+    r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
+    return r.status_code
+
+    ###################################################
 
 @app.route("/", methods=["GET", "POST"])
 def callback():
@@ -33,6 +48,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    # 確認資料類別
+    get_TYPE_message = 'Initial'
+
     # 取得事件變數
     temp_message = event.message.text
 
@@ -63,6 +81,16 @@ def handle_message(event):
         # (H)理監事是誰
         get_message = '『臺南市新吉工業區廠協會』理事長：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
+    ###################################################
+
+    elif ('TSVI推播' in temp_message):
+        # (B)測試推播
+        get_TYPE_message = 'TSVI推播'
+        temp_message = temp_message.strip('TSVI推播')
+        get_message = '\n' + temp_message
+
+    ###################################################
+    
     elif temp_message.count('Ver') > 0:
         # (Z)Ver
         get_message = '『臺南市新吉工業區廠協會』版本：\n(LC16)1220'
@@ -73,3 +101,23 @@ def handle_message(event):
     # Send To Line
     reply = TextSendMessage(text=f"{get_message}")
     line_bot_api.reply_message(event.reply_token,  reply)
+
+    # Send To Line
+    if get_TYPE_message == 'Initial':
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message = 'TSVI推播':
+        # 修改為你要傳送的訊息內容
+        message = get_message
+        # EctorLiu權杖：
+        token = 'TG4MfU7vPQd1c9ic4gcFUwxLAlEpPSY5GJ63vl5z0Ll'
+        # lineNotifyMessage(token, message)
+        lineNotifyMessage(token, message)
+        #文字訊息
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    else:
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
