@@ -106,7 +106,7 @@ def handle_message(event):
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
-    elif get_TYPE_message = 'TSVI推播':
+    elif get_TYPE_message == 'TSVI推播':
         # 修改為你要傳送的訊息內容
         message = get_message
         # EctorLiu權杖：
