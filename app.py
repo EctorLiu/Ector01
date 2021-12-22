@@ -48,11 +48,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    # 確認資料類別
-    get_TYPE_message = 'Initial'
-
     # 取得事件變數
     temp_message = event.message.text
+
+    # 確認資料類別
+    get_TYPE_message = 'Initial'
 
     if temp_message == '您好':
         # (A)禮貌回覆
@@ -84,7 +84,7 @@ def handle_message(event):
     ###################################################
 
     elif ('TSVI推播' in temp_message):
-        # (B)測試推播
+        # (T)測試推播
         get_TYPE_message = 'TSVI推播'
         temp_message = temp_message.strip('TSVI推播')
         get_message = '\n' + temp_message
@@ -100,9 +100,6 @@ def handle_message(event):
     else:
         get_message = '『臺南市新吉工業區廠協會』：\n您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n=====\n也許您可用下述常用關鍵字查詢：\n「廠協會立案進度」\n「如何加入廠協會」\n「廠協會地址」\n「廠協會會員名單」\n「理監事名單」\n「理事長由誰擔任」等..'
 
-    # Send To Line
-    reply = TextSendMessage(text=f"{get_message}")
-    line_bot_api.reply_message(event.reply_token,  reply)
 
     # Send To Line
     if get_TYPE_message == 'Initial':
