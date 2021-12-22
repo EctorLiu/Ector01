@@ -93,7 +93,7 @@ def handle_message(event):
     
     elif temp_message.count('Ver') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC22)1620'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC22)2235'
 
     ###################################################
 
