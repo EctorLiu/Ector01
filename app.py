@@ -87,6 +87,7 @@ def handle_message(event):
     ###################################################
 
     else:
+        get_TYPE_message = '非關鍵字的留言'
         get_message = '『臺南市新吉工業區廠協會』：\n您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n=====\n也許您可用下述常用關鍵字查詢：\n「廠協會立案進度」\n「如何加入廠協會」\n「廠協會地址」\n「廠協會會員名單」\n「理監事名單」\n「理事長由誰擔任」等..'
 
 
@@ -94,27 +95,6 @@ def handle_message(event):
     if get_TYPE_message == 'Initial':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
-
-        ##### 推播 #####
-        # 修改為你要傳送的訊息內容
-        # message = get_message
-        message = '廠協會有留言：' + temp_message
-
-        # EctorLiu權杖：
-        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
-        lineNotifyMessage(token, message)
-        # 智弘權杖：
-        token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
-        lineNotifyMessage(token, message)
-        # 冠伶權杖：
-        token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
-        lineNotifyMessage(token, message)
-        # 昆霖權杖：
-        token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
-        lineNotifyMessage(token, message)
-        # ***** ***** ***** ***** *****
-
-        # lineNotifyMessage(token, message)
 
     elif get_TYPE_message == 'TSVI推播':
         ##### 推播 #####
@@ -135,16 +115,12 @@ def handle_message(event):
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
-        # lineNotifyMessage(token, message)
-        
+        # lineNotifyMessage(token, message)        
         #文字訊息
         # reply = TextSendMessage(text=f"{get_message}")
         # line_bot_api.reply_message(event.reply_token,  reply)
 
-    else:
-        reply = TextSendMessage(text=f"{get_message}")
-        line_bot_api.reply_message(event.reply_token,  reply)
-
+    elif get_TYPE_message == '非關鍵字的留言':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
         # message = get_message
@@ -163,6 +139,10 @@ def handle_message(event):
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
+        
+    else:
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
 
 
     ##### 以下為子程式區域 #####
