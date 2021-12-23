@@ -17,17 +17,6 @@ line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
 
     ###################################################
-# 推播相關部分
-def lineNotifyMessage(token, msg):
-    headers = {
-      "Authorization": "Bearer " + token, 
-      "Content-Type" : "application/x-www-form-urlencoded"
-    }
-    payload = {'message': msg}
-    r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
-    return r.status_code
-
-    ###################################################
 
 @app.route("/", methods=["GET", "POST"])
 def callback():
@@ -106,9 +95,10 @@ def handle_message(event):
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
-    elif get_TYPE_message == 'TSVI推播':
+        ##### 推播 #####
         # 修改為你要傳送的訊息內容
         message = get_message
+
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
         lineNotifyMessage(token, message)
@@ -121,6 +111,28 @@ def handle_message(event):
         # 昆霖權杖：
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
         lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
+
+        # lineNotifyMessage(token, message)
+
+    elif get_TYPE_message == 'TSVI推播':
+        ##### 推播 #####
+        # 修改為你要傳送的訊息內容
+        message = get_message
+
+        # EctorLiu權杖：
+        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
+        lineNotifyMessage(token, message)
+        # 智弘權杖：
+        token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
+        lineNotifyMessage(token, message)
+        # 冠伶權杖：
+        token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
+        lineNotifyMessage(token, message)
+        # 昆霖權杖：
+        token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
+        lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
 
         # lineNotifyMessage(token, message)
         
@@ -131,3 +143,36 @@ def handle_message(event):
     else:
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
+
+        ##### 推播 #####
+        # 修改為你要傳送的訊息內容
+        message = get_message
+
+        # EctorLiu權杖：
+        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
+        lineNotifyMessage(token, message)
+        # 智弘權杖：
+        token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
+        lineNotifyMessage(token, message)
+        # 冠伶權杖：
+        token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
+        lineNotifyMessage(token, message)
+        # 昆霖權杖：
+        token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
+        lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
+
+
+    ##### 以下為子程式區域 #####
+
+# 推播相關部分
+def lineNotifyMessage(token, msg):
+    headers = {
+      "Authorization": "Bearer " + token, 
+      "Content-Type" : "application/x-www-form-urlencoded"
+    }
+    payload = {'message': msg}
+    r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
+    return r.status_code
+
+    # ***** ***** ***** ***** *****
