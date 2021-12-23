@@ -82,6 +82,24 @@ def handle_message(event):
         temp_message = temp_message.upper()
         temp_message = temp_message.strip('TSVI推播PROG')
         get_message = '\n' + temp_message
+    elif ('TSVI推播智弘' in temp_message.upper()):
+        # (T1)推播
+        get_TYPE_message = 'TSVI2智弘'
+        temp_message = temp_message.upper()
+        temp_message = temp_message.strip('TSVI推播智弘')
+        get_message = '\n' + temp_message
+    elif ('TSVI推播冠伶' in temp_message.upper()):
+        # (T1)推播
+        get_TYPE_message = 'TSVI2冠伶'
+        temp_message = temp_message.upper()
+        temp_message = temp_message.strip('TSVI推播冠伶')
+        get_message = '\n' + temp_message
+    elif ('TSVI推播昆霖' in temp_message.upper()):
+        # (T1)推播
+        get_TYPE_message = 'TSVI2昆霖'
+        temp_message = temp_message.upper()
+        temp_message = temp_message.strip('TSVI推播昆霖')
+        get_message = '\n' + temp_message
     elif ('TSVI推播' in temp_message):
         # (T2)推播
         get_TYPE_message = 'TSVI一般推播'
@@ -92,7 +110,7 @@ def handle_message(event):
     ##### (Ver)版本 #####    
     elif temp_message.count('Ver') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)0830'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)0835'
 
     # ***** ***** ***** ***** *****
 
@@ -111,7 +129,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI推播程式管理員':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = '(Admin)\n' + get_message
+        message = '(Admin)' + get_message
 
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
@@ -122,6 +140,36 @@ def handle_message(event):
         #文字訊息
         # reply = TextSendMessage(text=f"{get_message}")
         # line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'TSVI2智弘':
+        ##### 推播 #####
+        # 修改為你要傳送的訊息內容
+        message = get_message
+
+        # 智弘權杖：
+        token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
+        lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
+
+    elif get_TYPE_message == 'TSVI2冠伶':
+        ##### 推播 #####
+        # 修改為你要傳送的訊息內容
+        message = get_message
+
+        # 冠伶權杖：
+        token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
+        lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
+
+    elif get_TYPE_message == 'TSVI2昆霖':
+        ##### 推播 #####
+        # 修改為你要傳送的訊息內容
+        message = get_message
+
+        # 昆霖權杖：
+        token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
+        lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
 
     elif get_TYPE_message == 'TSVI一般推播':
         ##### 推播 #####
