@@ -70,21 +70,20 @@ def handle_message(event):
         # (H)理監事是誰
         get_message = '『臺南市新吉工業區廠協會』理事長：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
-    ###################################################
-
+    ##### (TSVI)推播 #####
     elif ('TSVI推播' in temp_message):
         # (T)測試推播
         get_TYPE_message = 'TSVI推播'
         temp_message = temp_message.strip('TSVI推播')
         get_message = '\n' + temp_message
+    # ***** ***** ***** ***** *****
 
-    ###################################################
-    
+    ##### (Ver)版本 #####    
     elif temp_message.count('Ver') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)0810'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)0815'
 
-    ###################################################
+    # ***** ***** ***** ***** *****
 
     else:
         get_TYPE_message = '非關鍵字的留言'
@@ -124,7 +123,7 @@ def handle_message(event):
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
         # message = get_message
-        message = '廠協會有留言：' + temp_message
+        message = '廠協會有留言如下：\n' + temp_message
 
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
