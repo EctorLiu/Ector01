@@ -157,7 +157,7 @@ def handle_message(event):
         message = '(只推冠伶)' + get_message
 
         # 冠伶權杖：
-        token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
+        token = 'Nl4oSAcKqwQnhL1hJpsjsDiVvSUaEZTDmkuthCkENLN'
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
