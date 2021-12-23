@@ -183,7 +183,7 @@ def handle_message(event):
         token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
         lineNotifyMessage(token, message)
         # 冠伶權杖：
-        token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
+        token = 'Nl4oSAcKqwQnhL1hJpsjsDiVvSUaEZTDmkuthCkENLN'
         lineNotifyMessage(token, message)
         # 昆霖權杖：
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
@@ -203,7 +203,7 @@ def handle_message(event):
         token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
         lineNotifyMessage(token, message)
         # 冠伶權杖：
-        token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
+        token = 'Nl4oSAcKqwQnhL1hJpsjsDiVvSUaEZTDmkuthCkENLN'
         lineNotifyMessage(token, message)
         # 昆霖權杖：
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
