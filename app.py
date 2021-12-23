@@ -81,41 +81,53 @@ def handle_message(event):
         get_TYPE_message = 'TSVI推播程式管理員'
         temp_message = temp_message.upper()
         temp_message = temp_message.strip('TSVI推播PROG')
-        get_message = '\n' + temp_message
+        get_message = '(Admin)\n' + temp_message
+    elif ('TSVI推播ECTOR' in temp_message.upper()):
+        # (T1)推播
+        get_TYPE_message = 'TSVI2Ector'
+        temp_message = temp_message.upper()
+        temp_message = temp_message.strip('TSVI推播ECTOR')
+        get_message = '(只推Ector)\n' + temp_message
     elif ('TSVI推播智弘' in temp_message.upper()):
         # (T1)推播
         get_TYPE_message = 'TSVI2智弘'
         temp_message = temp_message.upper()
         temp_message = temp_message.strip('TSVI推播智弘')
-        get_message = '\n' + temp_message
+        get_message = '(只推智弘)\n' + temp_message
     elif ('TSVI推播冠伶' in temp_message.upper()):
         # (T1)推播
         get_TYPE_message = 'TSVI2冠伶'
         temp_message = temp_message.upper()
         temp_message = temp_message.strip('TSVI推播冠伶')
-        get_message = '\n' + temp_message
+        get_message = '(只推冠伶)\n' + temp_message
     elif ('TSVI推播昆霖' in temp_message.upper()):
         # (T1)推播
         get_TYPE_message = 'TSVI2昆霖'
         temp_message = temp_message.upper()
         temp_message = temp_message.strip('TSVI推播昆霖')
-        get_message = '\n' + temp_message
-    elif ('TSVI推播' in temp_message):
+        get_message = '(只推昆霖)\n' + temp_message
+    elif ('TSVI推播宜庭' in temp_message.upper()):
+        # (T1)推播
+        get_TYPE_message = 'TSVI2宜庭'
+        temp_message = temp_message.upper()
+        temp_message = temp_message.strip('TSVI推播宜庭')
+        get_message = '(只推宜庭)\n' + temp_message
+    elif ('TSVI推播全部' in temp_message):
         # (T2)推播
-        get_TYPE_message = 'TSVI一般推播'
-        temp_message = temp_message.strip('TSVI推播')
-        get_message = '\n' + temp_message
+        get_TYPE_message = 'TSVI推播全部'
+        temp_message = temp_message.strip('TSVI推播全部')
+        get_message = '(推全部)\n' + temp_message
     # ***** ***** ***** ***** *****
 
     ##### (Ver)版本 #####    
     elif temp_message.upper().count('VER') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)1057'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)2200'
 
     # ***** ***** ***** ***** *****
 
     else:
-        get_TYPE_message = '非關鍵字的留言'
+        get_TYPE_message = 'TSVI非關鍵字的留言'
         get_message = '『臺南市新吉工業區廠協會』：\n您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n=====\n也許您可用下述常用關鍵字查詢：\n「廠協會立案進度」\n「如何加入廠協會」\n「廠協會地址」\n「廠協會會員名單」\n「理監事名單」\n「理事長由誰擔任」等..'
 
         
@@ -129,7 +141,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI推播程式管理員':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = '(Admin)' + get_message
+        message = get_message
 
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
@@ -141,10 +153,20 @@ def handle_message(event):
         # reply = TextSendMessage(text=f"{get_message}")
         # line_bot_api.reply_message(event.reply_token,  reply)
 
+    elif get_TYPE_message == 'TSVI2Ector':
+        ##### 推播 #####
+        # 修改為你要傳送的訊息內容
+        message = get_message
+
+        # EctorLiu權杖：
+        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
+        lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
+
     elif get_TYPE_message == 'TSVI2智弘':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = '(只推智弘)' + get_message
+        message = get_message
 
         # 智弘權杖：
         token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
@@ -154,7 +176,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2冠伶':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = '(只推冠伶)' + get_message
+        message = get_message
 
         # 冠伶權杖：
         token = 'Nl4oSAcKqwQnhL1hJpsjsDiVvSUaEZTDmkuthCkENLN'
@@ -164,17 +186,27 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2昆霖':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = '(只推昆霖)' + get_message
+        message = get_message
 
         # 昆霖權杖：
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
-    elif get_TYPE_message == 'TSVI一般推播':
+    elif get_TYPE_message == 'TSVI2宜庭':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = '(推全部)' +get_message
+        message = get_message
+
+        # 宜庭權杖：        
+        token = 'SmLwU8fGy4xJNKbFmlSEpcTklNuXVY7S7Gn6ijTeQSz'
+        lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
+
+    elif get_TYPE_message == 'TSVI推播全部':
+        ##### 推播 #####
+        # 修改為你要傳送的訊息內容
+        message = get_message
 
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
@@ -188,9 +220,12 @@ def handle_message(event):
         # 昆霖權杖：
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
         lineNotifyMessage(token, message)
+        # 宜庭權杖：        
+        token = 'SmLwU8fGy4xJNKbFmlSEpcTklNuXVY7S7Gn6ijTeQSz'
+        lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
-    elif get_TYPE_message == '非關鍵字的留言':
+    elif get_TYPE_message == 'TSVI非關鍵字的留言':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
         # message = get_message
@@ -207,6 +242,9 @@ def handle_message(event):
         lineNotifyMessage(token, message)
         # 昆霖權杖：
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
+        lineNotifyMessage(token, message)
+        # 宜庭權杖：        
+        token = 'SmLwU8fGy4xJNKbFmlSEpcTklNuXVY7S7Gn6ijTeQSz'
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
         
