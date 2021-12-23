@@ -144,7 +144,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2智弘':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = '(只推智弘)' + get_message
 
         # 智弘權杖：
         token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
@@ -154,7 +154,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2冠伶':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = '(只推冠伶)' + get_message
 
         # 冠伶權杖：
         token = 'nVddzLmVDon8unXi3Y1umMpahtp1fRwGMlNaEhjuNtO'
@@ -164,7 +164,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2昆霖':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = '(只推昆霖)' + get_message
 
         # 昆霖權杖：
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
@@ -174,7 +174,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI一般推播':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = '(推全部)' +get_message
 
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
