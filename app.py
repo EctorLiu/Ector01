@@ -97,7 +97,8 @@ def handle_message(event):
 
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        # message = get_message
+        message = '廠協會有留言：' + temp_message
 
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
@@ -118,8 +119,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI推播':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        # message = get_message
-        message = '廠協會有留言：' + temp_message
+        message = get_message
 
         # EctorLiu權杖：
         token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
