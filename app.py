@@ -1,22 +1,27 @@
-# 推播
+# ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
+
+    ##### (TSVI)推播 ######
 import requests
+    # ***** ***** ***** ***** *****
 
 import os
 from datetime import datetime
-
 from flask import Flask, abort, request
 
+    ##### Python ######
 # https://github.com/line/line-bot-sdk-python
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
+    # ***** ***** ***** ***** *****
 
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
 
-    ###################################################
+
+# ===== ===== ===== ===== ===== 【程式區域】 ===== ===== ===== ===== =====
 
 @app.route("/", methods=["GET", "POST"])
 def callback():
@@ -71,9 +76,15 @@ def handle_message(event):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
     ##### (TSVI)推播 #####
+    elif ('TSVI推播PROG' in temp_message.upper()):
+        # (T1)推播
+        get_TYPE_message = 'TSVI推播程式管理員'
+        temp_message = temp_message.upper()
+        temp_message = temp_message.strip('TSVI推播PROG')
+        get_message = '\n' + temp_message
     elif ('TSVI推播' in temp_message):
-        # (T)測試推播
-        get_TYPE_message = 'TSVI推播'
+        # (T2)推播
+        get_TYPE_message = 'TSVI一般推播'
         temp_message = temp_message.strip('TSVI推播')
         get_message = '\n' + temp_message
     # ***** ***** ***** ***** *****
@@ -81,7 +92,7 @@ def handle_message(event):
     ##### (Ver)版本 #####    
     elif temp_message.count('Ver') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)0815'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)0828'
 
     # ***** ***** ***** ***** *****
 
@@ -89,13 +100,30 @@ def handle_message(event):
         get_TYPE_message = '非關鍵字的留言'
         get_message = '『臺南市新吉工業區廠協會』：\n您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n=====\n也許您可用下述常用關鍵字查詢：\n「廠協會立案進度」\n「如何加入廠協會」\n「廠協會地址」\n「廠協會會員名單」\n「理監事名單」\n「理事長由誰擔任」等..'
 
+        
+# ===== ===== ===== ===== ===== 【Line區域】 ===== ===== ===== ===== =====
 
     # Send To Line
     if get_TYPE_message == 'Initial':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
-    elif get_TYPE_message == 'TSVI推播':
+    elif get_TYPE_message == 'TSVI推播程式管理員':
+        ##### 推播 #####
+        # 修改為你要傳送的訊息內容
+        message = get_message
+
+        # EctorLiu權杖：
+        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
+        lineNotifyMessage(token, message)
+        # ***** ***** ***** ***** *****
+
+        # lineNotifyMessage(token, message)        
+        #文字訊息
+        # reply = TextSendMessage(text=f"{get_message}")
+        # line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'TSVI一般推播':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
         message = get_message
@@ -113,11 +141,6 @@ def handle_message(event):
         token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
-
-        # lineNotifyMessage(token, message)        
-        #文字訊息
-        # reply = TextSendMessage(text=f"{get_message}")
-        # line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == '非關鍵字的留言':
         ##### 推播 #####
@@ -144,7 +167,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,  reply)
 
 
-    ##### 以下為子程式區域 #####
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
 
 # 推播相關部分
 def lineNotifyMessage(token, msg):
