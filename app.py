@@ -4,10 +4,6 @@
 import requests
     # ***** ***** ***** ***** *****
 
-import os
-from datetime import datetime
-from flask import Flask, abort, request
-
     ##### Python ######
 # https://github.com/line/line-bot-sdk-python
 from linebot import LineBotApi, WebhookHandler
@@ -15,11 +11,21 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
     # ***** ***** ***** ***** *****
 
+    ##### Flask ######
+from flask import Flask, abort, request
 app = Flask(__name__)
+    # ***** ***** ***** ***** *****
 
-line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
-handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
+    ##### Line ######
+from config import * 
 
+line_bot_api = LineBotApi(strchannel_access_token)
+handler = WebhookHandler(strchannel_secret)
+    # ***** ***** ***** ***** *****
+
+    ##### 日期時間 ######
+from datetime import datetime
+    # ***** ***** ***** ***** *****
 
 # ===== ===== ===== ===== ===== 【程式區域】 ===== ===== ===== ===== =====
 
