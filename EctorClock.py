@@ -23,7 +23,7 @@ sched = BlockingScheduler()
 # @sched.scheduled_job('cron', day_of_week = 'mon-fri', hour = 11, minute = 35, second = 05)
 
 # @sched.scheduled_job('cron', year = 2021, month = 12, day = 25, minute = 20)
-@sched.scheduled_job('cron', year = 2021, month = 12, day = 27, hour = 12, minute = 0, second = 0)
+@sched.scheduled_job('cron', year = 2021, month = 12, day = 27, hour = 12, minute = 2, second = 30)
 
 def scheduled_job():
     datNow = datetime.now()
