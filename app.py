@@ -128,7 +128,7 @@ def handle_message(event):
     ##### (Ver)版本 #####    
     elif temp_message.upper().count('VER') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC23)2200'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC27)1128'
 
     # ***** ***** ***** ***** *****
 
@@ -150,7 +150,7 @@ def handle_message(event):
         message = get_message
 
         # EctorLiu權杖：
-        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
+        token = strEctorToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
@@ -165,7 +165,7 @@ def handle_message(event):
         message = get_message
 
         # EctorLiu權杖：
-        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
+        token = strEctorToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
@@ -175,7 +175,7 @@ def handle_message(event):
         message = get_message
 
         # 智弘權杖：
-        token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
+        token = strJohnboToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
@@ -185,7 +185,7 @@ def handle_message(event):
         message = get_message
 
         # 冠伶權杖：
-        token = 'Nl4oSAcKqwQnhL1hJpsjsDiVvSUaEZTDmkuthCkENLN'
+        token = strGwenToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
@@ -195,7 +195,7 @@ def handle_message(event):
         message = get_message
 
         # 昆霖權杖：
-        token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
+        token = strKunToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
@@ -205,7 +205,7 @@ def handle_message(event):
         message = get_message
 
         # 宜庭權杖：        
-        token = 'SmLwU8fGy4xJNKbFmlSEpcTklNuXVY7S7Gn6ijTeQSz'
+        token = strMichelleToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
@@ -215,19 +215,19 @@ def handle_message(event):
         message = get_message
 
         # EctorLiu權杖：
-        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
+        token = strEctorToken
         lineNotifyMessage(token, message)
         # 智弘權杖：
-        token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
+        token = strJohnboToken
         lineNotifyMessage(token, message)
         # 冠伶權杖：
-        token = 'Nl4oSAcKqwQnhL1hJpsjsDiVvSUaEZTDmkuthCkENLN'
+        token = strGwenToken
         lineNotifyMessage(token, message)
         # 昆霖權杖：
-        token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
+        token = strKunToken
         lineNotifyMessage(token, message)
         # 宜庭權杖：        
-        token = 'SmLwU8fGy4xJNKbFmlSEpcTklNuXVY7S7Gn6ijTeQSz'
+        token = strMichelleToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
@@ -238,19 +238,19 @@ def handle_message(event):
         message = '廠協會有留言如下：\n' + temp_message
 
         # EctorLiu權杖：
-        token = 'fz684r2WIaxMU3PCZ3nKaTDoiyFVkCNezGXHDyaiBUg'
+        token = strEctorToken
         lineNotifyMessage(token, message)
         # 智弘權杖：
-        token = 'y1hnAMWKYk5jKU2flBQO5JRyTvpDTTOJMAVpHRDVIqC'
+        token = strJohnboToken
         lineNotifyMessage(token, message)
         # 冠伶權杖：
-        token = 'Nl4oSAcKqwQnhL1hJpsjsDiVvSUaEZTDmkuthCkENLN'
+        token = strGwenToken
         lineNotifyMessage(token, message)
         # 昆霖權杖：
-        token = 'JtjXyNHfdDTaESv3YGErLukPLnjDG6096d1yhjoRwlM'
+        token = strKunToken
         lineNotifyMessage(token, message)
         # 宜庭權杖：        
-        token = 'SmLwU8fGy4xJNKbFmlSEpcTklNuXVY7S7Gn6ijTeQSz'
+        token = strMichelleToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
         
