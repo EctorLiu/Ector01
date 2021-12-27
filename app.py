@@ -128,7 +128,7 @@ def handle_message(event):
     ##### (Ver)版本 #####    
     elif temp_message.upper().count('VER') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC27)1128'
+        get_message = '『臺南市新吉工業區廠協會』版本：\n(LC27)1138'
 
     # ***** ***** ***** ***** *****
 
@@ -264,11 +264,11 @@ def handle_message(event):
 # 推播相關部分
 def lineNotifyMessage(token, msg):
     headers = {
-      "Authorization": "Bearer " + token, 
-      "Content-Type" : "application/x-www-form-urlencoded"
+      'Authorization': 'Bearer ' + token, 
+      'Content-Type' : 'application/x-www-form-urlencoded'
     }
     payload = {'message': msg}
-    r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
+    r = requests.post('https://notify-api.line.me/api/notify', headers = headers, params = payload)
     return r.status_code
 
     # ***** ***** ***** ***** *****
