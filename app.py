@@ -61,7 +61,7 @@ def handle_message(event):
     if temp_message == '您好':
         # (A)禮貌回覆
         get_message = '『臺南市新吉工業區廠協會』：' + event.message.text
-    elif ('廠協會' in temp_message) and ((('立案' in temp_message) and ('進度' in temp_message or '狀態' in temp_message)) or '成立' in temp_message):
+    elif ('廠協會' in temp_message) and ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
         # (B)成立資訊
         get_message = '『臺南市新吉工業區廠協會』成立：\n' + \
             '臺南市政府社會局審件中...\n' + \
