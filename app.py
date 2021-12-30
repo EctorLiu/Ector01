@@ -8,24 +8,21 @@ strVer = '(LC30)1520'
 import requests
     # ***** ***** ***** ***** *****
 
-    ##### Python ######
+    ##### Line ######
 # https://github.com/line/line-bot-sdk-python
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import *
+from config import * 
+# from linebot.models import MessageEvent, TextMessage, TextSendMessage
+
+line_bot_api = LineBotApi(strchannel_access_token)
+handler = WebhookHandler(strchannel_secret)
     # ***** ***** ***** ***** *****
 
     ##### Flask ######
 from flask import Flask, abort, request
 app = Flask(__name__)
-    # ***** ***** ***** ***** *****
-
-    ##### Line ######
-from config import * 
-from linebot.models import *
-
-line_bot_api = LineBotApi(strchannel_access_token)
-handler = WebhookHandler(strchannel_secret)
     # ***** ***** ***** ***** *****
 
     ##### 日期時間 ######
