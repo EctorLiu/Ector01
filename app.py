@@ -250,29 +250,6 @@ def handle_message(event):
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
-    elif get_TYPE_message == 'TSVI樣版':
-        buttons_template = TemplateSendMessage( \
-            alt_text='樣版：需使用手機版方可顯示', \
-            template=ButtonsTemplate( \
-                title='標題：標題說明', \
-                text='樣版可以傳送文字、網址', \
-                thumbnail_image_url='顯示在開頭的網址', \
-                actions=[ \
-                    MessageTemplateAction( \
-                        label='按鈕標籤', \
-                        text='按鈕文字'), \
-                    URITemplateAction( \
-                        label='影片標籤', \
-                        uri='影片網址'), \
-                    PostbackTemplateAction( \
-                        label='postback', \
-                        text='postback text', \
-                        data='postback1') \
-                ] \
-            ) \
-        )
-        line_bot_api.reply_message(event.reply_token, buttons_template)
-
     elif get_TYPE_message == 'TSVI非關鍵字的留言':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
@@ -295,7 +272,32 @@ def handle_message(event):
         token = strMichelleToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
+
         
+    elif get_TYPE_message == 'TSVI樣版':
+        reply = TemplateSendMessage( 
+            alt_text='樣版：需使用手機版方可顯示', 
+            template=ButtonsTemplate( 
+                title='標題：標題說明', 
+                text='樣版可以傳送文字、網址', 
+                thumbnail_image_url='顯示在開頭的網址', 
+                actions=[ 
+                    MessageTemplateAction( 
+                        label='按鈕標籤', 
+                        text='按鈕文字'), 
+                    URITemplateAction( 
+                        label='影片標籤', 
+                        uri='影片網址'), 
+                    PostbackTemplateAction( 
+                        label='postback', 
+                        text='postback text', 
+                        data='postback1')
+                ] 
+            ) 
+        )
+        line_bot_api.reply_message(event.reply_token, reply)
+
+
     else:
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
