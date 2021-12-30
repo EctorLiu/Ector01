@@ -97,7 +97,7 @@ def handle_message(event):
         # (H)理監事是誰
         get_message = '『臺南市新吉工業區廠協會』理事長：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
-    ##### (Ver)版本 #####  
+    ##### TSVI樣版 #####  
    elif ('TSVI樣版' in temp_message):
         get_TYPE_message = 'TSVI樣版'   
     # ***** ***** ***** ***** *****
@@ -277,12 +277,11 @@ def handle_message(event):
 
 
     elif get_TYPE_message == 'TSVI樣版':
-        reply = TemplateSendMessage( 
-            alt_text='樣版：需使用手機版方可顯示', 
-            template=ButtonsTemplate( 
-                title='標題：標題說明', 
-                text='樣版可以傳送文字、網址', 
-                thumbnail_image_url='顯示在開頭的網址', 
+        reply = TemplateSendMessage(alt_text='樣版：需使用手機版方可顯示', \
+            template=ButtonsTemplate( \
+                title='標題：標題說明', \
+                text='樣版可以傳送文字、網址', \
+                thumbnail_image_url='顯示在開頭的網址', \
                 actions=[ 
                     MessageTemplateAction( 
                         label='按鈕標籤', 
@@ -295,7 +294,7 @@ def handle_message(event):
                         text='postback text', 
                         data='postback1')
                 ] 
-            ) 
+            ) \
         )
         line_bot_api.reply_message(event.reply_token, reply)
 
