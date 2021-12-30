@@ -22,6 +22,7 @@ app = Flask(__name__)
 
     ##### Line ######
 from config import * 
+from linebot.models import *
 
 line_bot_api = LineBotApi(strchannel_access_token)
 handler = WebhookHandler(strchannel_secret)
@@ -30,6 +31,7 @@ handler = WebhookHandler(strchannel_secret)
     ##### 日期時間 ######
 from datetime import datetime
     # ***** ***** ***** ***** *****
+
 
 # ===== ===== ===== ===== ===== 【程式區域】 ===== ===== ===== ===== =====
 
@@ -273,7 +275,7 @@ def handle_message(event):
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
-        
+
     elif get_TYPE_message == 'TSVI樣版':
         reply = TemplateSendMessage( 
             alt_text='樣版：需使用手機版方可顯示', 
