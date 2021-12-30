@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(LC30)1604'
+strVer = '(LC30)1608'
     # ***** ***** ***** ***** *****
 
     ##### (TSVI)推播 ######
@@ -276,13 +276,18 @@ def handle_message(event):
 
     elif get_TYPE_message == 'TSVI樣版':
         reply = TemplateSendMessage(alt_text='樣版：需使用手機版方可顯示', \
-                template=ButtonsTemplate( \
-                title='標題：標題說明', \
-                text='樣版可以傳送文字、網址', \
-                actions=[MessageTemplateAction(label='按鈕標籤', text='按鈕文字')] \
-            ) \
+                    template=ButtonsTemplate( \
+                    title='標題：標題說明', \
+                    text='樣版可以傳送文字、網址', \
+                    actions=[MessageTemplateAction(label='按鈕標籤', text='按鈕文字'), \
+                             URITemplateAction(label='影片標籤', uri='https://www.youtube.com/watch?v=THMFMCY65co&ab_channel=%E5%8F%B0%E5%8D%97%E5%B8%82%E5%B7%A5%E5%95%86%E7%99%BC%E5%B1%95%E6%8A%95%E8%B3%87%E7%AD%96%E9%80%B2%E6%9C%83' ), \
+                             PostbackTemplateAction(label='postback', text='postback text', data='postback1') \
+                    ] \
+                ) \
         )
-        # reply = TextSendMessage(text=f"{get_message}")
+
+        buttons_template = TemplateSendMessage(alt_text='Buttons Template', template=ButtonsTemplate(title='這是ButtonsTemplate', text='ButtonsTemplate可以傳送text,uri', thumbnail_image_url='顯示在開頭的大圖片網址', \
+                        actions=[ MessageTemplateAction( label='ButtonsTemplate', text='ButtonsTemplate' ))
         line_bot_api.reply_message(event.reply_token, reply)
 
 
