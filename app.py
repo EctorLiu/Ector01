@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(LC30)1608'
+strVer = '(LC30)1612'
     # ***** ***** ***** ***** *****
 
     ##### (TSVI)推播 ######
@@ -279,9 +279,9 @@ def handle_message(event):
                     template=ButtonsTemplate( \
                     title='標題：標題說明', \
                     text='樣版可以傳送文字、網址', \
-                    actions=[MessageTemplateAction(label='按鈕標籤', text='按鈕文字'), \
+                    actions=[MessageTemplateAction(label='最近活動', text='最近活動'), \
                              URITemplateAction(label='影片標籤', uri='https://www.youtube.com/watch?v=THMFMCY65co&ab_channel=%E5%8F%B0%E5%8D%97%E5%B8%82%E5%B7%A5%E5%95%86%E7%99%BC%E5%B1%95%E6%8A%95%E8%B3%87%E7%AD%96%E9%80%B2%E6%9C%83' ), \
-                             PostbackTemplateAction(label='postback', text='postback text', data='postback1') \
+                             PostbackTemplateAction(label='postback', text='最近活動2', data='postback1') \
                     ] \
                 ) \
         )
