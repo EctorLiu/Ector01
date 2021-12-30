@@ -61,13 +61,14 @@ def handle_message(event):
     if temp_message == '您好':
         # (A)禮貌回覆
         get_message = '『臺南市新吉工業區廠協會』：' + event.message.text
-    elif ('廠協會' in temp_message) and ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
+    elif (('廠協會' in temp_message) and ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message)) or ('最近活動' in temp_message):
         # (B)成立資訊
         get_message = '『臺南市新吉工業區廠協會』成立：\n' + \
             '臺南市政府社會局審件中...\n' + \
             '廠協會籌備會於2021/11/26(五)提出申請\n' + \
-            '2021/12/10(五)社會局通知需修改部分內容\n' + \
-            '修改V2審核中...\n\n' + \
+            '2021/12/10(五)社會局1st通知修改內容\n' + \
+            '2021/12/24(一)社會局2nd通知修改內容\n' + \
+            '修改V3審核中...\n\n' + \
             '第一屆第一次會員成立大會\n' + \
             '暨理監事聯席會議\n' + \
             '於2021/11/18(四)14:00舉行\n' + \
