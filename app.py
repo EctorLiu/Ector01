@@ -1,20 +1,21 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(LC30)1551'
+strVer = '(LC30)1604'
     # ***** ***** ***** ***** *****
 
     ##### (TSVI)推播 ######
 import requests
     # ***** ***** ***** ***** *****
 
+
     ##### Line ######
+from config import * 
 # https://github.com/line/line-bot-sdk-python
 from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import InvalidSignatureError
+from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
-from config import * 
-# from linebot.models import MessageEvent, TextMessage, TextSendMessage
+# from linebot.models import MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, MessageTemplateAction
 
 line_bot_api = LineBotApi(strchannel_access_token)
 handler = WebhookHandler(strchannel_secret)
@@ -275,10 +276,9 @@ def handle_message(event):
 
     elif get_TYPE_message == 'TSVI樣版':
         reply = TemplateSendMessage(alt_text='樣版：需使用手機版方可顯示', \
-            template=ButtonsTemplate( \
+                template=ButtonsTemplate( \
                 title='標題：標題說明', \
                 text='樣版可以傳送文字、網址', \
-                thumbnail_image_url='顯示在開頭的網址', \
                 actions=[MessageTemplateAction(label='按鈕標籤', text='按鈕文字')] \
             ) \
         )
