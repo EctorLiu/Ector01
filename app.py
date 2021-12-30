@@ -94,8 +94,8 @@ def handle_message(event):
         # (H)理監事是誰
         get_message = '『臺南市新吉工業區廠協會』理事長：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
-    ##### TSVI樣版 #####  
-   elif ('TSVI樣版' in temp_message):
+    ##### TSVI樣版 #####
+    elif ('TSVI樣版' in temp_message):
         get_TYPE_message = 'TSVI樣版'   
     # ***** ***** ***** ***** *****
 
