@@ -279,9 +279,7 @@ def handle_message(event):
                 title='標題：標題說明', \
                 text='樣版可以傳送文字、網址', \
                 thumbnail_image_url='顯示在開頭的網址', \
-                actions=[   MessageTemplateAction( \
-                                label='按鈕標籤', \
-                                text='按鈕文字')] \
+                actions=[MessageTemplateAction(label='按鈕標籤', text='按鈕文字')] \
             ) \
         )
         # reply = TextSendMessage(text=f"{get_message}")
