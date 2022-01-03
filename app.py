@@ -160,7 +160,7 @@ def handle_message(event):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
     elif ('如何使用' in temp_message):
         get_TYPE_message = 'How_To_Use'
-        get_message = '『臺南市新吉工業區廠協會』地址：\n臺南市新吉工業區新吉三路55號\n歡迎您的蒞臨指教！'
+        get_message = strInitialMessage
 
     ##### (Ver)版本 #####
     elif temp_message.upper().count('VER') > 0:
