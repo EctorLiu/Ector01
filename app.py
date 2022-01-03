@@ -141,7 +141,20 @@ def handle_message(event):
 
     elif ('廠協會' in temp_message) and ('如何加入' in temp_message or '加入會員' in temp_message):
         # (C)如何加入
-        get_message = '『臺南市新吉工業區廠協會』加入：\n\n(Step01)請下載並填寫『會員入會申請書』紙本\nhttps://bit.ly/3EZjgpO\n請填寫內容並用印(大小章)\n\n(Step02)請用超連結：\nhttps://forms.gle/bxDLMLgA2fSLCDia9\n最上方處有廠協會帳戶資訊\n匯款後請以手機或掃描方式留存匯款資料\n\n(Step03)請用同超連結：\nhttps://forms.gle/bxDLMLgA2fSLCDia9\n上傳『會員入會申請書(用印)』之掃描檔\n以及『匯款單』之照片或掃描檔\n\n我們會盡快通知理事會並回覆！\n感謝您的支持！'
+        get_message = '『臺南市新吉工業區廠協會』加入：\n\n' + \
+            '(Step01)請下載並填寫『會員入會申請書』紙本\n' + \
+            'https://www.sendspace.com/file/8jkwqm\n' + \
+            '請填寫內容並用印(大小章)\n\n' + \
+            '(Step02)請用超連結：\n' + \
+            'https://forms.gle/bxDLMLgA2fSLCDia9\n' + \
+            '最上方處有廠協會帳戶資訊\n' + \
+            '匯款後請以手機或掃描方式留存匯款資料\n\n' + \
+            '(Step03)請用同超連結：\n' + \
+            'https://forms.gle/bxDLMLgA2fSLCDia9\n' + \
+            '上傳『會員入會申請書(用印)』之掃描檔\n' + \
+            '以及『匯款單』之照片或掃描檔\n\n' + \
+            '我們會盡快通知理事會並回覆！\n' + \
+            '感謝您的支持！'
     elif ('廠協會' in temp_message) and ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or '住址' in temp_message or '在哪' in temp_message or '在那' in temp_message):
         # (E)廠協會會址
         get_message = '『臺南市新吉工業區廠協會』地址：\n臺南市新吉工業區新吉三路55號\n歡迎您的蒞臨指教！'
