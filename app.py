@@ -1,11 +1,11 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M103)1442'
+strVer = '(M103)1450'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
-strInitialMessage = '『臺南市新吉工業區廠協會』：\n' + \
+strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n\n' + \
                 '也許您可用下述常用關鍵字查詢：\n' + \
                 '「如何加入廠協會」\n' + \
@@ -13,6 +13,14 @@ strInitialMessage = '『臺南市新吉工業區廠協會』：\n' + \
                 '「廠協會地址」\n' + \
                 '「廠協會會員名單」\n' + \
                 '「理監事名單」\n' + \
+                '「理事長由誰擔任」等..'
+strNewestActivity = '『臺南市新吉工業區廠協會』：\n' + \
+                '最近活動：\n\n' + \
+                '(A) 廠協會年初全體會員活動：概念階段 \n' + \
+                '(B) 廠協會LOGO：設計階段 \n' + \
+                '(C) 廠協會背心：設計階段 \n' + \
+                '(D) 廠協會會址：申請階段 \n' + \
+                '(E) 廠協會理監事會議：待管理中心確認租借辦法後擇期召開 \n' + \
                 '「理事長由誰擔任」等..'
     # ***** ***** ***** ***** *****
 
@@ -123,7 +131,10 @@ def handle_message(event):
         get_TYPE_message = 'TSVI樣版'   
     # ***** ***** ***** ***** *****
 
-    elif (('廠協會' in temp_message) and ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message)) or ('最近活動' in temp_message):
+    elif ('最近活動' in temp_message):
+        get_message = strNewestActivity
+
+    elif ('廠協會' in temp_message) and ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
         # (B)成立資訊
         get_message = '『臺南市新吉工業區廠協會』成立：\n' + \
             '臺南市政府社會局2022/01/03(一)上午\n' + \
@@ -189,9 +200,10 @@ def handle_message(event):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
             '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
+
     elif ('如何使用' in temp_message):
         get_TYPE_message = 'How_To_Use'
-        get_message = strInitialMessage
+        get_message = strHowToUse
 
     ##### (Ver)版本 #####
     elif temp_message.upper().count('VER') > 0:
@@ -201,7 +213,7 @@ def handle_message(event):
 
     else:
         get_TYPE_message = 'TSVI非關鍵字的留言'
-        get_message = strInitialMessage
+        get_message = strHowToUse
         
 # ===== ===== ===== ===== ===== 【Line區域】 ===== ===== ===== ===== =====
 
