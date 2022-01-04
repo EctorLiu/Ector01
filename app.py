@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M103)1456'
+strVer = '(M104)1602'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -184,7 +184,7 @@ def handle_message(event):
             '(TS036)模懋實業股份有限公司\n(TS037)盛美股份有限公司\n(TS039)台安特殊鋼鐵股份有限公司\n(TS040)大澤科技有限公司\n' + \
             '(TS041)利煒企業股份有限公司\n(TS042)日鋒有限公司\n(TS043)傑崧機械股份有限公司\n(TS044)崇渼精密有限公司\n(TS045)泳常股份有限公司\n' + \
             '(TS046)鴻大開發事業股份有限公司\n(TS047)興華電創新有限公司\n(TS048)縱貫企業有限公司\n(TS049)翔豐模具企業社\n(TS050)東昇實業股份有限公司'        
-    elif ('理事' in temp_message or '監事' in temp_message or '理監事' in temp_message) and ('名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
+    elif ('理事' in temp_message or '監事' in temp_message or '理監事' in temp_message) and ('是誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         # (F)理監事名單
         get_message = '『臺南市新吉工業區廠協會』理監事名單：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉結果：\n' + \
