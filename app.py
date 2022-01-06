@@ -8,10 +8,11 @@ strVer = '(M106)1352'
 strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n\n' + \
                 '也許您可用下述常用關鍵字查詢：\n' + \
-                '「如何加入」\n' + \
-                '「最近活動」\n' + \
+                '「如何使用」\n' + \
+                '「最新訊息」\n' + \
                 '「成立資訊」\n' + \
-                '「地址」\n' + \
+                '「如何加入會員」\n' + \
+                '「會址」\n' + \
                 '「會員名單」\n' + \
                 '「理監事名單」\n' + \
                 '「理事長由誰擔任」等..'
@@ -140,7 +141,7 @@ def handle_message(event):
     elif ('如何使用' in temp_message):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
-    elif ('最近活動' in temp_message):
+    elif ('最近活動' in temp_message or '近期活動' in temp_message or '最新活動' in temp_message or '最新訊息' in temp_message):
         get_message = strNewestActivity
 
     elif ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
