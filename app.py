@@ -1,17 +1,18 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M106)1340'
+strVer = '(M106)1352'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
 strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n\n' + \
                 '也許您可用下述常用關鍵字查詢：\n' + \
-                '「如何加入廠協會」\n' + \
-                '「廠協會成立」\n' + \
-                '「廠協會地址」\n' + \
-                '「廠協會會員名單」\n' + \
+                '「如何加入」\n' + \
+                '「最近活動」\n' + \
+                '「成立資訊」\n' + \
+                '「地址」\n' + \
+                '「會員名單」\n' + \
                 '「理監事名單」\n' + \
                 '「理事長由誰擔任」等..'
 strNewestActivity = '『臺南市新吉工業區廠協會』：\n' + \
@@ -82,7 +83,7 @@ def handle_message(event):
 
     if temp_message == '您好':
         # (A)禮貌回覆
-        get_message = '『臺南市新吉工業區廠協會』：' + event.message.text
+        get_message = '『臺南市新吉工業區廠協會』：您好' + event.message.text
 
     ##### (TSVI)推播 #####
     elif ('TSVI推播PROG' in temp_message.upper()):
@@ -128,16 +129,21 @@ def handle_message(event):
         get_message = '(推全部)\n' + temp_message
     # ***** ***** ***** ***** *****
 
+    
     ##### TSVI樣版 #####
     elif ('TSVI樣版' in temp_message):
         get_TYPE_message = 'TSVI樣版'   
     # ***** ***** ***** ***** *****
 
+
+    ##### 關鍵字 #####
+    elif ('如何使用' in temp_message):
+        get_TYPE_message = 'How_To_Use'
+        get_message = strHowToUse
     elif ('最近活動' in temp_message):
         get_message = strNewestActivity
 
-    elif ('廠協會' in temp_message) and ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
-        # (B)成立資訊
+    elif ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』成立：\n' + \
             '臺南市政府社會局2022/01/03(一)上午\n' + \
             '通知協會立案通過！\n\n' + \
@@ -149,9 +155,7 @@ def handle_message(event):
             '>同年 12/10(五)社會局1st通知修改內容\n' + \
             '>同年 12/24(一)社會局2nd通知修改內容\n' + \
             '立案：南市社團字第1101543033號'
-
-    elif ('廠協會' in temp_message) and ('如何加入' in temp_message or '加入會員' in temp_message):
-        # (C)如何加入
+    elif ('如何加入' in temp_message or '加入會員' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』加入：\n\n' + \
             '(Step01)請下載並填寫『會員入會申請書』紙本\n' + \
             'https://www.sendspace.com/file/8jkwqm\n' + \
@@ -166,14 +170,12 @@ def handle_message(event):
             '以及『匯款單』之照片或掃描檔\n\n' + \
             '我們會盡快通知理事會並回覆！\n' + \
             '感謝您的支持！'
-    elif ('廠協會' in temp_message) and ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or '住址' in temp_message or '在哪' in temp_message or '在那' in temp_message):
-        # (E)廠協會會址
+    elif ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or '住址' in temp_message or '在哪' in temp_message or '在那' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』地址：\n' + \
             '臺南市新吉工業區新吉三路55號\n' + \
             '歡迎您的蒞臨指教！'
-
-    elif ('工業區會員' in temp_message or '廠協會會員' in temp_message) and ('名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
-        # (D)廠協會會員名單
+    elif ('工業區' in temp_message or '會員' in temp_message) and \
+            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』會員：\n' + \
             '(12/10資訊)\n' + \
             '(TS001)東佑達自動化科技股份有限公司\n(TS002)久揚模具有限公司\n(TS003)伍智金屬企業股份有限公司\n(TS004)亞勝塑膠實業有限公司\n(TS005)冠岱科技有限公司\n' + \
@@ -185,27 +187,25 @@ def handle_message(event):
             '(TS031)祥祿工業有限公司\n(TS032)梧濟工業股份有限公司\n(TS033)優護國際企業股份有限公司\n(TS034)沅皜光電科技股份有限公司\n(TS035)陽屹科技股份有限公司\n' + \
             '(TS036)模懋實業股份有限公司\n(TS037)盛美股份有限公司\n(TS039)台安特殊鋼鐵股份有限公司\n(TS040)大澤科技有限公司\n' + \
             '(TS041)利煒企業股份有限公司\n(TS042)日鋒有限公司\n(TS043)傑崧機械股份有限公司\n(TS044)崇渼精密有限公司\n(TS045)泳常股份有限公司\n' + \
-            '(TS046)鴻大開發事業股份有限公司\n(TS047)興華電創新有限公司\n(TS048)縱貫企業有限公司\n(TS049)翔豐模具企業社\n(TS050)東昇實業股份有限公司'        
-    elif ('理事' in temp_message or '監事' in temp_message or '理監事' in temp_message) and ('是誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
-        # (F)理監事名單
+            '(TS046)鴻大開發事業股份有限公司\n(TS047)興華電創新有限公司\n(TS048)縱貫企業有限公司\n(TS049)翔豐模具企業社\n(TS050)東昇實業股份有限公司'
+    elif ('理事' in temp_message or '監事' in temp_message or '理監事' in temp_message) and \
+            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』理監事名單：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉結果：\n' + \
             '理事長 林宗德\n' + \
             '常務理事 洪靖惠\n常務理事 吳依龍\n理事 張崑裕\n理事 陳結和\n理事 吳冠霖\n理事 薛智煜\n理事 郭志霄\n理事 李漢章\n' + \
             '常務監事 黃信夫\n監事 洪愛雅\n監事 洪志豪'
-    elif ('總幹事' in temp_message) and ('誰' in temp_message):
-        # (G)總幹事是誰
+    elif ('總幹事' in temp_message) and \
+            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』總幹事：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
-    elif (temp_message.count('理事長') > 0) and ('誰' in temp_message):
-        # (H)理監事是誰
+
+    elif (temp_message.count('理事長') > 0) and \
+            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
             '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
-
-    elif ('如何使用' in temp_message):
-        get_TYPE_message = 'How_To_Use'
-        get_message = strHowToUse
+    # ***** ***** ***** ***** *****
 
     ##### (Ver)版本 #####
     elif temp_message.upper().count('VER') > 0:
@@ -216,11 +216,16 @@ def handle_message(event):
     else:
         get_TYPE_message = 'TSVI非關鍵字的留言'
         get_message = strHowToUse
-        
+
+
 # ===== ===== ===== ===== ===== 【Line區域】 ===== ===== ===== ===== =====
 
     # Send To Line
     if get_TYPE_message == 'Initial':
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'How_To_Use':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
@@ -350,10 +355,6 @@ def handle_message(event):
                 ) \
         )
         line_bot_api.reply_message(event.reply_token, reply)
-
-    elif get_TYPE_message == 'How_To_Use':
-        reply = TextSendMessage(text=f"{get_message}")
-        line_bot_api.reply_message(event.reply_token,  reply)
 
     else:
         reply = TextSendMessage(text=f"{get_message}")
