@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M106)1430'
+strVer = '(M107)1118'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -140,7 +140,7 @@ def handle_message(event):
 
 
     ##### 關鍵字 #####
-    elif ('如何使用' in temp_message):
+    elif ('如何使用' in temp_message or 'help' in temp_message):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
     elif ('最近活動' in temp_message or '近期活動' in temp_message or '最新活動' in temp_message or '最新訊息' in temp_message):
@@ -343,6 +343,9 @@ def handle_message(event):
         token = strMichelleToken
         lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
+
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
 
     # ***** ***** ***** ***** *****
 
