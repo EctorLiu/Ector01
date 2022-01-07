@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M107)1118'
+strVer = '(M107)1134'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -28,6 +28,33 @@ strNewestActivity = '『臺南市新吉工業區廠協會』：最近活動\n' +
                 '(F) 廠協會統一編號：刻印單位章 & 準備申請階段 \n' + \
                 '(G) 廠協會開戶&正式收據提供：等(F)廠協會統編取得後進行開戶 \n' + \
                 '..'
+
+strLessonLearning = '1. 申請官方帳號：\n' + \
+                    'https://manager.line.biz/\n' + \
+                    '2. 類別有三種..\n' + \
+                    '(1) 關鍵字回應\n' + \
+                    '(2) AI回應\n' + \
+                    '(3) 程式回應\n' + \
+                    '3. 第一種..關鍵字回應\n' + \
+                    '11:00 EctorLiu (劉讃芳) 圖片\n' + \
+                    '4. 第二種..AI回應\n' + \
+                    '11:01 EctorLiu (劉讃芳) 圖片\n' + \
+                    '5. 第三種..程式回應（但還要寫程式)\n' + \
+                    '11:01 EctorLiu (劉讃芳) 圖片\n' + \
+                    '> 是用上面的設定決定哪一種回應方式..\n' + \
+                    '6. 開發環境網站Line Develop（之後再看其他教學網站）\n' + \
+                    'https://developers.line.biz/zh-hant/\n' + \
+                    '7. 可參考範例..\n' + \
+                    'https://ithelp.ithome.com.tw/articles/10192259\n' + \
+                    '8. 可參考範例..\n' + \
+                    'https://ithelp.ithome.com.tw/articles/10233234\n' + \
+                    '9. 上面兩個是應用面的教學\n' + \
+                    '下面這個是我一開始看的官方文件：\n' + \
+                    'https://developers.line.biz/zh-hant/docs/messaging-api/building-bot/\n' + \
+                    '10. 同上..Line官方有提供範例\n' + \
+                    'https://developers.line.biz/zh-hant/docs/messaging-api/building-bot/\n' + \
+                    '選擇語言進行開發..'
+
     # ***** ***** ***** ***** *****
 
     ##### (TSVI)推播 ######
@@ -144,7 +171,9 @@ def handle_message(event):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
     elif ('最近活動' in temp_message or '近期活動' in temp_message or '最新活動' in temp_message or '最新訊息' in temp_message):
-        get_message = strNewestActivity
+        get_message = strNewestActivitystrHowToUse
+    elif ('RS官方帳號教學' in temp_message):
+        get_message = strLessonLearning
 
     elif ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』成立：\n' + \
