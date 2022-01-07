@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M107)1140'
+strVer = '(M107)1828'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -205,6 +205,8 @@ def handle_message(event):
     elif ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or '住址' in temp_message or '在哪' in temp_message or '在那' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』地址：\n' + \
             '臺南市新吉工業區新吉三路55號\n' + \
+            '(預定遷至：臺南市新吉工業區安新二路99號)\n' + \
+            '(申請中..新吉工業區服務中心..未來會址)\n' + \
             '歡迎您的蒞臨指教！'
     elif ('工業區' in temp_message or '會員' in temp_message) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
