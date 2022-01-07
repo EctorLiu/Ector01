@@ -171,7 +171,7 @@ def handle_message(event):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
     elif ('最近活動' in temp_message or '近期活動' in temp_message or '最新活動' in temp_message or '最新訊息' in temp_message):
-        get_message = strNewestActivitystrHowToUse
+        get_message = strNewestActivity
     elif ('RS官方帳號教學' in temp_message):
         get_message = strLessonLearning
 
