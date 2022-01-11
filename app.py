@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M111)1453'
+strVer = '(M111)1456'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -282,13 +282,10 @@ def handle_message(event):
     elif get_TYPE_message == 'New_Activity':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
-        # reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
-        #                          preview_image_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg')
-        # line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'SJ_LOGO':
         reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
-                                 preview_image_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg')
+                                 preview_image_url = 'https://raw.githubusercontent.com/EctorLiu/Ector01/main/img/A.jpg')
         line_bot_api.reply_message(event.reply_token,  reply)
 
     ##### 推播Line Notify內容 #####
