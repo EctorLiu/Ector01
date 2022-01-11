@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M111)1340'
+strVer = '(M111)1342'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -275,10 +275,10 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'New_Activity':
-        reply = TextSendMessage(text=f"{get_message}")
-        line_bot_api.reply_message(event.reply_token,  reply)
         reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
                                  preview_image_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg')
+        line_bot_api.reply_message(event.reply_token,  reply)
+        reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
 
@@ -404,7 +404,8 @@ def handle_message(event):
                     title='標題：標題說明', \
                     text='樣版可以傳送文字、網址', \
                     actions=[MessageTemplateAction(label='最近活動', text='最近活動'), \
-                             URITemplateAction(label='新吉工業區之動畫介紹', uri='https://www.youtube.com/watch?v=THMFMCY65co&ab_channel=%E5%8F%B0%E5%8D%97%E5%B8%82%E5%B7%A5%E5%95%86%E7%99%BC%E5%B1%95%E6%8A%95%E8%B3%87%E7%AD%96%E9%80%B2%E6%9C%83' ), \
+                             URITemplateAction(label='新吉工業區之動畫介紹', \
+                             uri='https://www.youtube.com/watch?v=THMFMCY65co&ab_channel=%E5%8F%B0%E5%8D%97%E5%B8%82%E5%B7%A5%E5%95%86%E7%99%BC%E5%B1%95%E6%8A%95%E8%B3%87%E7%AD%96%E9%80%B2%E6%9C%83' ), \
                              PostbackTemplateAction(label='最近活動2', text='最近活動2', data='postback1') \
                     ] \
                 ) \
