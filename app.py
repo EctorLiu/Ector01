@@ -1,13 +1,14 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M111)1342'
+strVer = '(M111)1346'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
 strNewestActivity = '『臺南市新吉工業區廠協會』：最近活動\n' + \
                 '更新：2020/01/11(二) 13:32 ...\n\n' + \
                 '(B) 廠協會LOGO：已選出「齒輪工業風」(1/10) \n' + \
+                'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg\n' + \
                 '\n' + \
                 '(A) 廠協會年初全體會員活動：概念階段 \n' + \
                 '(C) 廠協會背心：設計階段 \n' + \
@@ -275,11 +276,11 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'New_Activity':
-        reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
-                                 preview_image_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg')
-        line_bot_api.reply_message(event.reply_token,  reply)
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
+        # reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
+        #                          preview_image_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg')
+        # line_bot_api.reply_message(event.reply_token,  reply)
 
 
     ##### 推播Line Notify內容 #####
