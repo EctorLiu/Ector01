@@ -179,7 +179,7 @@ def handle_message(event):
 
 
     ##### 關鍵字 #####
-    elif ('如何使用' in temp_message or 'HELP' in temp_message.upper() or '?' in temp_message or '？' in temp_message):
+    elif ('如何使用' in temp_message or 'HELP' in temp_message.upper() or '?' in temp_message.strip() or '？' in temp_message.strip()):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
     elif ('最近' in temp_message or '最新' in temp_message) and ('訊息' in temp_message or '活動' in temp_message):
