@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M111)1346'
+strVer = '(M111)1453'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -28,7 +28,8 @@ strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '「會址」\n' + \
                 '「會員名單」\n' + \
                 '「理監事名單」\n' + \
-                '「理事長由誰擔任」等..'
+                '「理事長由誰擔任」' + \
+                '「LOGO」等..'
 
 strLessonLearning = 'A1. 申請官方帳號：\n' + \
                     'https://manager.line.biz/\n' + \
@@ -184,6 +185,7 @@ def handle_message(event):
     elif ('最近' in temp_message or '最新' in temp_message) and ('訊息' in temp_message or '活動' in temp_message):
         get_TYPE_message = 'New_Activity'
         get_message = strNewestActivity
+
     elif ('RS官方帳號教學' in temp_message):
         get_message = strLessonLearning
 
@@ -245,12 +247,14 @@ def handle_message(event):
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』總幹事：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
-
     elif (temp_message.count('理事長') > 0) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
             '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
+
+    elif ('LOGO' in temp_message.upper()):
+        get_TYPE_message = 'SJ_LOGO'
     # ***** ***** ***** ***** *****
 
     ##### (Ver)版本 #####
@@ -282,6 +286,10 @@ def handle_message(event):
         #                          preview_image_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg')
         # line_bot_api.reply_message(event.reply_token,  reply)
 
+    elif get_TYPE_message == 'SJ_LOGO':
+        reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
+                                 preview_image_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg')
+        line_bot_api.reply_message(event.reply_token,  reply)
 
     ##### 推播Line Notify內容 #####
     elif get_TYPE_message == 'TSVI推播程式管理員':
