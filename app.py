@@ -181,6 +181,7 @@ def handle_message(event):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
     elif ('最近' in temp_message or '最新' in temp_message) and ('訊息' in temp_message or '活動' in temp_message):
+        get_TYPE_message = 'New_Activity'
         get_message = strNewestActivity
     elif ('RS官方帳號教學' in temp_message):
         get_message = strLessonLearning
@@ -272,6 +273,12 @@ def handle_message(event):
     elif get_TYPE_message == 'How_To_Use':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'New_Activity':
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
+        # reply = ImageSendMessage(original_content_url = 'https://www.toyorobot.com/Images/Home/TOYO_LOGO.png', preview_image_url = 'https://www.toyorobot.com/Images/Home/TOYO_LOGO.png')
+        # line_bot_api.reply_message(event.reply_token,  reply)
 
 
     ##### 推播Line Notify內容 #####
