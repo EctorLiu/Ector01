@@ -277,8 +277,8 @@ def handle_message(event):
     elif get_TYPE_message == 'New_Activity':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
-        # reply = ImageSendMessage(original_content_url = 'https://www.toyorobot.com/Images/Home/TOYO_LOGO.png', preview_image_url = 'https://www.toyorobot.com/Images/Home/TOYO_LOGO.png')
-        # line_bot_api.reply_message(event.reply_token,  reply)
+        reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/img/A.png', preview_image_url = 'https://github.com/EctorLiu/Ector01/img/A.png')
+        line_bot_api.reply_message(event.reply_token,  reply)
 
 
     ##### 推播Line Notify內容 #####
