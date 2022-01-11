@@ -8,7 +8,7 @@ strVer = '(M111)1500'
 strNewestActivity = '『臺南市新吉工業區廠協會』：最近活動\n' + \
                 '更新：2020/01/11(二) 13:32 ...\n\n' + \
                 '(B) 廠協會LOGO：已選出「齒輪工業風」(1/10) \n' + \
-                'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg\n' + \
+                'bit.ly/3HQOobY\n' + \
                 '\n' + \
                 '(A) 廠協會年初全體會員活動：概念階段 \n' + \
                 '(C) 廠協會背心：設計階段 \n' + \
