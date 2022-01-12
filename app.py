@@ -31,6 +31,13 @@ strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '「理事長由誰擔任」\n' + \
                 '「LOGO」等..'
 
+strMoneyText = '廠協會資金（零用金）使用狀況：\n' + \
+                '\n' + \
+                ' (01/11) 餘額 29350 NTD：銀行大章、印泥=650\n' + \
+                ' (01/12) 餘額 25850 NTD：花柱=3500\n' + \
+                '\n' + \
+                '最近預定花費：春酒、背心'
+
 strLessonLearning = 'A1. 申請官方帳號：\n' + \
                     'https://manager.line.biz/\n' + \
                     '\n' + \
@@ -253,6 +260,12 @@ def handle_message(event):
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
             '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
+    elif ('SJ120!55' in temp_message.upper() or \
+            'SJ$!55' in temp_message.upper() or \
+            'SJ零用金!55' in temp_message.upper()):
+        get_TYPE_message = 'SJ_MONEY'
+        get_message = strMoneyText
+
     elif ('LOGO' in temp_message.upper()):
         get_TYPE_message = 'SJ_LOGO'
     # ***** ***** ***** ***** *****
@@ -286,6 +299,10 @@ def handle_message(event):
     elif get_TYPE_message == 'SJ_LOGO':
         reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
                                  preview_image_url = 'https://raw.githubusercontent.com/EctorLiu/Ector01/main/img/A.jpg')
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'SJ_MONEY':
+        reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
     ##### 推播Line Notify內容 #####
