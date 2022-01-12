@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M112)1528'
+strVer = '(M112)1804'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -290,23 +290,6 @@ def handle_message(event):
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
-    elif get_TYPE_message == 'How_To_Use':
-        reply = TextSendMessage(text=f"{get_message}")
-        line_bot_api.reply_message(event.reply_token,  reply)
-
-    elif get_TYPE_message == 'New_Activity':
-        reply = TextSendMessage(text=f"{get_message}")
-        line_bot_api.reply_message(event.reply_token,  reply)
-
-    elif get_TYPE_message == 'SJ_LOGO':
-        reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
-                                 preview_image_url = 'https://raw.githubusercontent.com/EctorLiu/Ector01/main/img/A.jpg')
-        line_bot_api.reply_message(event.reply_token,  reply)
-
-    elif get_TYPE_message == 'SJ_MONEY':
-        reply = TextSendMessage(text=f"{get_message}")
-        line_bot_api.reply_message(event.reply_token,  reply)
-
     ##### 推播Line Notify內容 #####
     elif get_TYPE_message == 'TSVI推播程式管理員':
         ##### 推播 #####
@@ -422,6 +405,23 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,  reply)
 
     # ***** ***** ***** ***** *****
+
+    elif get_TYPE_message == 'How_To_Use':
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'New_Activity':
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'SJ_LOGO':
+        reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
+                                 preview_image_url = 'https://raw.githubusercontent.com/EctorLiu/Ector01/main/img/A.jpg')
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'SJ_MONEY':
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'TSVI樣版':
         reply = TemplateSendMessage(alt_text='樣版：需使用手機版方可顯示', \
