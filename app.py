@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M113)1858'
+strVer = '(M113)1928'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -283,13 +283,15 @@ def handle_message(event):
     elif 'SJ體溫!55' in temp_message.upper():
         get_TYPE_message = 'RS_BODY_TEMPERATURE'
         ms = MSSQL(host='211.23.242.222', port='2255', user='sa', pwd='00000', db='TIM_DB')
-
         resList = ms.RS_SQL_ExecQuery('SELECT ID, NAME, BT, CHK FROM TIM_DB.dbo.VIEW_APP_MEM_BODYTEMP ORDER BY BT DESC, ID')
-        strTemp='TOYO體溫回報清單：\n' + \
-                datNow  + '\n\n'
+        intCount=0
+        strTemp=''
         for (ID, NAME, BT, CHK) in resList:
             strTemp = strTemp + str(ID) + ',' + str(NAME) + ',' + str(BT) + ',' + str(CHK) + '\n'
-        get_message = strTemp
+            intCount += 1
+        get_message = 'TOYO體溫回報清單：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                        datNow  + '\n\n' + \
+                        strTemp
 
     elif ('SJMEMO!55' in temp_message.upper()):
         get_TYPE_message = 'SJ_MEMO'
