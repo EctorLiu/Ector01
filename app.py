@@ -284,7 +284,7 @@ def handle_message(event):
         get_TYPE_message = 'RS_BODY_TEMPERATURE'
         ms = MSSQL(host='211.23.242.222', port='2255', user='sa', pwd='00000', db='TIM_DB')
 
-        resList = ms.RS_SQL_ExecQuery('SELECT ID, NAME, BT, CHK FROM TIM_DB.dbo.VIEW_APP_MEM_BODYTEMP ORDER BY CHK DESC, BT DESC')
+        resList = ms.RS_SQL_ExecQuery('SELECT ID, NAME, BT, CHK FROM TIM_DB.dbo.VIEW_APP_MEM_BODYTEMP ORDER BY BT DESC')
         strTemp='TOYO體溫回報清單：\n' + \
                 datNow  + '\n\n'
         for (ID, NAME, BT, CHK) in resList:
