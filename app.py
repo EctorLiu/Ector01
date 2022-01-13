@@ -1,12 +1,13 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M112)1804'
+strVer = '(M113)0950'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
 strNewestActivity = '『臺南市新吉工業區廠協會』：最近活動\n' + \
-                '更新：2020/01/11(二) 13:32 ...\n\n' + \
+                '更新：2020/01/13(四) 09:50 ...\n\n' + \
+                '(F) 廠協會統一編號：89038129 (1/12) \n' + \
                 '(B) 廠協會LOGO：已選出「齒輪工業風」(1/10) \n' + \
                 'bit.ly/3HQOobY\n' + \
                 '\n' + \
@@ -14,18 +15,24 @@ strNewestActivity = '『臺南市新吉工業區廠協會』：最近活動\n' +
                 '(C) 廠協會背心：設計階段 \n' + \
                 '(D) 廠協會會址：待管理中心確認租借辦法階段 \n' + \
                 '(E) 廠協會理監事會議：待管理中心確認租借辦法後擇期召開 \n' + \
-                '(F) 廠協會統一編號：刻印單位章 & 準備申請階段 \n' + \
                 '(G) 廠協會開戶&正式收據提供：等(F)廠協會統編取得後進行開戶 \n' + \
                 '..'
 
 strMoneyText = '廠協會資金（零用金）使用狀況：\n' + \
-                '目前剩餘：25850 NTD\n' + \
+                '目前剩餘：26350 NTD\n' + \
                 '\n' + \
                 '明細說明：\n' + \
                 ' (01/11) 餘額 29350 NTD：\n  > 因買：銀行大章、印泥=650\n' + \
-                ' (01/12) 餘額 25850 NTD：\n  > 因買：花柱=3500\n' + \
+                ' (01/12) 餘額 26350 NTD：\n  > 因買：花柱=3000\n' + \
                 '\n' + \
                 '最近預定花費：春酒、背心'
+
+strMemo = '『臺南市新吉工業區廠協會』：\n' + 
+            '2021/11/18(四)：第一屆第一次\n' + \
+            '會員成立大會暨理監事聯席會議\n' + \
+            '立案(M103)：南市社團字第1101543033號\n' + \
+            '統編(M112)：89038129\n' + \
+            '『稅籍編號(M112)：710620649』'
 
 strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n\n' + \
@@ -268,6 +275,10 @@ def handle_message(event):
         get_TYPE_message = 'SJ_MONEY'
         get_message = strMoneyText
 
+    elif ('SJMEMO!55' in temp_message.upper()):
+        get_TYPE_message = 'SJ_MEMO'
+        get_message = strMemo
+
     elif ('LOGO' in temp_message.upper()):
         get_TYPE_message = 'SJ_LOGO'
     # ***** ***** ***** ***** *****
@@ -420,6 +431,10 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'SJ_MONEY':
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'SJ_MEMO':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
