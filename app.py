@@ -89,6 +89,11 @@ strLessonLearning = 'A1. 申請官方帳號：\n' + \
 import requests
     # ***** ***** ***** ***** *****
 
+    ##### 時間函數 ######
+from datetime import datetime
+import time
+datNow = time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()) 
+    # ***** ***** ***** ***** *****
 
     ##### Line ######
 from config import * 
