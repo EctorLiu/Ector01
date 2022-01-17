@@ -221,7 +221,7 @@ def handle_message(event):
         get_TYPE_message = 'New_Activity'
         get_message = strNewestActivity
 
-    elif (temp_message[0:2].upper() = 'RS') and ('官方帳號教學' in temp_message):
+    elif (temp_message[0:2].upper() == 'RS') and ('官方帳號教學' in temp_message):
         get_message = strLessonLearning
 
     elif ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
