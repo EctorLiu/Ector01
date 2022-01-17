@@ -1,15 +1,17 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M113)2206'
+strVer = '(M117)0924'
 
     # 切換SQL功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
+    # 切換同仁推播功能選擇：ON/OFF
+strPush_AllMember_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
 strNewestActivity = '『臺南市新吉工業區廠協會』：最近活動\n' + \
-                '更新：2020/01/13(四) 09:50 ...\n\n' + \
+                '更新：2022/01/13(四) 09:50 ...\n\n' + \
                 '(F) 廠協會統一編號：89038129 (1/12) \n' + \
                 '(B) 廠協會LOGO：已選出「齒輪工業風」(1/10) \n' + \
                 'bit.ly/3HQOobY\n' + \
@@ -144,6 +146,15 @@ def handle_message(event):
     # 取得事件變數
     temp_message = event.message.text
 
+    ##### 全型符號轉換 #####
+    temp_message = temp_message.replace('！','!')
+    temp_message = temp_message.replace('（','(')
+    temp_message = temp_message.replace('）',')')
+    temp_message = temp_message.replace('，',',')
+    temp_message = temp_message.replace('＄','$')
+    temp_message = temp_message.replace('？','?')
+    # ***** ***** ***** ***** *****
+
     # 確認資料類別
     get_TYPE_message = 'Initial'
 
@@ -210,7 +221,7 @@ def handle_message(event):
         get_TYPE_message = 'New_Activity'
         get_message = strNewestActivity
 
-    elif ('RS官方帳號教學' in temp_message):
+    elif (temp_message[0:2].upper() = 'RS') and ('官方帳號教學' in temp_message):
         get_message = strLessonLearning
 
     elif ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
