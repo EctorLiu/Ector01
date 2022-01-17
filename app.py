@@ -1,12 +1,12 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M117)0924'
+strVer = '(M117)0940'
 
     # 切換SQL功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
     # 切換同仁推播功能選擇：ON/OFF
-strPush_AllMember_Switch = 'OFF'
+strPush_NotKeyWord2All_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -221,8 +221,8 @@ def handle_message(event):
         get_TYPE_message = 'New_Activity'
         get_message = strNewestActivity
 
-    elif (temp_message[0:2].upper() == 'RS') and ('官方帳號教學' in temp_message):
-        get_message = strLessonLearning
+    elif ('LOGO' in temp_message.upper()):
+        get_TYPE_message = 'SJ_LOGO'
 
     elif ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』成立：\n' + \
@@ -288,13 +288,19 @@ def handle_message(event):
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
             '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
-    elif ('SJ120!55' in temp_message.upper() or \
-            'SJ$!55' in temp_message.upper() or \
-            'SJ零用金!55' in temp_message.upper()):
+    elif (temp_message[0:2].upper() == 'SJ') and \
+            (temp_message[-3:] == '!55') and \
+            ('120' in temp_message.upper() or \
+            '$' in temp_message.upper() or \
+            'MONEY' in temp_message.upper() or \
+            '零用金' in temp_message.upper()):
         get_TYPE_message = 'SJ_MONEY'
         get_message = strMoneyText
 
-    elif 'SJ體溫!55' in temp_message.upper():
+    elif (temp_message[0:2].upper() == 'SJ') and \
+            (temp_message[-3:] == '!55') and \
+            ('BT' in temp_message.upper() or \
+            '體溫' in temp_message.upper()):
         get_TYPE_message = 'RS_BODY_TEMPERATURE'
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host='211.23.242.222', port='2255', user='sa', pwd='00000', db='TIM_DB')
@@ -312,12 +318,14 @@ def handle_message(event):
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif ('SJMEMO!55' in temp_message.upper()):
+    elif (temp_message[0:2].upper() == 'SJ') and \
+            (temp_message[-3:] == '!55') and \
+            ('MEMO' in temp_message.upper()):
         get_TYPE_message = 'SJ_MEMO'
         get_message = strMemo
 
-    elif ('LOGO' in temp_message.upper()):
-        get_TYPE_message = 'SJ_LOGO'
+    elif (temp_message[0:5].upper() == 'ECTOR') and ('官方帳號教學' in temp_message):
+        get_message = strLessonLearning
     # ***** ***** ***** ***** *****
 
     ##### (Ver)版本 #####
@@ -432,7 +440,7 @@ def handle_message(event):
         # message = get_message
         message = '廠協會有留言如下：\n' + temp_message
 
-        if strPush_AllMember_Switch == 'ON': 
+        if strPush_NotKeyWord2All_Switch == 'ON': 
             # EctorLiu權杖：
             token = strEctorToken
             lineNotifyMessage(token, message)
