@@ -409,21 +409,27 @@ def handle_message(event):
         # 修改為你要傳送的訊息內容
         message = get_message
 
-        # EctorLiu權杖：
-        token = strEctorToken
-        lineNotifyMessage(token, message)
-        # 智弘權杖：
-        token = strJohnboToken
-        lineNotifyMessage(token, message)
-        # 冠伶權杖：
-        token = strGwenToken
-        lineNotifyMessage(token, message)
-        # 昆霖權杖：
-        token = strKunToken
-        lineNotifyMessage(token, message)
-        # 宜庭權杖：        
-        token = strMichelleToken
-        lineNotifyMessage(token, message)
+        if strPush_AllMember_Switch == 'ON':        
+            # EctorLiu權杖：
+            token = strEctorToken
+            lineNotifyMessage(token, message)
+            # 智弘權杖：
+            token = strJohnboToken
+            lineNotifyMessage(token, message)
+            # 冠伶權杖：
+            token = strGwenToken
+            lineNotifyMessage(token, message)
+            # 昆霖權杖：
+            token = strKunToken
+            lineNotifyMessage(token, message)
+            # 宜庭權杖：        
+            token = strMichelleToken
+            lineNotifyMessage(token, message)
+          else:
+            # EctorLiu權杖：
+            message = 'DebugModeForEctor\n：' + message
+            token = strEctorToken
+            lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
     elif get_TYPE_message == 'TSVI非關鍵字的留言':
