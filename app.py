@@ -4,7 +4,7 @@
 strVer = '(M113)2206'
 
     # 切換SQL功能選擇：ON/OFF
-strSQL_FW_Switch = 'OFF'
+strSQL_FW_Switch = 'ON'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
