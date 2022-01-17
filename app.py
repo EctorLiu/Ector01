@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M117)0946'
+strVer = '(M117)0952'
 
     # 切換SQL功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -298,6 +298,30 @@ def handle_message(event):
             '零用金' in temp_message.upper()):
         get_TYPE_message = 'SJ_MONEY'
         get_message = strMoneyText
+
+    elif (temp_message[0:2].upper() == 'SJ') and \
+            (temp_message[-3:] == '!55') and \
+            ('DOOR' in temp_message.upper()):
+        strTitle = 'TOYO門禁清單'
+        get_TYPE_message = 'RS_SQL_DOOR_INFO'
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host='211.23.242.222', port='2255', user='sa', pwd='00000', db='TIM_DB')
+            strSQL = 'SELECT TOP(50) HRM_Dept_Name, HRM_USER_NAME, DoorText, DrDateTime ' + \
+                        ' FROM TIM_DB.dbo.VIEW_DOOR_INFO_INSIDE_List ' + \
+                        ' ORDER BY DrDateTime DESC'
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (HRM_Dept_Name, HRM_USER_NAME, DoorText, DrDateTime) in resList:
+                intCount += 1
+                strTemp += '(' + str(intCount) + ')' + str(DrDateTime) + '\n..' + str(HRM_Dept_Name) + ', ' + str(HRM_USER_NAME) + ', ' + str(DoorText) + '\n'
+            get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            datNow  + '\n\n' + \
+                            strTemp
+        else:
+            get_message = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
