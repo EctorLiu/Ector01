@@ -301,7 +301,8 @@ def handle_message(event):
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
-            ('DOOR' in temp_message.upper()):
+            ('DOOR' in temp_message.upper() or \
+            '門禁' in temp_message.upper()):
         strTitle = 'TOYO門禁清單'
         get_TYPE_message = 'RS_SQL_DOOR_INFO'
         if strSQL_FW_Switch == 'ON':
