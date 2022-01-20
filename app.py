@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M118)1220'
+strVer = '(M120)1310'
 
     # 切換SQL功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -253,9 +253,12 @@ def handle_message(event):
             '以及『匯款單』之照片或掃描檔\n\n' + \
             '我們會盡快通知理事會並回覆！\n' + \
             '感謝您的支持！'
-    elif ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or '住址' in temp_message or '在哪' in temp_message or '在那' in temp_message):
-        get_message = '『臺南市新吉工業區廠協會』地址：\n' + \
+    elif ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or \
+             '住址' in temp_message or '在哪' in temp_message or '在那' in temp_message or \
+             '電話' in temp_message or '聯絡' in temp_message):
+        get_message = '『臺南市新吉工業區廠協會』地址/電話：\n' + \
             '臺南市新吉工業區新吉三路55號\n' + \
+            '(06)202-1347 #總機6828 \n' + \
             '(預定遷至：臺南市新吉工業區安新二路99號)\n' + \
             '(申請中..新吉工業區服務中心..未來會址)\n' + \
             '歡迎您的蒞臨指教！'
@@ -273,6 +276,11 @@ def handle_message(event):
             '(TS036)模懋實業股份有限公司\n(TS037)盛美股份有限公司\n(TS039)台安特殊鋼鐵股份有限公司\n(TS040)大澤科技有限公司\n' + \
             '(TS041)利煒企業股份有限公司\n(TS042)日鋒有限公司\n(TS043)傑崧機械股份有限公司\n(TS044)崇渼精密有限公司\n(TS045)泳常股份有限公司\n' + \
             '(TS046)鴻大開發事業股份有限公司\n(TS047)興華電創新有限公司\n(TS048)縱貫企業有限公司\n(TS049)翔豐模具企業社\n(TS050)東昇實業股份有限公司'
+    elif (temp_message.count('理事長') > 0) and \
+            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
+        get_message = '『臺南市新吉工業區廠協會』理事長：\n' + \
+            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
+            '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
     elif ('理事' in temp_message or '監事' in temp_message or '理監事' in temp_message) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』理監事名單：\n' + \
@@ -284,11 +292,6 @@ def handle_message(event):
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』總幹事：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
-    elif (temp_message.count('理事長') > 0) and \
-            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
-        get_message = '『臺南市新吉工業區廠協會』理事長：\n' + \
-            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
-            '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
