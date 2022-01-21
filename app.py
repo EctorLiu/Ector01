@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M120)1310'
+strVer = '(M121)1616'
 
     # 切換SQL功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -308,6 +308,30 @@ def handle_message(event):
         get_TYPE_message = 'SJ_MEMO'
         get_message = strMemo
 
+    elif (temp_message[0:2].upper() == 'SJ') and \
+            ('體溫' in temp_message.upper() or \
+            'BT' in temp_message.upper()):
+        strTitle = 'TOYO體溫回報清單'
+        get_TYPE_message = 'SJ_TEXT_REPLY_MSG'
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = 'SELECT ID, NAME, BT, CHK ' + \
+                        ' FROM TIM_DB.dbo.VIEW_APP_MEM_BODYTEMP ' + \
+                        ' ORDER BY BT DESC, ID '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (ID, NAME, BT, CHK) in resList:
+                strTemp = strTemp + str(ID) + ',' + str(NAME) + ',' + str(BT) + ',' + str(CHK) + '\n'
+                intCount += 1
+            get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            datNow  + '\n\n' + \
+                            strTemp
+        else:
+            get_message = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
+
     elif (temp_message[0:5].upper() == 'ECTOR') and ('官方帳號教學' in temp_message):
         get_message = strLessonLearning
     # ***** ***** ***** ***** *****
@@ -469,7 +493,7 @@ def handle_message(event):
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
-    elif get_TYPE_message == 'RS_BODY_TEMPERATURE':
+    elif get_TYPE_message == 'SJ_TEXT_REPLY_MSG':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token, reply)
 
@@ -509,56 +533,4 @@ def lineNotifyMessage(token, msg):
     return r.status_code
 
     # ***** ***** ***** *****  *****
-
-    ##### SQL ######
-import pymssql
-
-class MSSQL:
-    def __init__(self, host, port, user, pwd, db):
-        self.host = host
-        self.port = port
-        self.user = user
-        self.pwd = pwd
-        self.db = db
-
-    def RS_SQL_GetConnect(self):
-        if not self.db:
-            raise(NameError,"沒有設定資料庫資訊")
-        self.conn = pymssql.connect(host=self.host, port=self.port, user=self.user, password=self.pwd, database=self.db, charset='utf8')
-        cur = self.conn.cursor()
-        if not cur:
-            raise(NameError,"連線資料庫失敗")
-            # strSQLCond = "Connect NG"
-            # return strSQLCond
-        else:
-            return cur
-            # strSQLCond = "Connect OK"
-            # return strSQLCond
-
-    def RS_SQL_ExecQuery(self, sql):
-        cur = self.RS_SQL_GetConnect()
-        cur.execute(sql)
-        resList = cur.fetchall()
-        self.conn.close()
-        return resList
-        # strSQLCond = "RS_SQL_ExecQuery OK"
-        # return strSQLCond
-
-    def RS_SQL_ExecNonQuery(self, sql):
-        cur = self.RS_SQL_GetConnect()
-        cur.execute(sql)
-        self.conn.commit()
-        self.conn.close()
-
-# sql語句中有中文的時候進行encode
-# insertSql = "insert into WeiBo([UserId],[WeiBoContent],[PublishDate]) values(1,'測試','2012/2/1')".encode("utf8")
-# 連線的時候加入charset設定資訊
-# pymssql.connect(host=self.host,user=self.user,password=self.pwd,database=self.db,charset='utf8')
-
-# conn = pymssql.connect(host='192.168.1.254', user='sa', password='00000')
-# conn = pymssql.connect(host='192.168.1.254', port=1433, user='sa',password='00000',database='TIM_DB',charset='utf8', as_dict=True)
-# conn = pymssql.connect('192.168.1.254','sa', '00000', 'TIM_DB')
-# conn = pymssql.connect('211.23.242.220','sa@211.23.242.220', 'Sql#dsc20170524', 'TIMHRDB')
-# cursor = conn.cursor(as_dict=True)
-    # ***** ***** ***** ***** *****
 
