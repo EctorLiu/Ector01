@@ -253,9 +253,9 @@ def handle_message(event):
                     strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
                                 '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
-            if len(strTemp) >= 1000:
-                strTemp = strTemp[0:1000] + '...(資料過多)'
-            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + str(len(strTemp)) + \
+            if len(strTemp) >= 4000:
+                strTemp = strTemp[0:4000] + '...(資料過多)'
+            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
         else:
@@ -303,8 +303,8 @@ def handle_message(event):
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + SJMBCorpProd + '\n\n'
-            if len(strTemp) >= 2000:
-                strTemp = strTemp[0:2000] + '...(資料過多)'
+            if len(strTemp) >= 4500:
+                strTemp = strTemp[0:4500] + '...(資料過多)'
             get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + str(len(strTemp)) + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
