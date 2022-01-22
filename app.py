@@ -9,6 +9,10 @@ strSQL_FW_Switch = 'ON'
 strPush_NotKeyWord2All_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
+    ##### 限制 ######
+intMaxLineString = 4900
+    # ***** ***** ***** ***** *****
+
     ##### 預設留言 ######
 strMemo = '『臺南市新吉工業區廠協會』：\n' + \
             '2021/11/18(四)：第一屆第一次\n' + \
@@ -253,8 +257,8 @@ def handle_message(event):
                     strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
                                 '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
-            if len(strTemp) >= 4000:
-                strTemp = strTemp[0:4000] + '...(資料過多)'
+            if len(strTemp) >= intMaxLineString:
+                strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
             get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
@@ -303,8 +307,8 @@ def handle_message(event):
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + SJMBCorpProd + '\n\n'
-            if len(strTemp) >= 4950:
-                strTemp = strTemp[0:4950] + '...(資料過多)'
+            if len(strTemp) >= intMaxLineString:
+                strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
             get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + str(len(strTemp)) + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
