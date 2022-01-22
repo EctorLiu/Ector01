@@ -10,7 +10,8 @@ strPush_NotKeyWord2All_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
     ##### 限制 ######
-intMaxLineString = 4900
+intMaxLineMSGString = 4900
+intMaxItemString = 100
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -257,8 +258,8 @@ def handle_message(event):
                     strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
                                 '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
-            if len(strTemp) >= intMaxLineString:
-                strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
+            if len(strTemp) >= intMaxLineMSGString:
+                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             get_message = strTitle + '：\n資料筆數：[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
@@ -290,14 +291,18 @@ def handle_message(event):
             for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, \
                     SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel, SJMBCorpProd) in resList:
                 intCount += 1
+                if len(SJMBCorpProd)>= intMaxItemString:
+                    strCorpProdText = SJMBCorpProd[0:intMaxItemString] + '...'
+                else:
+                    strCorpProdText = SJMBCorpProd
                 strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n' + \
                             '  電話：' + str(SJMBCorpTel) + '\n' + \
-                            '  營業項目：' + str(SJMBCorpProd[0:100]) + '\n\n'
-            if len(strTemp) >= intMaxLineString:
-                strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
+                            '  營業項目：' + str(strCorpProdText) + '\n\n'
+            if len(strTemp) >= intMaxLineMSGString:
+                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
@@ -335,8 +340,8 @@ def handle_message(event):
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n\n'
-            if len(strTemp) >= intMaxLineString:
-                strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
+            if len(strTemp) >= intMaxLineMSGString:
+                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
