@@ -296,8 +296,8 @@ def handle_message(event):
                 else:
                     strCorpProdText = SJMBCorpProd
                 strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 \n' + \
-                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  ' + str(SJMBPRType) + '：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n' + \
                             '  電話：' + str(SJMBCorpTel) + '\n' + \
                             '  > 營業項目：' + str(strCorpProdText) + ' <\n\n'
