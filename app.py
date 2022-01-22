@@ -1,12 +1,12 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)1400'
+strVer = '(M122)1438'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
     # 切換【非關鍵字通知】同仁推播功能選擇：ON/OFF
-strPush_NotKeyWord2All_Switch = 'ON'
+strPush_NotKeyWord2All_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
     ##### 限制 ######
@@ -433,6 +433,9 @@ def handle_message(event):
                         ' SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
                         ' WHERE [SJMBCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJMBPRName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJMBCorpPRName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJMBCorpProd] LIKE ' + '\'%' + strCond + '%\'' + \
                         ' ORDER BY SEQ_TYPE, SJMBCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
