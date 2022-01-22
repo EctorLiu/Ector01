@@ -10,15 +10,6 @@ strPush_NotKeyWord2All_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
-strMoneyText = '廠協會資金（零用金）使用狀況：\n' + \
-                '目前剩餘：26350 NTD\n' + \
-                '\n' + \
-                '明細說明：\n' + \
-                ' (01/11) 餘額 29350 NTD：\n  > 因買：銀行大章、印泥=650\n' + \
-                ' (01/12) 餘額 26350 NTD：\n  > 因買：花柱=3000\n' + \
-                '\n' + \
-                '最近預定花費：春酒、背心'
-
 strMemo = '『臺南市新吉工業區廠協會』：\n' + \
             '2021/11/18(四)：第一屆第一次\n' + \
             '會員成立大會暨理監事聯席會議\n' + \
@@ -318,7 +309,7 @@ def handle_message(event):
 
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = 'SELECT TOP (50) SJCSCode, SJCSEditDate, SJCSText, SJCSStatus, SJCSNum, ' + \
+            strSQL = ' SELECT TOP (50) SJCSCode, SJCSEditDate, SJCSText, SJCSStatus, SJCSNum, ' + \
                         ' SJCSPrice, SJCSNow ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJCS_CashUseList] ' + \
                         ' WHERE [SJCSDelFlag] = 0 ' + \
@@ -332,8 +323,8 @@ def handle_message(event):
                             '  更新日期：[ ' + str(SJCSEditDate) + ' ]\n' + \
                             '  ' + str(SJCSText) + '：\n' + \
                             '  ' + str(SJCSStatus) + '：\n' + \
-                            '  金額：' + SJCSPrice + ' (數量：' + str(SJCSNum) + ')\n'
-                            '  餘額可用：' + SJCSNow + '\n\n'
+                            '  金額：' + str(SJCSPrice) + ' (數量：' + str(SJCSNum) + ')\n'
+                            '  餘額可用：' + str(SJCSNow) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
@@ -355,7 +346,7 @@ def handle_message(event):
         get_TYPE_message = 'SJ_TEXT_REPLY_MSG'
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = 'SELECT ID, NAME, BT, CHK ' + \
+            strSQL = ' SELECT ID, NAME, BT, CHK ' + \
                         ' FROM TIM_DB.dbo.VIEW_APP_MEM_BODYTEMP ' + \
                         ' ORDER BY BT DESC, ID '
             resList = ms.RS_SQL_ExecQuery(strSQL)
