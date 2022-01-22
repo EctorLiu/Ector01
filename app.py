@@ -255,7 +255,7 @@ def handle_message(event):
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
             if len(strTemp) >= 1000:
                 strTemp = strTemp[0:4000] + '...(資料過多)'
-            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + \
+            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + len(strTemp) + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
         else:
@@ -303,7 +303,7 @@ def handle_message(event):
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n\n'
-            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + \
+            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + len(strTemp) + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
             if len(strTemp) >= 1000:
