@@ -308,7 +308,7 @@ def handle_message(event):
                         ' SJBKPrice, SJBKNow ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBK_BankUseList] ' + \
                         ' WHERE [SJBKDelFlag] = 0 ' + \
-                        ' ORDER BY SJBKEditDate DESC, SJBKCode '
+                        ' ORDER BY SJBKCode DESC'
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
