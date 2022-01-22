@@ -416,8 +416,13 @@ def handle_message(event):
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif (temp_message[0:4].upper() == 'FIND'):
-        strCond = temp_message[-(len(temp_message)-4):]
+    elif (temp_message[0:4].upper() == 'FIND') or \
+            (temp_message[0:1].upper() == '找'):
+        if (temp_message[0:4].upper() == 'FIND'):
+            strCond = temp_message[-(len(temp_message)-4):]
+        elif (temp_message[0:1].upper() == '找'):
+            strCond = temp_message[-(len(temp_message)-1):]
+        strCond=strCond.strip()
 
         strTitle = '(Query)查詢會員公司營業資料'
         get_TYPE_message = 'SQL_Query_Text'
