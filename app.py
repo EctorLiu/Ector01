@@ -286,7 +286,7 @@ def handle_message(event):
             ('DETAIL' in temp_message.upper() or \
             '內用名單' in temp_message.upper() or \
             '詳細名單' in temp_message.upper()):
-        strTitle = '(SJ)臺南市新吉工業區廠商協進會(D)'
+        strTitle = '(SJ)臺南市新吉工業區廠商協進會(Detail)'
         get_TYPE_message = 'SQL_Query_Text'
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
@@ -303,8 +303,8 @@ def handle_message(event):
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + SJMBCorpProd + '\n\n'
-            if len(strTemp) >= 5000:
-                strTemp = strTemp[0:5000] + '...(資料過多)'
+            if len(strTemp) >= 4950:
+                strTemp = strTemp[0:4950] + '...(資料過多)'
             get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + str(len(strTemp)) + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
