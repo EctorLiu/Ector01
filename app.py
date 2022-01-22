@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)0840'
+strVer = '(M122)0850'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -10,19 +10,6 @@ strPush_NotKeyWord2All_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
-strNewestActivity = '『臺南市新吉工業區廠協會』：最近活動\n' + \
-                '更新：2022/01/13(四) 09:50 ...\n\n' + \
-                '(F) 廠協會統一編號：89038129 (1/12) \n' + \
-                '(B) 廠協會LOGO：已選出「齒輪工業風」(1/10) \n' + \
-                'bit.ly/3HQOobY\n' + \
-                '\n' + \
-                '(A) 廠協會年初全體會員活動：概念階段 \n' + \
-                '(C) 廠協會背心：設計階段 \n' + \
-                '(D) 廠協會會址：待管理中心確認租借辦法階段 \n' + \
-                '(E) 廠協會理監事會議：待管理中心確認租借辦法後擇期召開 \n' + \
-                '(G) 廠協會開戶&正式收據提供：等(F)廠協會統編取得後進行開戶 \n' + \
-                '..'
-
 strMoneyText = '廠協會資金（零用金）使用狀況：\n' + \
                 '目前剩餘：26350 NTD\n' + \
                 '\n' + \
@@ -219,6 +206,7 @@ def handle_message(event):
     elif ('如何使用' in temp_message or 'HELP' in temp_message.upper() or '?' in temp_message.strip() or '？' in temp_message.strip()):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
+
     elif ('最近' in temp_message or '最新' in temp_message) and \
             ('訊息' in temp_message or '活動' in temp_message or '新聞' in temp_message):
         strTitle = '最近訊息/新聞'
@@ -226,7 +214,7 @@ def handle_message(event):
 
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = 'SELECT TOP (50) [SJBTCode] ,[SJBTText] ,[SJBTStatus] ,[SJBTEditDate] ' + \
+            strSQL = 'SELECT TOP (50) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
                         ' WHERE [SJBTDelFlag] = 0 ' + \
                         ' ORDER BY SJBTEditDate DESC, SJBTID '
@@ -235,10 +223,10 @@ def handle_message(event):
             strTemp=''
             for (SJBTCode, SJBTText, SJBTStatus, SJBTEditDate) in resList:
                 intCount += 1
-                strTemp += '[第 ' + str(intCount) + ' 筆] 案' + str(SJBTCode) + '：\n' + \
+                strTemp += '[ ' + str(intCount) + ' ] 案號：' + str(SJBTCode) + ' .. \n' + \
                             '更新時間：' + str(SJBTEditDate) + '\n' + \
                             str(SJBTText) + '：\n' + \
-                            str(SJBTStatus) + '\n'
+                            str(SJBTStatus) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
