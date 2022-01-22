@@ -272,7 +272,7 @@ def handle_message(event):
 
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = ' SELECT TOP (50) SJCSCode, SJCSEditDate, SJCSText, SJCSStatus, SJCSNum, ' + \
+            strSQL = ' SELECT TOP (50) SJCSCode, CONVERT(nvarchar, [SJCSEditDate], 111), SJCSText, SJCSStatus, SJCSNum, ' + \
                         ' SJCSPrice, SJCSNow ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJCS_CashUseList] ' + \
                         ' WHERE [SJCSDelFlag] = 0 ' + \
@@ -304,7 +304,7 @@ def handle_message(event):
 
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = ' SELECT TOP (50) SJBKCode, SJBKEditDate, SJBKText, SJBKStatus, SJBKNum, ' + \
+            strSQL = ' SELECT TOP (50) SJBKCode, CONVERT(nvarchar, [SJBKEditDate], 111) , SJBKText, SJBKStatus, SJBKNum, ' + \
                         ' SJBKPrice, SJBKNow ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBK_BankUseList] ' + \
                         ' WHERE [SJBKDelFlag] = 0 ' + \
