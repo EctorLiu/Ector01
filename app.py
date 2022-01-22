@@ -29,43 +29,6 @@ strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '「理監事名單」\n' + \
                 '「理事長由誰擔任」\n' + \
                 '「LOGO」等..'
-
-strLessonLearning = 'A1. 申請官方帳號：\n' + \
-                    'https://manager.line.biz/\n' + \
-                    '\n' + \
-                    'A2. 自動回覆的類別有三種..\n' + \
-                    '    (1) 『關鍵字』回應\n' + \
-                    '    (2) 『智慧聊天』回應\n' + \
-                    '    (3) 『程式』回應 (需自己寫程式)\n' + \
-                    'A3. 第一種..『關鍵字』回應\n' + \
-                    '    回應模式：選「聊天機器人」、Webhook：選「停用」\n' + \
-                    'A4. 第二種..『智慧聊天』回應\n' + \
-                    '    回應模式：選「聊天」\n' + \
-                    'A5. 第三種..『程式』回應 (需自己寫程式)\n' + \
-                    '    回應模式：選「聊天機器人」、Webhook：選「啟用」\n' + \
-                    '    > 是用上面的設定決定哪一種回應方式..\n' + \
-                    '\n' + \
-                    'A6. 應用面的教學\n' + \
-                    '    可參考範例1..\n' + \
-                    'https://ithelp.ithome.com.tw/articles/10192259\n' + \
-                    '    可參考範例2..\n' + \
-                    'https://ithelp.ithome.com.tw/articles/10233234\n' + \
-                    '\n' + \
-                    'A7. 這個是我一開始看的官方文件：\n' + \
-                    'https://developers.line.biz/zh-hant/docs/messaging-api/building-bot/\n' + \
-                    'A8. 同上..Line官方有提供範例\n' + \
-                    'https://developers.line.biz/zh-hant/docs/messaging-api/building-bot/\n' + \
-                    '選擇語言進行開發..\n' + \
-                    '\n' + \
-                    'A9. 開發環境網站Line Develop（之後再看其他教學網站）\n' + \
-                    'https://developers.line.biz/zh-hant/\n' + \
-                    '\n' + \
-                    'B1. 『推播』的話要拿權杖：\n' + \
-                    'https://notify-bot.line.me/my/\n' + \
-                    'B2. 『推播』教學可參考這一篇：\n' + \
-                    'https://bustlec.github.io/note/2018/07/10/line-notify-using-python/'
-
-
     # ***** ***** ***** ***** *****
 
     ##### (TSVI)推播 ######
@@ -364,7 +327,7 @@ def handle_message(event):
                             '暫停使用..有急用可找ECTOR'
 
     elif (temp_message[0:5].upper() == 'ECTOR') and ('官方帳號教學' in temp_message):
-        get_message = strLessonLearning
+        get_message = GVstrLessonLearning
     # ***** ***** ***** ***** *****
 
     ##### (Ver)版本 #####
