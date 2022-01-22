@@ -233,15 +233,14 @@ def handle_message(event):
 
     elif ('工業區' in temp_message or '會員' in temp_message or '廠協會' in temp_message) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message or '會員' in temp_message):
-        strTitle = '(SJ)新吉廠協會名單'
+        strTitle = '(SJ)臺南市新吉工業區廠商協進會_會員名單'
         get_TYPE_message = 'SQL_Query_Text'
 
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpProd, SJMBCorpEmpNum ' + \
-                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
-                        ' ORDER BY SEQ_TYPE, SJMBCode '
+                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
@@ -259,6 +258,7 @@ def handle_message(event):
             get_message = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
+
 
     elif (temp_message.count('理事長') > 0) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
