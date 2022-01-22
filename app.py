@@ -426,6 +426,7 @@ def handle_message(event):
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
+                        ' WHERE [SJMBCorpName] LIKE %' + strCond + '%' + \
                         ' ORDER BY SEQ_TYPE, SJMBCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
@@ -441,7 +442,7 @@ def handle_message(event):
             get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
-                            strTemp
+                            strTemp + strCond
         else:
             get_message = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
