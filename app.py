@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)1225'
+strVer = '(M122)1300'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -303,8 +303,8 @@ def handle_message(event):
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + SJMBCorpProd + '\n\n'
-            if len(strTemp) >= 4500:
-                strTemp = strTemp[0:4500] + '...(資料過多)'
+            if len(strTemp) >= 5000:
+                strTemp = strTemp[0:5000] + '...(資料過多)'
             get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + str(len(strTemp)) + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
