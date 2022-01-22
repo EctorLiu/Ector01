@@ -259,7 +259,7 @@ def handle_message(event):
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
             if len(strTemp) >= intMaxLineString:
                 strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
-            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + \
+            get_message = strTitle + '：\n資料筆數：[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
         else:
@@ -290,7 +290,7 @@ def handle_message(event):
             ('DETAIL' in temp_message.upper() or \
             '內用名單' in temp_message.upper() or \
             '詳細名單' in temp_message.upper()):
-        strTitle = '(SJ)臺南市新吉工業區廠商協進會(Detail)'
+        strTitle = '(SJ)臺南市新吉工業區廠商協進會'
         get_TYPE_message = 'SQL_Query_Text'
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
@@ -303,14 +303,15 @@ def handle_message(event):
             strTemp=''
             for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '(' + str(SJMBCorpEmpNum) + '人)\n' + \
+                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '(' + str(SJMBCorpEmpNum) + '人)\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
-                            '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
-                            '  廠址：' + str(SJMBCorpAddress) + '\n' + \
-                            '  電話：' + str(SJMBCorpTel) + '\n\n'
+                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  A：' + str(SJMBCorpAddress) + '\n' + \
+                            '  T：' + str(SJMBCorpTel) + '\n\n'
             if len(strTemp) >= intMaxLineString:
                 strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
-            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + str(len(strTemp)) + \
+            get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
+                            '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
         else:
