@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)1340'
+strVer = '(M122)1342'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -11,7 +11,7 @@ strPush_NotKeyWord2All_Switch = 'OFF'
 
     ##### 限制 ######
 intMaxLineMSGString = 4900
-intMaxItemString = 100
+intMaxItemString = 200
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
