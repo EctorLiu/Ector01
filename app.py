@@ -235,14 +235,14 @@ def handle_message(event):
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message or '會員' in temp_message):
         strTitle = '(SJ)新吉廠協會名單'
         get_TYPE_message = 'SQL_Query_Text'
-# ' CASE WHEN SJMBPRType = "理事長" THEN "1" WHEN SJMBPRType = "常務理事" THEN "2" WHEN SJMBPRType = '理事' THEN '3' WHEN SJMBPRType = '常務監事' THEN '4' WHEN SJMBPRType = '監事' THEN '5' WHEN SJMBPRType = '一般會員' THEN '6' ELSE '7' END AS SEQ_TYPE ' + \
+
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpProd, SJMBCorpEmpNum ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
                         ' WHERE [SJMBDelFlag] = 0 ' + \
-                        ' ORDER BY SEQ_TYPE, SJMBCode'
+                            ' ORDER BY SEQ_TYPE, SJMBCode'
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
