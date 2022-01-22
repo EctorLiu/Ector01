@@ -226,8 +226,7 @@ def handle_message(event):
 
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = 'SELECT TOP (50) [SJBTID], [SJBTCode] ,[SJBTDate] ,[SJBTText] ,[SJBTStatus], ' + \
-                        ' [SJBTEditMem] ,[SJBTEditDate] ,[SJBTMemo] ,[SJBTDelFlag] ' + \
+            strSQL = 'SELECT TOP (50) [SJBTCode] ,[SJBTText] ,[SJBTStatus] ,[SJBTEditDate] ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
                         ' WHERE [SJBTDelFlag] = 0 ' + \
                         ' ORDER BY SJBTEditDate DESC, SJBTID '
