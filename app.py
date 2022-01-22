@@ -286,7 +286,7 @@ def handle_message(event):
                             '  更新日期：[ ' + str(SJCSEditDate) + ' ]\n' + \
                             '  ' + str(SJCSText) + '：\n' + \
                             '  ' + str(SJCSStatus) + '：\n' + \
-                            '  金額：' + str(SJCSPrice) + ' (數量：' + str(SJCSNum) + ')\n'
+                            '  金額：' + str(SJCSPrice) + ' (數量：' + str(SJCSNum) + ')\n' + \
                             '  餘額可用：' + str(SJCSNow) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
