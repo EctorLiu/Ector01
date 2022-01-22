@@ -249,7 +249,7 @@ def handle_message(event):
                     strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 \n' + \
                                 '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
-                elif:
+                else:
                     strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
                                 '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
