@@ -6,7 +6,7 @@ strVer = '(M122)1350'
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
     # 切換【非關鍵字通知】同仁推播功能選擇：ON/OFF
-strPush_NotKeyWord2All_Switch = 'OFF'
+strPush_NotKeyWord2All_Switch = 'ON'
     # ***** ***** ***** ***** *****
 
     ##### 限制 ######
