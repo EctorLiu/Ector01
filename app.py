@@ -295,12 +295,12 @@ def handle_message(event):
                     strCorpProdText = SJMBCorpProd[0:intMaxItemString] + '...'
                 else:
                     strCorpProdText = SJMBCorpProd
-                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
+                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 \n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
-                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  ' + str(SJMBPRType) + '：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n' + \
                             '  電話：' + str(SJMBCorpTel) + '\n' + \
-                            '  營業項目：' + str(strCorpProdText) + '\n\n'
+                            '  > 營業項目：' + str(strCorpProdText) + ' <\n\n'
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
