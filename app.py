@@ -237,15 +237,15 @@ def handle_message(event):
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
-                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum ' + \
+                        ' SJMBPRTitle, SJMBCorpAddress ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
                         ' ORDER BY SEQ_TYPE, SJMBCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
-            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum) in resList:
+            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '(' + str(SJMBCorpEmpNum) + ')\n' + \
+                strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) '\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n\n'
@@ -274,6 +274,36 @@ def handle_message(event):
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』總幹事：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
+
+    elif (temp_message[0:2].upper() == 'SJ') and \
+            (temp_message[-3:] == '!55') and \
+            ('DETAIL' in temp_message.upper() or \
+            '內用名單' in temp_message.upper() or \
+            '詳細名單' in temp_message.upper()):
+        strTitle = '(SJ)臺南市新吉工業區廠商協進會(D)'
+        get_TYPE_message = 'SQL_Query_Text'
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
+                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum ' + \
+                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
+                        ' ORDER BY SEQ_TYPE, SJMBCode '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '(' + str(SJMBCorpEmpNum) + ')\n' + \
+                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
+                            '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  廠址：' + str(SJMBCorpAddress) + '\n\n'
+            get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + datNow  + '\n\n' + \
+                            strTemp
+        else:
+            get_message = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
