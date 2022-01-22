@@ -439,10 +439,10 @@ def handle_message(event):
                 strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
-                            '  成立：' + str(SJMBCorpSince) + '\n'
-                            '  廠址：' + str(SJMBCorpAddress) + '\n'
-                            '  電話：' + str(SJMBCorpTel) + '\n'
-                            '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n'
+                            '  成立：' + str(SJMBCorpSince) + '\n' + \
+                            '  廠址：' + str(SJMBCorpAddress) + '\n' + \
+                            '  電話：' + str(SJMBCorpTel) + '\n' + \
+                            '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n' + \
                             '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
