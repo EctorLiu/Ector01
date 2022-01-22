@@ -238,7 +238,8 @@ def handle_message(event):
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpProd, SJMBCorpEmpNum ' + \
-                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] '
+                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
+                        ' ORDER BY SEQ_TYPE, SJMBCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
@@ -248,7 +249,7 @@ def handle_message(event):
                             '  公司：(' + str(SJMBCorpUniNum) + ')' + str(SJMBCorpName) + '\n' + \
                             '  會員代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  住址：' + str(SJMBCorpAddress) + '\n' + \
-                            '  營業項目：' + str(SJMBCorpProd) + '(' + str(SJMBCorpEmpNum) + ')\n\n'
+                            '  營業項目：' + str(SJMBCorpProd[0:50]) + '(' + str(SJMBCorpEmpNum) + ')\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
