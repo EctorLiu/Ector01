@@ -239,8 +239,7 @@ def handle_message(event):
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
-                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpProd, SJMBCorpEmpNum, ' + \
-                        ' CASE WHEN SJMBPRType = 理事長 THEN 1 ELSE 7 END AS SEQ_TYPE ' + \
+                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpProd, SJMBCorpEmpNum ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJMB_MemberList] ' + \
                         ' WHERE [SJMBDelFlag] = 0 ' + \
                         ' ORDER BY SEQ_TYPE, SJMBCode'
