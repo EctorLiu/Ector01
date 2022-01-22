@@ -230,8 +230,39 @@ def handle_message(event):
             '(預定遷至：臺南市新吉工業區安新二路99號)\n' + \
             '(申請中..新吉工業區服務中心..未來會址)\n' + \
             '歡迎您的蒞臨指教！'
-    elif ('工業區' in temp_message or '會員' in temp_message) and \
-            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
+
+    elif ('工業區' in temp_message or '會員' in temp_message or '廠協會' in temp_message) and \
+            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message or '會員' in temp_message):
+        strTitle = '(SJ)新吉廠協會名單'
+        get_TYPE_message = 'SQL_Query_Text'
+
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
+                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpProd, SJMBCorpEmpNum  ' + \
+                        ' CASE WHEN SJMBPRType = '理事長' THEN '1' WHEN SJMBPRType = '常務理事' THEN '2' WHEN SJMBPRType = '理事' THEN '3' WHEN SJMBPRType = '常務監事' THEN '4' WHEN SJMBPRType = '監事' THEN '5' WHEN SJMBPRType = '一般會員' THEN '6' ELSE '7' END AS SEQ_TYPE ' + \
+                        ' FROM [TIM_DB].[dbo].[tbl0A_SJMB_MemberList] ' + \
+                        ' WHERE [SJMBDelFlag] = 0 ' + \
+                        ' ORDER BY SEQ_TYPE, SJMBCode'
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpProd, SJMBCorpEmpNum) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 會員編號：【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
+                            '  公司：(' + str(SJMBCorpUniNum) + ')' + str(SJMBCorpName) + '\n' + \
+                            '  會員代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  住址：' + str(SJMBCorpAddress) + '\n' + \
+                            '  營業項目：' + str(SJMBCorpProd) + '(' + str(SJMBCorpEmpNum) + ')\n\n'
+            get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + datNow  + '\n\n' + \
+                            strTemp
+        else:
+            get_message = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
+    
+        
         get_message = '『臺南市新吉工業區廠協會』會員：\n' + \
             '(12/10資訊)\n' + \
             '(TS001)東佑達自動化科技股份有限公司\n(TS002)久揚模具有限公司\n(TS003)伍智金屬企業股份有限公司\n(TS004)亞勝塑膠實業有限公司\n(TS005)冠岱科技有限公司\n' + \
