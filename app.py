@@ -223,10 +223,10 @@ def handle_message(event):
             strTemp=''
             for (SJBTCode, SJBTText, SJBTStatus, SJBTEditDate) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 案號：' + str(SJBTCode) + ' .. \n' + \
-                            '更新時間：' + str(SJBTEditDate) + '\n' + \
-                            str(SJBTText) + '：\n' + \
-                            str(SJBTStatus) + '\n\n'
+                strTemp += '[ ' + str(intCount) + ' ] 案號【' + str(SJBTCode) + '】\n' + \
+                            '  更新日期：[ ' + str(SJBTEditDate) + ' ]\n' + \
+                            '  ' + str(SJBTText) + '：\n' + \
+                            '  ' + str(SJBTStatus) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
