@@ -243,13 +243,12 @@ def handle_message(event):
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
-            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpProd, SJMBCorpEmpNum) in resList:
+            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum) in resList:
                 intCount += 1
                 strTemp += '[ ' + str(intCount) + ' ] 會員編號：【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
                             '  公司：(' + str(SJMBCorpUniNum) + ')' + str(SJMBCorpName) + '\n' + \
                             '  會員代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
-                            '  住址：' + str(SJMBCorpAddress) + '\n' + \
-                            '  營業項目：' + str(SJMBCorpProd[0:50]) + '(' + str(SJMBCorpEmpNum) + ')\n\n'
+                            '  住址：' + str(SJMBCorpAddress) + str(SJMBCorpEmpNum) + ')\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
