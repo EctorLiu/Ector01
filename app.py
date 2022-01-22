@@ -1,12 +1,12 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M121)1616'
+strVer = '(M122)0840'
 
-    # 切換SQL功能選擇：ON/OFF
+    # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
-    # 切換同仁推播功能選擇：ON/OFF
-strPush_NotKeyWord2All_Switch = 'ON'
+    # 切換【非關鍵字通知】同仁推播功能選擇：ON/OFF
+strPush_NotKeyWord2All_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
@@ -219,9 +219,36 @@ def handle_message(event):
     elif ('如何使用' in temp_message or 'HELP' in temp_message.upper() or '?' in temp_message.strip() or '？' in temp_message.strip()):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
-    elif ('最近' in temp_message or '最新' in temp_message) and ('訊息' in temp_message or '活動' in temp_message):
-        get_TYPE_message = 'New_Activity'
-        get_message = strNewestActivity
+    elif ('最近' in temp_message or '最新' in temp_message) and \
+            ('訊息' in temp_message or '活動' in temp_message or '新聞' in temp_message):
+        strTitle = '最近訊息/新聞'
+        get_TYPE_message = 'SQL_Query_Text'
+
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = 'SELECT TOP (50) [SJBTID], [SJBTCode] ,[SJBTDate] ,[SJBTText] ,[SJBTStatus], ' + \
+                        ' [SJBTEditMem] ,[SJBTEditDate] ,[SJBTMemo] ,[SJBTDelFlag] ' + \
+                        ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
+                        ' WHERE [SJBTDelFlag] = 0 ' + \
+                        ' ORDER BY SJBTEditDate DESC, SJBTID '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJBTCode, SJBTText, SJBTStatus, SJBTEditDate) in resList:
+                intCount += 1
+                strTemp += '[第 ' + str(intCount) + ' 筆] 案' + str(SJBTCode) + '：\n' + \
+                            '更新時間：' + str(SJBTEditDate) + '\n' + \
+                            str(SJBTText) + '：\n' + \
+                            str(SJBTStatus) + '\n'
+            get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + datNow  + '\n\n' + \
+                            strTemp
+        else:
+            get_message = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
+        # get_TYPE_message = 'New_Activity'
+        # get_message = strNewestActivity
 
     elif ('LOGO' in temp_message.upper()):
         get_TYPE_message = 'SJ_LOGO'
@@ -480,7 +507,7 @@ def handle_message(event):
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
-    elif get_TYPE_message == 'New_Activity':
+    elif get_TYPE_message == 'SQL_Query_Text':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
