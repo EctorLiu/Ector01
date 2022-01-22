@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)1350'
+strVer = '(M122)1400'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -409,6 +409,38 @@ def handle_message(event):
                             '  金額：' + str(SJBKPrice) + ' (數量：' + str(SJBKNum) + ')\n' + \
                             '  餘額可用：' + str(SJBKNow) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + datNow  + '\n\n' + \
+                            strTemp
+        else:
+            get_message = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
+
+    elif (temp_message[0:4].upper() == 'FIND'):
+        strCond = temp_message[-4:]
+
+        strTitle = '(Query)查詢會員公司營業資料'
+        get_TYPE_message = 'SQL_Query_Text'
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
+                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum ' + \
+                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
+                        ' WHERE [SJMBCorpName] LIKE %' + strCond + '%' + \
+                        ' ORDER BY SEQ_TYPE, SJMBCode '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
+                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
+                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  廠址：' + str(SJMBCorpAddress) + '\n\n'
+            if len(strTemp) >= intMaxLineMSGString:
+                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+            get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
+                            '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
         else:
