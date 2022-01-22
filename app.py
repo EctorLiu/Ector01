@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)0850'
+strVer = '(M122)0902'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -313,8 +313,34 @@ def handle_message(event):
             '$' in temp_message.upper() or \
             'MONEY' in temp_message.upper() or \
             '零用金' in temp_message.upper()):
-        get_TYPE_message = 'SJ_MONEY'
-        get_message = strMoneyText
+        strTitle = '零用金使用狀況'
+        get_TYPE_message = 'SQL_Query_Text'
+
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = 'SELECT TOP (50) SJCSCode, SJCSEditDate, SJCSText, SJCSStatus, SJCSNum, ' + \
+                        ' SJCSPrice, SJCSNow ' + \
+                        ' FROM [TIM_DB].[dbo].[tbl0A_SJCS_CashUseList] ' + \
+                        ' WHERE [SJCSDelFlag] = 0 ' + \
+                        ' ORDER BY SJCSEditDate DESC, SJCSCode '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJCSCode, SJCSEditDate, SJCSText, SJCSStatus, SJCSNum, SJCSPrice, SJCSNow) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJCSCode) + '】\n' + \
+                            '  更新日期：[ ' + str(SJCSEditDate) + ' ]\n' + \
+                            '  ' + str(SJCSText) + '：\n' + \
+                            '  ' + str(SJCSStatus) + '：\n' + \
+                            '  金額：' + SJCSPrice + ' (數量：' + str(SJCSNum) + ')\n'
+                            '  餘額可用：' + SJCSNow + '\n\n'
+            get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + datNow  + '\n\n' + \
+                            strTemp
+        else:
+            get_message = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
