@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)1300'
+strVer = '(M122)1340'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -273,13 +273,40 @@ def handle_message(event):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
             '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
+
     elif ('理事' in temp_message or '監事' in temp_message or '理監事' in temp_message) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
-        get_message = '『臺南市新吉工業區廠協會』理監事名單：\n' + \
-            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉結果：\n' + \
-            '理事長 林宗德\n' + \
-            '常務理事 洪靖惠\n常務理事 吳依龍\n理事 張崑裕\n理事 陳結和\n理事 吳冠霖\n理事 薛智煜\n理事 郭志霄\n理事 李漢章\n' + \
-            '常務監事 黃信夫\n監事 洪愛雅\n監事 洪志豪'
+        strTitle = '(SJ)新吉廠協會理監事名單'
+        get_TYPE_message = 'SQL_Query_Text'
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
+                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel, SJMBCorpProd ' + \
+                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_LeaderList] ' + \
+                        ' ORDER BY SEQ_TYPE, SJMBCode '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, \
+                    SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel, SJMBCorpProd) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
+                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
+                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  廠址：' + str(SJMBCorpAddress) + '\n' + \
+                            '  電話：' + str(SJMBCorpTel) + '\n' + \
+                            '  營業項目：' + str(SJMBCorpProd[0:100]) + '\n\n'
+            if len(strTemp) >= intMaxLineString:
+                strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
+            get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
+                            '資料筆數：[ ' + str(intCount) + ' ] \n' + \
+                            '查詢時間：' + datNow  + '\n\n' + \
+                            strTemp
+        else:
+            get_message = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
+
     elif ('總幹事' in temp_message) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』總幹事：\n' + \
@@ -287,7 +314,8 @@ def handle_message(event):
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
-            ('DETAIL' in temp_message.upper() or \
+            ('MEM' in temp_message.upper() or \
+            'DETAIL' in temp_message.upper() or \
             '內用名單' in temp_message.upper() or \
             '詳細名單' in temp_message.upper()):
         strTitle = '(SJ)臺南市新吉工業區廠商協進會'
