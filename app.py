@@ -295,8 +295,8 @@ def handle_message(event):
                     strCorpProdText = SJMBCorpProd[0:intMaxItemString] + '...'
                 else:
                     strCorpProdText = SJMBCorpProd
-                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 \n' + \
-                            '  ' + str(SJMBPRType) + '：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                strTemp += '[ ' + str(intCount) + ' ] ' + str(SJMBPRType) + '：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  編號 【' + str(SJMBCode) + '】' + '\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n' + \
                             '  電話：' + str(SJMBCorpTel) + '\n' + \
