@@ -425,7 +425,7 @@ def handle_message(event):
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
-                        ' SJMBCorpSince ' + \
+                        ' SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
                         ' WHERE [SJMBCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
                         ' ORDER BY SEQ_TYPE, SJMBCode '
