@@ -245,9 +245,14 @@ def handle_message(event):
             strTemp=''
             for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
-                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
-                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
+                if SJMBPRType == '一般會員':
+                    strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 \n' + \
+                                '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
+                                '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
+                elif:
+                    strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
+                                '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
+                                '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
             get_message = strTitle + '：\n資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
