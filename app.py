@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)1120'
+strVer = '(M122)1125'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -245,10 +245,10 @@ def handle_message(event):
             strTemp=''
             for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號：【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '(' + str(SJMBCorpEmpNum) + ')\n' + \
-                            '  公司：(' + str(SJMBCorpUniNum) + ')' + str(SJMBCorpName) + '\n' + \
-                            '  會員代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
-                            '  住址：' + str(SJMBCorpAddress) + '\n\n'
+                strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '(' + str(SJMBCorpEmpNum) + ')\n' + \
+                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
+                            '  代表：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  廠址：' + str(SJMBCorpAddress) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
