@@ -298,35 +298,44 @@ def handle_message(event):
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
-            ('MEMO' in temp_message.upper()):
-        get_TYPE_message = 'SJ_MEMO'
-        get_message = strMemo
+            ('BANK' in temp_message.upper()):
+        strTitle = '銀行帳戶資訊'
+        get_TYPE_message = 'SQL_Query_Text'
 
-    elif (temp_message[0:2].upper() == 'SJ') and \
-            ('體溫' in temp_message.upper() or \
-            'BT' in temp_message.upper()):
-        strTitle = 'TOYO體溫回報清單'
-        get_TYPE_message = 'SJ_TEXT_REPLY_MSG'
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = ' SELECT ID, NAME, BT, CHK ' + \
-                        ' FROM TIM_DB.dbo.VIEW_APP_MEM_BODYTEMP ' + \
-                        ' ORDER BY BT DESC, ID '
+            strSQL = ' SELECT TOP (50) SJBKCode, SJBKEditDate, SJBKText, SJBKStatus, SJBKNum, ' + \
+                        ' SJBKPrice, SJBKNow ' + \
+                        ' FROM [TIM_DB].[dbo].[tbl0A_SJBK_BankUseList] ' + \
+                        ' WHERE [SJBKDelFlag] = 0 ' + \
+                        ' ORDER BY SJBKEditDate DESC, SJBKCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
-            for (ID, NAME, BT, CHK) in resList:
-                strTemp = strTemp + str(ID) + ',' + str(NAME) + ',' + str(BT) + ',' + str(CHK) + '\n'
+            for (SJBKCode, SJBKEditDate, SJBKText, SJBKStatus, SJBKNum, SJBKPrice, SJBKNow) in resList:
                 intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJBKCode) + '】\n' + \
+                            '  更新日期：[ ' + str(SJBKEditDate) + ' ]\n' + \
+                            '  ' + str(SJBKText) + '：\n' + \
+                            '  ' + str(SJBKStatus) + '：\n' + \
+                            '  金額：' + str(SJBKPrice) + ' (數量：' + str(SJBKNum) + ')\n' + \
+                            '  餘額可用：' + str(SJBKNow) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
-                            datNow  + '\n\n' + \
+                            '查詢時間：' + datNow  + '\n\n' + \
                             strTemp
         else:
             get_message = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif (temp_message[0:5].upper() == 'ECTOR') and ('官方帳號教學' in temp_message):
+    elif (temp_message[0:2].upper() == 'SJ') and \
+            (temp_message[-3:] == '!55') and \
+            ('MEMO' in temp_message.upper()):
+        get_TYPE_message = 'SJ_MEMO'
+        get_message = strMemo
+
+    elif (temp_message[0:5].upper() == 'ECTOR') and \
+            ('官方帳號教學' in temp_message):
         get_message = GVstrLessonLearning
     # ***** ***** ***** ***** *****
 
@@ -482,14 +491,6 @@ def handle_message(event):
         reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
                                  preview_image_url = 'https://raw.githubusercontent.com/EctorLiu/Ector01/main/img/A.jpg')
         line_bot_api.reply_message(event.reply_token,  reply)
-
-    elif get_TYPE_message == 'SJ_MONEY':
-        reply = TextSendMessage(text=f"{get_message}")
-        line_bot_api.reply_message(event.reply_token,  reply)
-
-    elif get_TYPE_message == 'SJ_TEXT_REPLY_MSG':
-        reply = TextSendMessage(text=f"{get_message}")
-        line_bot_api.reply_message(event.reply_token, reply)
 
     elif get_TYPE_message == 'SJ_MEMO':
         reply = TextSendMessage(text=f"{get_message}")
