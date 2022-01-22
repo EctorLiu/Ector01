@@ -426,7 +426,7 @@ def handle_message(event):
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
-                        ' WHERE [SJMBCorpName] LIKE %' + strCond + '%' + \
+                        ' WHERE [SJMBCorpName] LIKE "%' + strCond + '%" ' + \
                         ' ORDER BY SEQ_TYPE, SJMBCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
