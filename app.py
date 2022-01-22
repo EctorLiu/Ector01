@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)1056'
+strVer = '(M122)1108'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -165,7 +165,6 @@ def handle_message(event):
             ('訊息' in temp_message or '活動' in temp_message or '新聞' in temp_message):
         strTitle = '最近訊息/新聞'
         get_TYPE_message = 'SQL_Query_Text'
-
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = 'SELECT TOP (50) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
@@ -233,9 +232,8 @@ def handle_message(event):
 
     elif ('工業區' in temp_message or '會員' in temp_message or '廠協會' in temp_message) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message or '會員' in temp_message):
-        strTitle = '(SJ)臺南市新吉工業區廠商協進會_會員名單'
+        strTitle = '(SJ)臺南市新吉工業區廠商協進會'
         get_TYPE_message = 'SQL_Query_Text'
-
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
@@ -285,7 +283,6 @@ def handle_message(event):
             '零用金' in temp_message.upper()):
         strTitle = '零用金使用狀況'
         get_TYPE_message = 'SQL_Query_Text'
-
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT TOP (50) SJCSCode, CONVERT(nvarchar, [SJCSEditDate], 111), SJCSText, SJCSStatus, SJCSNum, ' + \
@@ -317,7 +314,6 @@ def handle_message(event):
             ('BANK' in temp_message.upper()):
         strTitle = '銀行帳戶資訊'
         get_TYPE_message = 'SQL_Query_Text'
-
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT TOP (50) SJBKCode, CONVERT(nvarchar, [SJBKEditDate], 111) , SJBKText, SJBKStatus, SJBKNum, ' + \
