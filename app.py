@@ -283,7 +283,7 @@ def handle_message(event):
             (temp_message[-3:] == '!55') and \
             ('120' in temp_message.upper() or \
             '$' in temp_message.upper() or \
-            'MONEY' in temp_message.upper() or \
+            'CASH' in temp_message.upper() or \
             '零用金' in temp_message.upper()):
         strTitle = '零用金使用狀況'
         get_TYPE_message = 'SQL_Query_Text'
