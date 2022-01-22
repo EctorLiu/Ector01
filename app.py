@@ -295,19 +295,18 @@ def handle_message(event):
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
-                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel ' + \
+                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
                         ' ORDER BY SEQ_TYPE, SJMBCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
-            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel) in resList:
+            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum) in resList:
                 intCount += 1
                 strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '(' + str(SJMBCorpEmpNum) + '人)\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
-                            '  A：' + str(SJMBCorpAddress) + '\n' + \
-                            '  T：' + str(SJMBCorpTel) + '\n\n'
+                            '  廠址：' + str(SJMBCorpAddress) + '\n\n'
             if len(strTemp) >= intMaxLineString:
                 strTemp = strTemp[0:intMaxLineString] + '...(資料過多)'
             get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
