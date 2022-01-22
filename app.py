@@ -1,3 +1,4 @@
+
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
@@ -320,7 +321,7 @@ def handle_message(event):
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
-            ('MEM' in temp_message.upper() or \
+            ('MEMBER' in temp_message.upper() or \
             'DETAIL' in temp_message.upper() or \
             '內用名單' in temp_message.upper() or \
             '詳細名單' in temp_message.upper()):
