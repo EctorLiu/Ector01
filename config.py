@@ -73,7 +73,7 @@ GVstrNameCard_Info_Config = '>> 名片建議設計兩面，其中一面為原本
                             '\n' + \
                             '>> (2) 可提供名片製作業者直接套用：\n' + \
                             '  Step02：AI檔案\n' + \
-                            '  連結：https://bit.ly/3LfnmNP\n' + \
+                            '  連結：https://bit.ly/3LfnmNP\n'
 
                             # '  連結：https://github.com/EctorLiu/Ector01/raw/main/files/(M127)SJ_Design_Text.jpg\n' + \
                             # '  連結：https://github.com/EctorLiu/Ector01/raw/main/files/(M127)SJ_Design_AI_File.ai\n' + \
