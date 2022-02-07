@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M122)1506'
+strVer = '(M207)1445'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -270,7 +270,6 @@ def handle_message(event):
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-
     elif (temp_message.count('理事長') > 0) and \
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』理事長：\n' + \
@@ -318,6 +317,11 @@ def handle_message(event):
             ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』總幹事：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
+
+    elif ('名片' in temp_message) and \
+            ('格式' in temp_message):
+        get_TYPE_message = 'SJ_MSG_Text'
+        get_message = GVstrNameCard_Info_Config
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
@@ -659,6 +663,10 @@ def handle_message(event):
     # ***** ***** ***** ***** *****
 
     elif get_TYPE_message == 'How_To_Use':
+        reply = TextSendMessage(text=f"{get_message}")
+        line_bot_api.reply_message(event.reply_token,  reply)
+
+    elif get_TYPE_message == 'SJ_MSG_Text':
         reply = TextSendMessage(text=f"{get_message}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
