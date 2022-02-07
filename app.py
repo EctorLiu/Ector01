@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M207)1445'
+strVer = '(M207)1456'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -215,7 +215,7 @@ def handle_message(event):
     elif ('如何加入' in temp_message or '加入會員' in temp_message):
         get_message = '『臺南市新吉工業區廠協會』加入：\n\n' + \
             '(Step01)請下載並填寫『會員入會申請書』紙本\n' + \
-            'https://www.sendspace.com/file/8jkwqm\n' + \
+            'https://bit.ly/3GwQf4w\n' + \
             '請填寫內容並用印(大小章)\n\n' + \
             '(Step02)請用超連結：\n' + \
             'https://forms.gle/bxDLMLgA2fSLCDia9\n' + \
