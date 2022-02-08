@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M208)1230'
+strVer = '(M208)1240'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -165,10 +165,6 @@ def handle_message(event):
 
 
     ##### 關鍵字 #####
-    elif ('如何使用' in temp_message or 'HELP' in temp_message.upper() or '?' in temp_message.strip() or '？' in temp_message.strip()):
-        get_TYPE_message = 'How_To_Use'
-        get_message = strHowToUse
-
     elif ('最近' in temp_message or '最新' in temp_message) and \
             ('訊息' in temp_message or '活動' in temp_message or '新聞' in temp_message):
         strTitle = '最近訊息/新聞'
@@ -482,6 +478,10 @@ def handle_message(event):
     elif (temp_message[0:5].upper() == 'ECTOR') and \
             ('官方帳號教學' in temp_message):
         get_message = GVstrLessonLearning
+
+    elif ('如何使用' in temp_message or 'HELP' in temp_message.upper() or '?' in temp_message.strip() or '？' in temp_message.strip()):
+        get_TYPE_message = 'How_To_Use'
+        get_message = strHowToUse
     # ***** ***** ***** ***** *****
 
     ##### (Ver)版本 #####
