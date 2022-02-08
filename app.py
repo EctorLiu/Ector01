@@ -95,6 +95,7 @@ def handle_message(event):
     temp_message = event.message.text
 
     ##### 全型符號轉換 #####
+    temp_message = temp_message.upper()
     temp_message = temp_message.replace('！','!')
     temp_message = temp_message.replace('（','(')
     temp_message = temp_message.replace('）',')')
@@ -322,7 +323,7 @@ def handle_message(event):
         get_TYPE_message = 'SJ_MSG_Text'
         get_message = GVstrNameCard_Info_Config
 
-    elif ('使用' in temp_message.upper()) and ('VOWIFI' in temp_message.upper()):
+    elif (('使用' in temp_message) or ('設定' in temp_message) or ('通話' in temp_message)) and ('VOWIFI' in temp_message):
         get_TYPE_message = 'SJ_MSG_Text'
         get_message = GVstrVoWiFi_Info_Config
 
