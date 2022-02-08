@@ -82,7 +82,7 @@ GVstrNameCard_Info_Config = '>> 名片建議設計兩面，其中一面為原本
     ##### 下載VoWiFi說明 ######
 GVstrVoWiFi_Info_Config = '>> 【VoWiFi】可在「電信訊號」不佳，\n' + \
                             '    但是「網路訊號」良好的情況下，順利通話！\n' + \
-                            '    可用「網路」撥通「02-xxxx-xxxx 或 0912-345678」！\n' + \
+                            '    可用「網路」撥通「02-xxxx-xxxx 或 09xx-xxxxxx」！\n' + \
                             '\n' + \
                             '  Step01：參考VoWiFi說明\n' + \
                             '  連結：https://bit.ly/34JlWu8\n' + \
