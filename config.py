@@ -79,6 +79,22 @@ GVstrNameCard_Info_Config = '>> 名片建議設計兩面，其中一面為原本
                             # '  連結：https://github.com/EctorLiu/Ector01/raw/main/files/(M127)SJ_Design_AI_File.ai\n' + \
     # ***** ***** ***** ***** *****
 
+    ##### 下載VoWiFi說明 ######
+GVstrVoWiFi_Info_Config = '>> VoWiFi可在「電信訊號」不佳，\n' + \
+                            '>> 但是「網路訊號」良好的情況下，順利通話！\n' + \
+                            '>> 可用「網路」撥通「02-xxxx-xxxx 或 0912-345678」！\n' + \
+                            '  Step01：參考VoWiFi說明\n' + \
+                            '  連結：https://bit.ly/34JlWu8\n' + \
+                            '\n' + \
+                            '  Step02：聯絡手機的業者（遠傳、中華電信等）開啟VoWiFi功能\n' + \
+                            '      .. 有的稱呼為「WiFi通話功能」\n' + \
+                            '      .. 可能為免費，也可能需月租費\n' + \
+                            '  Step03：開啟手機的VoWiFi功能\n' + \
+                            '      .. (請參考上方的說明，或「Google」各機型開啟方法)\n'
+
+                            # '  連結：https://github.com/EctorLiu/Ector01/raw/main/files/(M208)SJ_VoWiFi_Setup(V3).pdf\n' + \
+    # ***** ***** ***** ***** *****
+
     ##### SQL ######
 import pymssql
 
