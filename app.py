@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M208)1046'
+strVer = '(M208)1230'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -321,6 +321,10 @@ def handle_message(event):
     elif ('名片' in temp_message) and (('製作' in temp_message) or ('格式' in temp_message)):
         get_TYPE_message = 'SJ_MSG_Text'
         get_message = GVstrNameCard_Info_Config
+
+    elif ('使用' in temp_message.upper()) and ('VOWIFI' in temp_message.upper()):
+        get_TYPE_message = 'SJ_MSG_Text'
+        get_message = GVstrVoWiFi_Info_Config
 
     elif (temp_message[0:2].upper() == 'SJ') and \
             (temp_message[-3:] == '!55') and \
