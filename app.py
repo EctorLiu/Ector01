@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M207)1456'
+strVer = '(M208)1045'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -318,7 +318,7 @@ def handle_message(event):
         get_message = '『臺南市新吉工業區廠協會』總幹事：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
 
-    elif ('名片' in temp_message) and \
+    elif ('名片' in temp_message) and ('製作' in temp_message)\
             ('格式' in temp_message):
         get_TYPE_message = 'SJ_MSG_Text'
         get_message = GVstrNameCard_Info_Config
