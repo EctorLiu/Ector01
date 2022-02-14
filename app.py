@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M214)1208'
+strVer = '(M214)1218'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -327,7 +327,7 @@ def handle_message(event):
         get_TYPE_message = 'SJ_MSG_Text'
         get_message = '『臺南市新吉工業區廠協會』：\n' + \
                         '立案(M103)：南市社團字第1101543033號\n' + \
-                        '統編(M112)：89038129』'
+                        '統編(M112)：89038129'
 
 
     elif (temp_message[0:2].upper() == 'SJ') and \
