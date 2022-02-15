@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M215)0942'
+strVer = '(M215)1156'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -42,10 +42,12 @@ strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
 import requests
     # ***** ***** ***** ***** *****
 
+
     ##### 時間函數 ######
 from datetime import datetime
 import time
-datNow = time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()) 
+datNow = time.localtime()
+strNow = time.strftime("%Y/%m/%d %H:%M:%S", datNow) 
     # ***** ***** ***** ***** *****
 
     ##### Line ######
@@ -185,7 +187,7 @@ def handle_message(event):
                             '  ' + str(SJBTText) + '：\n' + \
                             '  ' + str(SJBTStatus) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
-                            '查詢時間：' + datNow  + '\n\n' + \
+                            '查詢時間：' + strNow  + '\n\n' + \
                             strTemp
         else:
             get_message = strTitle + '：\n' + \
@@ -260,7 +262,7 @@ def handle_message(event):
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             get_message = strTitle + '：\n資料筆數：[ ' + str(intCount) + ' ]\n' + \
-                            '查詢時間：' + datNow  + '\n\n' + \
+                            '查詢時間：' + strNow  + '\n\n' + \
                             strTemp
         else:
             get_message = strTitle + '：\n' + \
@@ -303,7 +305,7 @@ def handle_message(event):
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + datNow  + '\n\n' + \
+                            '查詢時間：' + strNow  + '\n\n' + \
                             strTemp
         else:
             get_message = strTitle + '：\n' + \
@@ -357,7 +359,7 @@ def handle_message(event):
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + datNow  + '\n\n' + \
+                            '查詢時間：' + strNow  + '\n\n' + \
                             strTemp
         else:
             get_message = strTitle + '：\n' + \
@@ -391,7 +393,7 @@ def handle_message(event):
                             '  金額：' + str(SJCSPrice) + ' (數量：' + str(SJCSNum) + ')\n' + \
                             '  餘額可用：' + str(SJCSNow) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
-                            '查詢時間：' + datNow  + '\n\n' + \
+                            '查詢時間：' + strNow  + '\n\n' + \
                             strTemp
         else:
             get_message = strTitle + '：\n' + \
@@ -422,7 +424,7 @@ def handle_message(event):
                             '  金額：' + str(SJBKPrice) + ' (數量：' + str(SJBKNum) + ')\n' + \
                             '  餘額可用：' + str(SJBKNow) + '\n\n'
             get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
-                            '查詢時間：' + datNow  + '\n\n' + \
+                            '查詢時間：' + strNow  + '\n\n' + \
                             strTemp
         else:
             get_message = strTitle + '：\n' + \
@@ -469,7 +471,7 @@ def handle_message(event):
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             get_message = strTitle + '：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + datNow  + '\n\n' + \
+                            '查詢時間：' + strNow  + '\n\n' + \
                             strTemp
         else:
             get_message = strTitle + '：\n' + \
@@ -497,14 +499,32 @@ def handle_message(event):
         get_message = '『臺南市新吉工業區廠協會』版本：\n' + strVer
     # ***** ***** ***** ***** *****
 
+    ##### 列出全部的關鍵字清單 #####
     elif (temp_message[0:4].upper() == 'TOYO') and ('!ALL' in temp_message):
-        get_TYPE_message = 'TY_TEXT_Send_MSG'
+        get_TYPE_message = 'SJ_MSG_Text'
         get_message = GVstrCMKeyWord
+    # ***** ***** ***** ***** *****
 
-    elif (temp_message[0:5].upper() == 'ECTOR') and ('.KW' in temp_message):
-        get_TYPE_message = 'TY_TEXT_Send_MSG'
-        get_message = GVstrECKeyWord
-
+    ##### 程式開發使用 #####
+    elif (temp_message[0:5].upper() == 'ECTOR'):
+        if len(temp_message) == 5:
+            strCond = ''
+        else:
+            strCond = temp_message.replace('ECTOR', '')
+            strCond = strCond.strip()
+        #比對輸入[小時分鐘](1225)
+        strHHNN = RS_DateTime_2_HHNN(datNow)
+        #開發者關鍵字清單
+        if (strHHNN in strCond) and ('KW' in strCond):        
+            get_TYPE_message = 'SJ_MSG_Text'
+            get_message = GVstrECKeyWord
+        #官方帳號教學
+        elif (strHHNN in strCond) and ('LINE' in strCond):        
+            get_TYPE_message = 'SJ_MSG_Text'
+            get_message = GVstrLessonLearning
+        else:
+            get_TYPE_message = 'SJ_MSG_Text'
+            get_message = 'EC' + '\n' * 100 + 'OK'
     else:
         strCond = temp_message.strip()
         strTitle = '(Query)關鍵字查詢'
@@ -543,13 +563,17 @@ def handle_message(event):
                 get_TYPE_message = 'SQL_Query_Text'
                 get_message = strTitle + '：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + datNow  + '\n\n' + \
+                            '查詢時間：' + strNow  + '\n\n' + \
                             strTemp
         else:
             get_TYPE_message = 'SQL_Query_Text'
             get_message = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
+
+
+
+
 
 
 # ===== ===== ===== ===== ===== 【Line區域】 ===== ===== ===== ===== =====
@@ -735,3 +759,17 @@ def lineNotifyMessage(token, msg):
 
     # ***** ***** ***** *****  *****
 
+
+    ##### 日期編碼 ######
+def RS_DateTime_2_HHNN(datDT):
+    strHour = time.strftime("%H", datDT) 
+    strMinute = time.strftime("%M", datDT) 
+    if len(strHour) < 2:
+        strHour = '0' + strHour
+    if len(strMinute) < 2:
+        strMinute = '0' + strMinute
+    RS_DateTime_2_HH_NN = strHour + strMinute
+    return RS_DateTime_2_HH_NN
+    # ***** ***** ***** ***** *****
+    
+    
