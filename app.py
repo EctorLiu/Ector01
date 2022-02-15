@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M214)1218'
+strVer = '(M215)0936'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -496,6 +496,14 @@ def handle_message(event):
         # (Z)Ver
         get_message = '『臺南市新吉工業區廠協會』版本：\n' + strVer
     # ***** ***** ***** ***** *****
+
+    elif (temp_message[0:5].upper() == 'TOYO') and ('!ALL' in temp_message):
+        get_TYPE_message = 'TY_TEXT_Send_MSG'
+        get_message = GVstrCMKeyWord
+
+    elif (temp_message[0:5].upper() == 'ECTOR') and ('.KW' in temp_message):
+        get_TYPE_message = 'TY_TEXT_Send_MSG'
+        get_message = GVstrECKeyWord
 
     else:
         strCond = temp_message.strip()
