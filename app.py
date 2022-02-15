@@ -97,13 +97,17 @@ def handle_message(event):
     temp_message = event.message.text
 
     ##### 全型符號轉換 #####
-    temp_message = temp_message.upper()
     temp_message = temp_message.replace('！','!')
     temp_message = temp_message.replace('（','(')
     temp_message = temp_message.replace('）',')')
     temp_message = temp_message.replace('，',',')
     temp_message = temp_message.replace('＄','$')
     temp_message = temp_message.replace('？','?')
+    # ***** ***** ***** ***** *****
+
+    ##### 關鍵字處理消空白 #####
+    temp_message = temp_message.upper()
+    temp_message = temp_message.strip()
     # ***** ***** ***** ***** *****
 
     # 確認資料類別
@@ -484,13 +488,13 @@ def handle_message(event):
         get_TYPE_message = 'SJ_MEMO'
         get_message = strMemo
 
-    elif (temp_message[0:5].upper() == 'ECTOR') and \
-            ('官方帳號教學' in temp_message):
-        get_message = GVstrLessonLearning
-
     elif ('如何使用' in temp_message or 'HELP' in temp_message.upper() or '?' in temp_message.strip() or '？' in temp_message.strip()):
         get_TYPE_message = 'How_To_Use'
         get_message = strHowToUse
+
+    elif (temp_message[0:2].upper() == 'SJ') and \
+            ('官方帳號教學' in temp_message):
+        get_message = GVstrLessonLearning
     # ***** ***** ***** ***** *****
 
     ##### (Ver)版本 #####
@@ -524,7 +528,7 @@ def handle_message(event):
             get_message = GVstrLessonLearning
         else:
             get_TYPE_message = 'SJ_MSG_Text'
-            get_message = 'EC' + '\n' * 100 + 'OK'
+            get_message = 'EC' + '\n' * 100 + strCond + '\n' + strHHNN + 'OK'
     else:
         strCond = temp_message.strip()
         strTitle = '(Query)關鍵字查詢'
@@ -770,6 +774,5 @@ def RS_DateTime_2_HHNN(datDT):
         strMinute = '0' + strMinute
     RS_DateTime_2_HH_NN = strHour + strMinute
     return RS_DateTime_2_HH_NN
-    # ***** ***** ***** ***** *****
-    
+    # ***** ***** ***** ***** *****    
     
