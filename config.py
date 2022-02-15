@@ -199,7 +199,7 @@ GVstrCMKeyWord = 'KW：\n' + \
                 '(2)(使用 or 設定 or 通話) + (VOWIFI)\n' + \
                 '\n' + \
                 '[教學]\n' + \
-                '(1)ECTOR官方帳號教學'
+                '(1)SJ官方帳號教學'
 
 
     ##### 關鍵字清單 ######
@@ -244,5 +244,7 @@ GVstrECKeyWord = 'KW：\n' + \
                 '(2)(使用 or 設定 or 通話) + (VOWIFI)\n' + \
                 '\n' + \
                 '[教學]\n' + \
-                '(1)ECTOR官方帳號教學'
+                '(1)SJ官方帳號教學' + \
+                '[ECTOR]\n' + \
+                '(1)E.4. + HN + (KW or LINE)'
 
