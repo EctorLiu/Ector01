@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M215)1156'
+strVer = '(M215)1212'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -528,7 +528,7 @@ def handle_message(event):
             get_message = GVstrLessonLearning
         else:
             get_TYPE_message = 'SJ_MSG_Text'
-            get_message = 'EC' + '\n' * 100 + strCond + '\n' + strHHNN + 'OK'
+            get_message = 'EC' + '\n' * 100 + 'OK'
     else:
         strCond = temp_message.strip()
         strTitle = '(Query)關鍵字查詢'
