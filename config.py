@@ -3,6 +3,7 @@ import os
 
 # ===== ===== ===== ===== ===== 【變數區域】 ===== ===== ===== ===== =====
 
+
     ##### Line ######
 # line-bot
 strchannel_access_token = os.environ.get("CHANNEL_ACCESS_TOKEN")
@@ -65,6 +66,7 @@ GVstrLessonLearning = 'A1. 申請官方帳號：\n' + \
                     'https://bustlec.github.io/note/2018/07/10/line-notify-using-python/'
     # ***** ***** ***** ***** *****
 
+
     ##### 下載名片檔案 ######
 GVstrNameCard_Info_Config = '>> 名片建議設計兩面，其中一面為原本自己公司的設計\n' + \
                             '>> (1) 另外一面套用標準格式：\n' + \
@@ -78,6 +80,7 @@ GVstrNameCard_Info_Config = '>> 名片建議設計兩面，其中一面為原本
                             # '  連結：https://github.com/EctorLiu/Ector01/raw/main/files/(M127)SJ_Design_Text.jpg\n' + \
                             # '  連結：https://github.com/EctorLiu/Ector01/raw/main/files/(M127)SJ_Design_AI_File.ai\n' + \
     # ***** ***** ***** ***** *****
+
 
     ##### 下載VoWiFi說明 ######
 GVstrVoWiFi_Info_Config = '>> 【VoWiFi】可在「電信訊號」不佳，\n' + \
@@ -98,6 +101,7 @@ GVstrVoWiFi_Info_Config = '>> 【VoWiFi】可在「電信訊號」不佳，\n' +
 
                             # '  連結：https://github.com/EctorLiu/Ector01/raw/main/files/(M208)SJ_VoWiFi_Setup(V3).pdf\n' + \
     # ***** ***** ***** ***** *****
+
 
     ##### SQL ######
 import pymssql
@@ -159,16 +163,60 @@ class MSSQL:
 
 
     ##### 關鍵字清單 ######
-GVstrKeyWord = 'KW：\n' + \
+GVstrCMKeyWord = 'KW：\n' + \
                 '[推播功能]\n' + \
                 'TSVI +\n' + \
-                '(1)推播PROG\n' + \
-                '(2)推播ECTOR\n' + \
-                '(3)推播智弘\n' + \
-                '(4)推播冠伶\n' + \
-                '(5)推播昆霖\n' + \
-                '(6)推播宜庭\n' + \
-                '(7)推播全部\n' + \
+                '(1)推播ECTOR + 推播內容\n' + \
+                '(2)推播智弘 + 推播內容\n' + \
+                '(3)推播冠伶 + 推播內容\n' + \
+                '(4)推播昆霖 + 推播內容\n' + \
+                '(5)推播宜庭 + 推播內容\n' + \
+                '(6)推播全部 + 推播內容\n' + \
+                '\n' + \
+                '[測試中]\n' + \
+                'TSVI +\n' + \
+                '(1)樣版\n' + \
+                '\n' + \
+                '[關鍵字]\n' + \
+                '(1)如何使用/HELP/?/？\n' + \
+                '(2)(最近 or 最新) + (訊息 or 活動 or 新聞)\n' + \
+                '(3)進度 or 狀態 or 成立\n' + \
+                '(4)如何加入 or 加入會員\n' + \
+                '(5)會址 or 地址 or 位置 or 住址 or 在哪 or 在那 or 電話 or 聯絡\n' + \
+                '(6)(理事長) + (誰 or 名單 or 清單 or 列表)\n' + \
+                '(7)(總幹事) + (誰 or 名單 or 清單 or 列表)\n' + \
+                '(8)統編 or 統一編號 or 立案\n' + \
+                '\n' + \
+                '[資料庫]\n' + \
+                '(1)(工業區 or 會員 or 廠協會) + (誰 or 名單 or 清單 or 列表 or 會員)\n' + \
+                '(2)(理事 or 監事 or 理監事) + (誰 or 名單 or 清單 or 列表)\n' + \
+                '\n' + \
+                '[內部使用]\n' + \
+                '(1)(SJ) + (MEMBER or DETAIL or 內用名單 or 詳細名單) + (!55)\n' + \
+                '(2)(SJ) + (120 or $ or CASH or 零用金) + (!55)\n' + \
+                '(3)(SJ) + (BANK) + (!55)\n' + \
+                '(4)(SJ) + (MEMO) + (!55)\n' + \
+                '(5)(FIND or 找 or [空白]) + (關鍵字:公司營業項目)\n' + \
+                '\n' + \
+                '[下載]\n' + \
+                '(1)(名片) + (製作 or 格式)\n' + \
+                '(2)(使用 or 設定 or 通話) + (VOWIFI)\n' + \
+                '\n' + \
+                '[教學]\n' + \
+                '(1)ECTOR官方帳號教學'
+
+
+    ##### 關鍵字清單 ######
+GVstrECKeyWord = 'KW：\n' + \
+                '[推播功能]\n' + \
+                'TSVI +\n' + \
+                '(1)推播PROG + 推播內容\n' + \
+                '(2)推播ECTOR + 推播內容\n' + \
+                '(3)推播智弘 + 推播內容\n' + \
+                '(4)推播冠伶 + 推播內容\n' + \
+                '(5)推播昆霖 + 推播內容\n' + \
+                '(6)推播宜庭 + 推播內容\n' + \
+                '(7)推播全部 + 推播內容\n' + \
                 '\n' + \
                 '[測試中]\n' + \
                 'TSVI +\n' + \
