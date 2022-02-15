@@ -528,7 +528,7 @@ def handle_message(event):
             get_message = GVstrLessonLearning
         else:
             get_TYPE_message = 'SJ_MSG_Text'
-            get_message = 'EC' + '\n' * 100 + 'OK'
+            get_message = 'EC' + strCond + '\n' * 100 + strHHNN[-2:] + 'OK'
     else:
         strCond = temp_message.strip()
         strTitle = '(Query)關鍵字查詢'
@@ -575,10 +575,26 @@ def handle_message(event):
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-
-
-
-
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 
 # ===== ===== ===== ===== ===== 【Line區域】 ===== ===== ===== ===== =====
 
