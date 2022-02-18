@@ -482,8 +482,8 @@ def handle_message(event):
                             '暫停使用..有急用可找ECTOR'
 
     elif (strEventMSG[0:2].upper() == 'SJ') and \
-            ('BANK' in strEventMSG.upper() or \            
-            '銀行' in strEventMSG.upper()):
+            ('BANK' in strEventMSG.upper() or \
+            '銀行' in strEventMSG):
         strTitle = '銀行帳戶資訊'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
