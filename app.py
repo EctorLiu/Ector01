@@ -178,6 +178,10 @@ def handle_message(event):
 
 
     ##### 關鍵字 #####
+    elif ('如何使用' in strEventMSG or 'HELP' in strEventMSG.upper() or '?' in strEventMSG.strip() or '？' in strEventMSG.strip()):
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        strReply_MSG = strHowToUse
+
     elif ('最近' in strEventMSG or '最新' in strEventMSG) and \
             ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG):
         strTitle = '最近訊息/新聞'
@@ -205,9 +209,6 @@ def handle_message(event):
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif ('LOGO' in strEventMSG.upper()):
-        get_TYPE_message = 'SJ_LOGO'
-
     elif ('進度' in strEventMSG or '狀態' in strEventMSG or '成立' in strEventMSG):
         strReply_MSG = '『臺南市新吉工業區廠協會』成立：\n' + \
             '臺南市政府社會局2022/01/03(一)上午\n' + \
@@ -220,6 +221,7 @@ def handle_message(event):
             '>同年 12/10(五)社會局1st通知修改內容\n' + \
             '>同年 12/24(一)社會局2nd通知修改內容\n' + \
             '立案：南市社團字第1101543033號'
+
     elif ('如何加入' in strEventMSG or '加入會員' in strEventMSG):
         strReply_MSG = '『臺南市新吉工業區廠協會』加入：\n\n' + \
             '(Step01)請下載並填寫『會員入會申請書』紙本\n' + \
@@ -235,6 +237,7 @@ def handle_message(event):
             '以及『匯款單』之照片或掃描檔\n\n' + \
             '我們會盡快通知理事會並回覆！\n' + \
             '感謝您的支持！'
+
     elif ('會址' in strEventMSG or '地址' in strEventMSG or '位置' in strEventMSG or \
              '住址' in strEventMSG or '在哪' in strEventMSG or '在那' in strEventMSG or \
              '電話' in strEventMSG or '聯絡' in strEventMSG):
@@ -245,6 +248,38 @@ def handle_message(event):
             '(申請中..新吉工業區服務中心..未來會址)\n' + \
             '歡迎您的蒞臨指教！'
 
+    elif (strEventMSG.count('理事長') > 0) and \
+            ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
+        strReply_MSG = '『臺南市新吉工業區廠協會』理事長：\n' + \
+            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
+            '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
+
+    elif ('總幹事' in strEventMSG) and \
+            ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
+        strReply_MSG = '『臺南市新吉工業區廠協會』總幹事：\n' + \
+            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
+
+    elif (('統編' in strEventMSG) or ('統一編號' in strEventMSG) or ('立案' in strEventMSG)):
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        strReply_MSG = '『臺南市新吉工業區廠協會』：\n' + \
+                        '立案(M103)：南市社團字第1101543033號\n' + \
+                        '統編(M112)：89038129'
+
+
+    ##### 下載 #####
+    elif ('LOGO' in strEventMSG.upper()):
+        get_TYPE_message = 'SJ_LOGO'
+
+    elif ('名片' in strEventMSG) and (('製作' in strEventMSG) or ('格式' in strEventMSG)):
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        strReply_MSG = GVstrNameCard_Info_Config
+
+    elif (('使用' in strEventMSG) or ('設定' in strEventMSG) or ('通話' in strEventMSG)) and ('VOWIFI' in strEventMSG):
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        strReply_MSG = GVstrVoWiFi_Info_Config
+
+
+    ##### 資料庫 #####
     elif ('工業區' in strEventMSG or '會員' in strEventMSG or '廠協會' in strEventMSG) and \
             ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG or '會員' in strEventMSG):
         strTitle = '(SJ)臺南市新吉工業區廠商協進會'
@@ -277,12 +312,6 @@ def handle_message(event):
             strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
-
-    elif (strEventMSG.count('理事長') > 0) and \
-            ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
-        strReply_MSG = '『臺南市新吉工業區廠協會』理事長：\n' + \
-            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
-            '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
     elif ('理事' in strEventMSG or '監事' in strEventMSG or '理監事' in strEventMSG) and \
             ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
@@ -321,25 +350,55 @@ def handle_message(event):
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif ('總幹事' in strEventMSG) and \
-            ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
-        strReply_MSG = '『臺南市新吉工業區廠協會』總幹事：\n' + \
-            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
+    elif (strEventMSG[0:4].upper() == 'FIND') or \
+            (strEventMSG[0:1].upper() == '找'):
+        if (strEventMSG[0:4].upper() == 'FIND'):
+            strCond = strEventMSG[-(len(strEventMSG)-4):]
+        elif (strEventMSG[0:1].upper() == '找'):
+            strCond = strEventMSG[-(len(strEventMSG)-1):]
+        strCond=strCond.strip()
 
-    elif ('名片' in strEventMSG) and (('製作' in strEventMSG) or ('格式' in strEventMSG)):
+        strTitle = '(Query)查詢會員公司營業資料'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        strReply_MSG = GVstrNameCard_Info_Config
+        if strSQL_FW_Switch == 'ON':
+            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
+                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
+                        ' SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle ' + \
+                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
+                        ' WHERE [SJMBCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJMBPRName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJMBCorpPRName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJMBCorpProd] LIKE ' + '\'%' + strCond + '%\'' + \
+                        ' ORDER BY SEQ_TYPE, SJMBCode '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, \
+                    SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, \
+                    SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
+                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
+                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                            '  成立：' + str(SJMBCorpSince) + '\n' + \
+                            '  廠址：' + str(SJMBCorpAddress) + '\n' + \
+                            '  電話：' + str(SJMBCorpTel) + '\n' + \
+                            '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n' + \
+                            '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
+            if len(strTemp) >= intMaxLineMSGString:
+                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+            strReply_MSG = strTitle + '：\n' + \
+                            '資料筆數：[ ' + str(intCount) + ' ] \n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
+                            strTemp
+        else:
+            strReply_MSG = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
 
-    elif (('使用' in strEventMSG) or ('設定' in strEventMSG) or ('通話' in strEventMSG)) and ('VOWIFI' in strEventMSG):
-        get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        strReply_MSG = GVstrVoWiFi_Info_Config
 
-    elif (('統編' in strEventMSG) or ('統一編號' in strEventMSG) or ('立案' in strEventMSG)):
-        get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        strReply_MSG = '『臺南市新吉工業區廠協會』：\n' + \
-                        '立案(M103)：南市社團字第1101543033號\n' + \
-                        '統編(M112)：89038129'
-
+    ##### 內部使用 #####
     elif (strEventMSG[0:2].upper() == 'SJ') and \
             (strEventMSG[-3:] == '!55') and \
             ('MEMBER' in strEventMSG.upper() or \
@@ -461,70 +520,22 @@ def handle_message(event):
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif (strEventMSG[0:4].upper() == 'FIND') or \
-            (strEventMSG[0:1].upper() == '找'):
-        if (strEventMSG[0:4].upper() == 'FIND'):
-            strCond = strEventMSG[-(len(strEventMSG)-4):]
-        elif (strEventMSG[0:1].upper() == '找'):
-            strCond = strEventMSG[-(len(strEventMSG)-1):]
-        strCond=strCond.strip()
 
-        strTitle = '(Query)查詢會員公司營業資料'
-        get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
-                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
-                        ' SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle ' + \
-                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
-                        ' WHERE [SJMBCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
-                            ' OR [SJMBPRName] LIKE ' + '\'%' + strCond + '%\'' + \
-                            ' OR [SJMBCorpPRName] LIKE ' + '\'%' + strCond + '%\'' + \
-                            ' OR [SJMBCorpProd] LIKE ' + '\'%' + strCond + '%\'' + \
-                        ' ORDER BY SEQ_TYPE, SJMBCode '
-            resList = ms.RS_SQL_ExecQuery(strSQL)
-            intCount=0
-            strTemp=''
-            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, \
-                    SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, \
-                    SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle) in resList:
-                intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
-                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
-                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
-                            '  成立：' + str(SJMBCorpSince) + '\n' + \
-                            '  廠址：' + str(SJMBCorpAddress) + '\n' + \
-                            '  電話：' + str(SJMBCorpTel) + '\n' + \
-                            '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n' + \
-                            '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
-            if len(strTemp) >= intMaxLineMSGString:
-                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
-            strReply_MSG = strTitle + '：\n' + \
-                            '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + FVstrNow  + '\n\n' + \
-                            strTemp
-        else:
-            strReply_MSG = strTitle + '：\n' + \
-                            '目前ECTOR關閉防火牆\n' + \
-                            '暫停使用..有急用可找ECTOR'
-
-    elif ('如何使用' in strEventMSG or 'HELP' in strEventMSG.upper() or '?' in strEventMSG.strip() or '？' in strEventMSG.strip()):
-        get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        strReply_MSG = strHowToUse
-
+    ##### 教學 #####
     elif (strEventMSG[0:2].upper() == 'SJ') and \
             ('官方帳號教學' in strEventMSG):
         strReply_MSG = GVstrLessonLearning
     # ***** ***** ***** ***** *****
 
+
     ##### (Ver)版本 #####
     elif strEventMSG.upper().count('VER') > 0:
-        # (Z)Ver
         strReply_MSG = '『臺南市新吉工業區廠協會』版本：\n' + strVer
     # ***** ***** ***** ***** *****
 
+
     ##### 列出全部的關鍵字清單 #####
-    elif (strEventMSG[0:4].upper() == 'TOYO') and ('!ALL' in strEventMSG):
+    elif (strEventMSG[0:2].upper() == 'SJ' or strEventMSG[0:4].upper() == 'TOYO') and ('!ALL' in strEventMSG):
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         strContent = GVstrCMKeyWord
         ##### 此項需有權限才能執行 #####
@@ -537,25 +548,27 @@ def handle_message(event):
         # ***** ***** ***** ***** *****
     # ***** ***** ***** ***** *****
 
+
     ##### 程式開發使用 #####
     elif (strEventMSG[0:5].upper() == 'ECTOR'):
         if len(strEventMSG) == 5:
             strCond = ''
         else:
-            strCond = strEventMSG.replace('ECTOR', '')
-            strCond = strCond.strip()
+            strCond = RS_RIGHT_String_NotLeftStrNum(strEventMSG, 5).strip()
         #比對輸入[小時分鐘](1225)
         strHHNN = RS_DateTime_2_HHNN()
+        #範例：if (strHHNN in strCond) and ('KW' in strCond):
+
         #開發者關鍵字清單
-        if (strHHNN in strCond) and ('KW' in strCond):        
-            get_TYPE_message = 'SYS_ADMIN'
+        if ('KW' in strCond):
+            get_TYPE_message = 'SYS_ADMIN_MSG'
             strContent = GVstrECKeyWord
         #官方帳號教學
-        elif (strHHNN in strCond) and ('LINE' in strCond):        
-            get_TYPE_message = 'SYS_ADMIN'
+        elif ('LINE' in strCond):
+            get_TYPE_message = 'SYS_ADMIN_MSG'
             strContent = GVstrLessonLearning
         else:
-            get_TYPE_message = 'SYS_ADMIN'
+            get_TYPE_message = 'SYS_ADMIN_MSG'
             strContent = 'EC' + strCond + '\n' * 100 + strHHNN[-2:] + 'OK'
         ##### 此項需有權限才能執行 #####
         strAUTHKWQuery = 'SYSADMIN'
@@ -645,13 +658,13 @@ def handle_message(event):
 # ===== ===== ===== ===== ===== 【Line區域】 ===== ===== ===== ===== =====
 # ===== ===== ===== ===== ===== 【Line區域】 ===== ===== ===== ===== =====
 
-    # Send To Line
+    ##### Send To Line #####
     if get_TYPE_message == 'Initial':
         reply = TextSendMessage(text=f"{strReply_MSG}")
         line_bot_api.reply_message(event.reply_token,  reply)
     # ***** ***** ***** ***** *****
 
-    # LOGO
+    ##### LOGO #####
     elif get_TYPE_message == 'SJ_LOGO':
         reply = ImageSendMessage(original_content_url = 'https://github.com/EctorLiu/Ector01/raw/main/img/A.jpg', \
                                  preview_image_url = 'https://raw.githubusercontent.com/EctorLiu/Ector01/main/img/A.jpg')
@@ -684,6 +697,7 @@ def handle_message(event):
             token = strPush2Who
             lineNotifyMessage(token, push_message)
     # ***** ***** ***** ***** *****
+
 
     ##### 推播Line Notify內容 #####
     elif get_TYPE_message == 'SYS_KW_INPUT_MSG':
@@ -774,10 +788,10 @@ def handle_message(event):
 # ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
 
     # SQL_LOG紀錄
-    strEventMSG = strEventMSG.replace("'", '')
-    strEventMSG = strEventMSG.replace('"', '')
-    strReply_MSG = strReply_MSG.replace("'", '')
-    strReply_MSG = strReply_MSG.replace('"', '')
+    strEventMSG = strEventMSG.replace("'", '.')
+    strEventMSG = strEventMSG.replace('"', '.')
+    strReply_MSG = strReply_MSG.replace("'", '.')
+    strReply_MSG = strReply_MSG.replace('"', '.')
     strSQLReturn = RS_Line_LOG_ADD(strLineDisplayName, strLineUserID, strEventMSG, strReply_MSG)
 
 # ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
