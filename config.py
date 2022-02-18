@@ -236,7 +236,7 @@ GVstrECKeyWord = 'KW：\n' + \
                 '[內部使用]\n' + \
                 '*(1)(SJ) + (MEMBER or DETAIL or 內用名單 or 詳細名單)\n' + \
                 '*(2)(SJ) + (120 or $ or CASH or 零用金)\n' + \
-                '*(3)(SJ) + (BANK) + (!55)\n' + \
+                '*(3)(SJ) + (BANK or 銀行)\n' + \
                 '\n' + \
                 '[教學]\n' + \
                 '(1)SJ官方帳號教學' + \
