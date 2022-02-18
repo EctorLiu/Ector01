@@ -199,7 +199,8 @@ GVstrCMKeyWord = 'KW：\n' + \
                 '*(3)(SJ) + (BANK) + (!55)\n' + \
                 '\n' + \
                 '[教學]\n' + \
-                '(1)SJ官方帳號教學'
+                '(1)SJ官方帳號教學\n' + \
+                ''
 
 
     ##### 關鍵字清單 ######
@@ -246,6 +247,6 @@ GVstrECKeyWord = 'KW：\n' + \
                 '(1)樣版\n' + \
                 '\n' + \
                 '[ECTOR]\n' + \
-                '(1)E.4. + HN + (KW or LINE)' + \
+                '(1)E.4. + HN + (KW or LINE)\n' + \
                 ''
 
