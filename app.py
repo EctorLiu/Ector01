@@ -2,12 +2,12 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M215)1212'
+strVer = '(M218)1420'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
     # 切換【非關鍵字通知】同仁推播功能選擇：ON/OFF
-strPush_NotKeyWord2All_Switch = 'ON'
+strPush_NotKeyWord2All_Switch = 'OFF'
     # ***** ***** ***** ***** *****
 
     ##### 限制 ######
@@ -16,13 +16,6 @@ intMaxItemString = 200
     # ***** ***** ***** ***** *****
 
     ##### 預設留言 ######
-strMemo = '『臺南市新吉工業區廠協會』：\n' + \
-            '2021/11/18(四)：第一屆第一次\n' + \
-            '會員成立大會暨理監事聯席會議\n' + \
-            '立案(M103)：南市社團字第1101543033號\n' + \
-            '統編(M112)：89038129\n' + \
-            '『稅籍編號(M112)：710620649』'
-
 strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n\n' + \
                 '也許您可用下述常用關鍵字查詢：\n' + \
@@ -46,8 +39,14 @@ import requests
     ##### 時間函數 ######
 from datetime import datetime
 import time
-datNow = time.localtime()
-strNow = time.strftime("%Y/%m/%d %H:%M:%S", datNow) 
+
+FVdatNow = datetime.now()
+FVstrToday = FVdatNow.strftime("%Y-%m-%d") 
+FVstrNow = FVdatNow.strftime("%Y-%m-%d %H:%M:%S") 
+
+# FVstrLCNow = time.strftime("%Y-%m-%d %H:%M:%S.%f", time.localtime())
+FVstrGMNow = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+FVdatGMNow = datetime.strptime(FVstrGMNow, "%Y-%m-%d %H:%M:%S") 
     # ***** ***** ***** ***** *****
 
     ##### Line ######
@@ -94,85 +93,83 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     # 取得事件變數
-    temp_message = event.message.text
+    strEventMSG = event.message.text
 
-    ##### 全型符號轉換 #####
-    temp_message = temp_message.replace('！','!')
-    temp_message = temp_message.replace('（','(')
-    temp_message = temp_message.replace('）',')')
-    temp_message = temp_message.replace('，',',')
-    temp_message = temp_message.replace('＄','$')
-    temp_message = temp_message.replace('？','?')
+    ##### 取得Line訊息 #####
+    pfProfile = line_bot_api.get_profile(event.source.user_id)
+    strLineDisplayName = pfProfile.display_name
+    strLineUserID = pfProfile.user_id
     # ***** ***** ***** ***** *****
 
-    ##### 關鍵字處理消空白 #####
-    temp_message = temp_message.upper()
-    temp_message = temp_message.strip()
+    ##### 全型符號轉換 #####
+    strEventMSG = strEventMSG.replace('！','!')
+    strEventMSG = strEventMSG.replace('（','(')
+    strEventMSG = strEventMSG.replace('）',')')
+    strEventMSG = strEventMSG.replace('，',',')
+    strEventMSG = strEventMSG.replace('＄','$')
+    strEventMSG = strEventMSG.replace('？','?')
+    # ***** ***** ***** ***** *****
+
+    ##### 關鍵字處理大寫消空白 #####
+    strEventMSG = strEventMSG.upper()
+    strEventMSG = strEventMSG.strip()
     # ***** ***** ***** ***** *****
 
     # 確認資料類別
     get_TYPE_message = 'Initial'
 
-    if temp_message == '您好':
+    if strEventMSG == '您好':
         # (A)禮貌回覆
-        get_message = '『臺南市新吉工業區廠協會』：您好' + event.message.text
+        strReply_MSG = '『臺南市新吉工業區廠協會』：您好' + event.message.text
 
     ##### (TSVI)推播 #####
-    elif (temp_message[0:4].upper() == 'TSVI') and \
-            ('推播PROG' in temp_message.upper()):
-        get_TYPE_message = 'TSVI推播程式管理員'
-        temp_message = temp_message.upper()
-        temp_message = temp_message.replace('TSVI推播PROG', '')
-        get_message = '(Admin)\n' + temp_message
-    elif (temp_message[0:4].upper() == 'TSVI') and \
-            ('推播ECTOR' in temp_message.upper()):
+    elif (strEventMSG[0:4].upper() == 'TSVI') and \
+            ('推播ECTOR' in strEventMSG.upper()):
         get_TYPE_message = 'TSVI2Ector'
-        temp_message = temp_message.upper()
-        temp_message = temp_message.replace('TSVI推播ECTOR', '')
-        get_message = '(只推Ector)\n' + temp_message
-    elif (temp_message[0:4].upper() == 'TSVI') and \
-            ('推播智弘' in temp_message.upper()):
+        strEventMSG = strEventMSG.replace('TSVI推播ECTOR', '')
+        strReply_MSG = '(只推Ector)\n' + strEventMSG
+    elif (strEventMSG[0:4].upper() == 'TSVI') and \
+            ('推播智弘' in strEventMSG.upper()):
         # (T1)推播
         get_TYPE_message = 'TSVI2智弘'
-        temp_message = temp_message.upper()
-        temp_message = temp_message.replace('TSVI推播智弘', '')
-        get_message = '(只推智弘)\n' + temp_message
-    elif (temp_message[0:4].upper() == 'TSVI') and \
-            ('推播冠伶' in temp_message.upper()):
+        strEventMSG = strEventMSG.replace('TSVI推播智弘', '')
+        strReply_MSG = '(只推智弘)\n' + strEventMSG
+    elif (strEventMSG[0:4].upper() == 'TSVI') and \
+            ('推播冠伶' in strEventMSG.upper()):
         get_TYPE_message = 'TSVI2冠伶'
-        temp_message = temp_message.upper()
-        temp_message = temp_message.replace('TSVI推播冠伶', '')
-        get_message = '(只推冠伶)\n' + temp_message
-    elif (temp_message[0:4].upper() == 'TSVI') and \
-            ('推播昆霖' in temp_message.upper()):
+        strEventMSG = strEventMSG.upper()
+        strEventMSG = strEventMSG.replace('TSVI推播冠伶', '')
+        strReply_MSG = '(只推冠伶)\n' + strEventMSG
+    elif (strEventMSG[0:4].upper() == 'TSVI') and \
+            ('推播昆霖' in strEventMSG.upper()):
         get_TYPE_message = 'TSVI2昆霖'
-        temp_message = temp_message.upper()
-        temp_message = temp_message.replace('TSVI推播昆霖', '')
-        get_message = '(只推昆霖)\n' + temp_message
-    elif (temp_message[0:4].upper() == 'TSVI') and \
-            ('推播宜庭' in temp_message.upper()):
+        strEventMSG = strEventMSG.upper()
+        strEventMSG = strEventMSG.replace('TSVI推播昆霖', '')
+        strReply_MSG = '(只推昆霖)\n' + strEventMSG
+    elif (strEventMSG[0:4].upper() == 'TSVI') and \
+            ('推播宜庭' in strEventMSG.upper()):
         get_TYPE_message = 'TSVI2宜庭'
-        temp_message = temp_message.upper()
-        temp_message = temp_message.replace('TSVI推播宜庭', '')
-        get_message = '(只推宜庭)\n' + temp_message
-    elif (temp_message[0:4].upper() == 'TSVI') and \
-            ('推播全部' in temp_message.upper()):
+        strEventMSG = strEventMSG.upper()
+        strEventMSG = strEventMSG.replace('TSVI推播宜庭', '')
+        strReply_MSG = '(只推宜庭)\n' + strEventMSG
+    elif (strEventMSG[0:4].upper() == 'TSVI') and \
+            ('推播全部' in strEventMSG.upper()):
         get_TYPE_message = 'TSVI推播全部'
-        temp_message = temp_message.replace('TSVI推播全部', '')
-        get_message = '(推全部)\n' + temp_message
+        strEventMSG = strEventMSG.replace('TSVI推播全部', '')
+        strReply_MSG = '(推全部)\n' + strEventMSG
     # ***** ***** ***** ***** *****
 
     
     ##### TSVI樣版 #####
-    elif (temp_message[0:4].upper() == 'TSVI') and \
-            ('樣版' in temp_message.upper()):
+    elif (strEventMSG[0:4].upper() == 'TSVI') and \
+            ('樣版' in strEventMSG.upper()):
         get_TYPE_message = 'TSVI樣版'   
     # ***** ***** ***** ***** *****
 
 
     ##### 關鍵字 #####
-    elif ('最近' in temp_message or '最新' in temp_message) and \
-            ('訊息' in temp_message or '活動' in temp_message or '新聞' in temp_message):
+    elif ('最近' in strEventMSG or '最新' in strEventMSG) and \
+            ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG):
         strTitle = '最近訊息/新聞'
         get_TYPE_message = 'SQL_Query_Text'
         if strSQL_FW_Switch == 'ON':
@@ -190,21 +187,21 @@ def handle_message(event):
                             '  更新日期：[ ' + str(SJBTEditDate) + ' ]\n' + \
                             '  ' + str(SJBTText) + '：\n' + \
                             '  ' + str(SJBTStatus) + '\n\n'
-            get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
-                            '查詢時間：' + strNow  + '\n\n' + \
+            strReply_MSG = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
         else:
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
         # get_TYPE_message = 'New_Activity'
-        # get_message = strNewestActivity
+        # strReply_MSG = strNewestActivity
 
-    elif ('LOGO' in temp_message.upper()):
+    elif ('LOGO' in strEventMSG.upper()):
         get_TYPE_message = 'SJ_LOGO'
 
-    elif ('進度' in temp_message or '狀態' in temp_message or '成立' in temp_message):
-        get_message = '『臺南市新吉工業區廠協會』成立：\n' + \
+    elif ('進度' in strEventMSG or '狀態' in strEventMSG or '成立' in strEventMSG):
+        strReply_MSG = '『臺南市新吉工業區廠協會』成立：\n' + \
             '臺南市政府社會局2022/01/03(一)上午\n' + \
             '通知協會立案通過！\n\n' + \
             '成立歷程...\n' + \
@@ -215,8 +212,8 @@ def handle_message(event):
             '>同年 12/10(五)社會局1st通知修改內容\n' + \
             '>同年 12/24(一)社會局2nd通知修改內容\n' + \
             '立案：南市社團字第1101543033號'
-    elif ('如何加入' in temp_message or '加入會員' in temp_message):
-        get_message = '『臺南市新吉工業區廠協會』加入：\n\n' + \
+    elif ('如何加入' in strEventMSG or '加入會員' in strEventMSG):
+        strReply_MSG = '『臺南市新吉工業區廠協會』加入：\n\n' + \
             '(Step01)請下載並填寫『會員入會申請書』紙本\n' + \
             'https://bit.ly/3GwQf4w\n' + \
             '請填寫內容並用印(大小章)\n\n' + \
@@ -230,18 +227,18 @@ def handle_message(event):
             '以及『匯款單』之照片或掃描檔\n\n' + \
             '我們會盡快通知理事會並回覆！\n' + \
             '感謝您的支持！'
-    elif ('會址' in temp_message or '地址' in temp_message or '位置' in temp_message or \
-             '住址' in temp_message or '在哪' in temp_message or '在那' in temp_message or \
-             '電話' in temp_message or '聯絡' in temp_message):
-        get_message = '『臺南市新吉工業區廠協會』地址/電話：\n' + \
+    elif ('會址' in strEventMSG or '地址' in strEventMSG or '位置' in strEventMSG or \
+             '住址' in strEventMSG or '在哪' in strEventMSG or '在那' in strEventMSG or \
+             '電話' in strEventMSG or '聯絡' in strEventMSG):
+        strReply_MSG = '『臺南市新吉工業區廠協會』地址/電話：\n' + \
             '臺南市新吉工業區新吉三路55號\n' + \
             '(06)202-1347 #總機6828 \n' + \
             '(預定遷至：臺南市新吉工業區安新二路99號)\n' + \
             '(申請中..新吉工業區服務中心..未來會址)\n' + \
             '歡迎您的蒞臨指教！'
 
-    elif ('工業區' in temp_message or '會員' in temp_message or '廠協會' in temp_message) and \
-            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message or '會員' in temp_message):
+    elif ('工業區' in strEventMSG or '會員' in strEventMSG or '廠協會' in strEventMSG) and \
+            ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG or '會員' in strEventMSG):
         strTitle = '(SJ)臺南市新吉工業區廠商協進會'
         get_TYPE_message = 'SQL_Query_Text'
         if strSQL_FW_Switch == 'ON':
@@ -265,22 +262,22 @@ def handle_message(event):
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
-            get_message = strTitle + '：\n資料筆數：[ ' + str(intCount) + ' ]\n' + \
-                            '查詢時間：' + strNow  + '\n\n' + \
+            strReply_MSG = strTitle + '：\n資料筆數：[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
         else:
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif (temp_message.count('理事長') > 0) and \
-            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
-        get_message = '『臺南市新吉工業區廠協會』理事長：\n' + \
+    elif (strEventMSG.count('理事長') > 0) and \
+            ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
+        strReply_MSG = '『臺南市新吉工業區廠協會』理事長：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
             '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
 
-    elif ('理事' in temp_message or '監事' in temp_message or '理監事' in temp_message) and \
-            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
+    elif ('理事' in strEventMSG or '監事' in strEventMSG or '理監事' in strEventMSG) and \
+            ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
         strTitle = '(SJ)新吉廠協會理監事名單'
         get_TYPE_message = 'SQL_Query_Text'
         if strSQL_FW_Switch == 'ON':
@@ -307,41 +304,41 @@ def handle_message(event):
                             '  > 營業項目：' + str(strCorpProdText) + ' <\n\n'
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
-            get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
+            strReply_MSG = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + strNow  + '\n\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
         else:
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif ('總幹事' in temp_message) and \
-            ('誰' in temp_message or '名單' in temp_message or '清單' in temp_message or '列表' in temp_message):
-        get_message = '『臺南市新吉工業區廠協會』總幹事：\n' + \
+    elif ('總幹事' in strEventMSG) and \
+            ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
+        strReply_MSG = '『臺南市新吉工業區廠協會』總幹事：\n' + \
             '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
 
-    elif ('名片' in temp_message) and (('製作' in temp_message) or ('格式' in temp_message)):
+    elif ('名片' in strEventMSG) and (('製作' in strEventMSG) or ('格式' in strEventMSG)):
         get_TYPE_message = 'SJ_MSG_Text'
-        get_message = GVstrNameCard_Info_Config
+        strReply_MSG = GVstrNameCard_Info_Config
 
-    elif (('使用' in temp_message) or ('設定' in temp_message) or ('通話' in temp_message)) and ('VOWIFI' in temp_message):
+    elif (('使用' in strEventMSG) or ('設定' in strEventMSG) or ('通話' in strEventMSG)) and ('VOWIFI' in strEventMSG):
         get_TYPE_message = 'SJ_MSG_Text'
-        get_message = GVstrVoWiFi_Info_Config
+        strReply_MSG = GVstrVoWiFi_Info_Config
 
-    elif (('統編' in temp_message) or ('統一編號' in temp_message) or ('立案' in temp_message)):
+    elif (('統編' in strEventMSG) or ('統一編號' in strEventMSG) or ('立案' in strEventMSG)):
         get_TYPE_message = 'SJ_MSG_Text'
-        get_message = '『臺南市新吉工業區廠協會』：\n' + \
+        strReply_MSG = '『臺南市新吉工業區廠協會』：\n' + \
                         '立案(M103)：南市社團字第1101543033號\n' + \
                         '統編(M112)：89038129'
 
 
-    elif (temp_message[0:2].upper() == 'SJ') and \
-            (temp_message[-3:] == '!55') and \
-            ('MEMBER' in temp_message.upper() or \
-            'DETAIL' in temp_message.upper() or \
-            '內用名單' in temp_message.upper() or \
-            '詳細名單' in temp_message.upper()):
+    elif (strEventMSG[0:2].upper() == 'SJ') and \
+            (strEventMSG[-3:] == '!55') and \
+            ('MEMBER' in strEventMSG.upper() or \
+            'DETAIL' in strEventMSG.upper() or \
+            '內用名單' in strEventMSG.upper() or \
+            '詳細名單' in strEventMSG.upper()):
         strTitle = '(SJ)臺南市新吉工業區廠商協進會'
         get_TYPE_message = 'SQL_Query_Text'
         if strSQL_FW_Switch == 'ON':
@@ -361,21 +358,21 @@ def handle_message(event):
                             '  廠址：' + str(SJMBCorpAddress) + '\n\n'
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
-            get_message = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
+            strReply_MSG = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + strNow  + '\n\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
         else:
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif (temp_message[0:2].upper() == 'SJ') and \
-            (temp_message[-3:] == '!55') and \
-            ('120' in temp_message.upper() or \
-            '$' in temp_message.upper() or \
-            'CASH' in temp_message.upper() or \
-            '零用金' in temp_message.upper()):
+    elif (strEventMSG[0:2].upper() == 'SJ') and \
+            (strEventMSG[-3:] == '!55') and \
+            ('120' in strEventMSG.upper() or \
+            '$' in strEventMSG.upper() or \
+            'CASH' in strEventMSG.upper() or \
+            '零用金' in strEventMSG.upper()):
         strTitle = '零用金使用狀況'
         get_TYPE_message = 'SQL_Query_Text'
         if strSQL_FW_Switch == 'ON':
@@ -396,17 +393,17 @@ def handle_message(event):
                             '  ' + str(SJCSStatus) + '：\n' + \
                             '  金額：' + str(SJCSPrice) + ' (數量：' + str(SJCSNum) + ')\n' + \
                             '  餘額可用：' + str(SJCSNow) + '\n\n'
-            get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
-                            '查詢時間：' + strNow  + '\n\n' + \
+            strReply_MSG = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
         else:
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif (temp_message[0:2].upper() == 'SJ') and \
-            (temp_message[-3:] == '!55') and \
-            ('BANK' in temp_message.upper()):
+    elif (strEventMSG[0:2].upper() == 'SJ') and \
+            (strEventMSG[-3:] == '!55') and \
+            ('BANK' in strEventMSG.upper()):
         strTitle = '銀行帳戶資訊'
         get_TYPE_message = 'SQL_Query_Text'
         if strSQL_FW_Switch == 'ON':
@@ -427,20 +424,20 @@ def handle_message(event):
                             '  ' + str(SJBKStatus) + '：\n' + \
                             '  金額：' + str(SJBKPrice) + ' (數量：' + str(SJBKNum) + ')\n' + \
                             '  餘額可用：' + str(SJBKNow) + '\n\n'
-            get_message = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
-                            '查詢時間：' + strNow  + '\n\n' + \
+            strReply_MSG = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
         else:
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif (temp_message[0:4].upper() == 'FIND') or \
-            (temp_message[0:1].upper() == '找'):
-        if (temp_message[0:4].upper() == 'FIND'):
-            strCond = temp_message[-(len(temp_message)-4):]
-        elif (temp_message[0:1].upper() == '找'):
-            strCond = temp_message[-(len(temp_message)-1):]
+    elif (strEventMSG[0:4].upper() == 'FIND') or \
+            (strEventMSG[0:1].upper() == '找'):
+        if (strEventMSG[0:4].upper() == 'FIND'):
+            strCond = strEventMSG[-(len(strEventMSG)-4):]
+        elif (strEventMSG[0:1].upper() == '找'):
+            strCond = strEventMSG[-(len(strEventMSG)-1):]
         strCond=strCond.strip()
 
         strTitle = '(Query)查詢會員公司營業資料'
@@ -473,62 +470,56 @@ def handle_message(event):
                             '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + strNow  + '\n\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
         else:
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif (temp_message[0:2].upper() == 'SJ') and \
-            (temp_message[-3:] == '!55') and \
-            ('MEMO' in temp_message.upper()):
-        get_TYPE_message = 'SJ_MEMO'
-        get_message = strMemo
-
-    elif ('如何使用' in temp_message or 'HELP' in temp_message.upper() or '?' in temp_message.strip() or '？' in temp_message.strip()):
+    elif ('如何使用' in strEventMSG or 'HELP' in strEventMSG.upper() or '?' in strEventMSG.strip() or '？' in strEventMSG.strip()):
         get_TYPE_message = 'How_To_Use'
-        get_message = strHowToUse
+        strReply_MSG = strHowToUse
 
-    elif (temp_message[0:2].upper() == 'SJ') and \
-            ('官方帳號教學' in temp_message):
-        get_message = GVstrLessonLearning
+    elif (strEventMSG[0:2].upper() == 'SJ') and \
+            ('官方帳號教學' in strEventMSG):
+        strReply_MSG = GVstrLessonLearning
     # ***** ***** ***** ***** *****
 
     ##### (Ver)版本 #####
-    elif temp_message.upper().count('VER') > 0:
+    elif strEventMSG.upper().count('VER') > 0:
         # (Z)Ver
-        get_message = '『臺南市新吉工業區廠協會』版本：\n' + strVer
+        strReply_MSG = '『臺南市新吉工業區廠協會』版本：\n' + strVer
     # ***** ***** ***** ***** *****
 
     ##### 列出全部的關鍵字清單 #####
-    elif (temp_message[0:4].upper() == 'TOYO') and ('!ALL' in temp_message):
+    elif (strEventMSG[0:4].upper() == 'TOYO') and ('!ALL' in strEventMSG):
         get_TYPE_message = 'SJ_MSG_Text'
-        get_message = GVstrCMKeyWord
+        strReply_MSG = GVstrCMKeyWord
     # ***** ***** ***** ***** *****
 
     ##### 程式開發使用 #####
-    elif (temp_message[0:5].upper() == 'ECTOR'):
-        if len(temp_message) == 5:
+    elif (strEventMSG[0:5].upper() == 'ECTOR'):
+        if len(strEventMSG) == 5:
             strCond = ''
         else:
-            strCond = temp_message.replace('ECTOR', '')
+            strCond = strEventMSG.replace('ECTOR', '')
             strCond = strCond.strip()
         #比對輸入[小時分鐘](1225)
         strHHNN = RS_DateTime_2_HHNN()
         #開發者關鍵字清單
         if (strHHNN in strCond) and ('KW' in strCond):        
             get_TYPE_message = 'SJ_MSG_Text'
-            get_message = GVstrECKeyWord
+            strReply_MSG = GVstrECKeyWord
         #官方帳號教學
         elif (strHHNN in strCond) and ('LINE' in strCond):        
             get_TYPE_message = 'SJ_MSG_Text'
-            get_message = GVstrLessonLearning
+            strReply_MSG = GVstrLessonLearning
         else:
             get_TYPE_message = 'SJ_MSG_Text'
-            get_message = 'EC' + strCond + '\n' * 100 + strHHNN[-2:] + 'OK'
+            strReply_MSG = 'EC' + strCond + '\n' * 100 + strHHNN[-2:] + 'OK'
 
 #
 #
@@ -552,7 +543,7 @@ def handle_message(event):
 #
 
     else:
-        strCond = temp_message.strip()
+        strCond = strEventMSG.strip()
         strTitle = '(Query)關鍵字查詢'
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
@@ -584,16 +575,16 @@ def handle_message(event):
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             if intCount == 0:
                 get_TYPE_message = 'TSVI非關鍵字的留言'
-                get_message = strHowToUse
+                strReply_MSG = strHowToUse
             else:
                 get_TYPE_message = 'SQL_Query_Text'
-                get_message = strTitle + '：\n' + \
+                strReply_MSG = strTitle + '：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + strNow  + '\n\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
         else:
             get_TYPE_message = 'SQL_Query_Text'
-            get_message = strTitle + '：\n' + \
+            strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
@@ -602,14 +593,14 @@ def handle_message(event):
 
     # Send To Line
     if get_TYPE_message == 'Initial':
-        reply = TextSendMessage(text=f"{get_message}")
+        reply = TextSendMessage(text=f"{strReply_MSG}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
     ##### 推播Line Notify內容 #####
     elif get_TYPE_message == 'TSVI推播程式管理員':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = strReply_MSG
 
         # EctorLiu權杖：
         token = strEctorToken
@@ -618,13 +609,13 @@ def handle_message(event):
 
         # lineNotifyMessage(token, message)        
         #文字訊息
-        # reply = TextSendMessage(text=f"{get_message}")
+        # reply = TextSendMessage(text=f"{strReply_MSG}")
         # line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'TSVI2Ector':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = strReply_MSG
 
         # EctorLiu權杖：
         token = strEctorToken
@@ -634,7 +625,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2智弘':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = strReply_MSG
 
         # 智弘權杖：
         token = strJohnboToken
@@ -644,7 +635,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2冠伶':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = strReply_MSG
 
         # 冠伶權杖：
         token = strGwenToken
@@ -654,7 +645,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2昆霖':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = strReply_MSG
 
         # 昆霖權杖：
         token = strKunToken
@@ -664,7 +655,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI2宜庭':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = strReply_MSG
 
         # 宜庭權杖：        
         token = strMichelleToken
@@ -674,7 +665,7 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI推播全部':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        message = get_message
+        message = strReply_MSG
 
         # EctorLiu權杖：
         token = strEctorToken
@@ -696,8 +687,8 @@ def handle_message(event):
     elif get_TYPE_message == 'TSVI非關鍵字的留言':
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
-        # message = get_message
-        message = '廠協會有留言如下：\n' + temp_message
+        # message = strReply_MSG
+        message = '廠協會有留言如下：\n' + strEventMSG
 
         if strPush_NotKeyWord2All_Switch == 'ON': 
             # EctorLiu權杖：
@@ -722,21 +713,21 @@ def handle_message(event):
             lineNotifyMessage(token, message)
         # ***** ***** ***** ***** *****
 
-        reply = TextSendMessage(text=f"{get_message}")
+        reply = TextSendMessage(text=f"{strReply_MSG}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
     # ***** ***** ***** ***** *****
 
     elif get_TYPE_message == 'How_To_Use':
-        reply = TextSendMessage(text=f"{get_message}")
+        reply = TextSendMessage(text=f"{strReply_MSG}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'SJ_MSG_Text':
-        reply = TextSendMessage(text=f"{get_message}")
+        reply = TextSendMessage(text=f"{strReply_MSG}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'SQL_Query_Text':
-        reply = TextSendMessage(text=f"{get_message}")
+        reply = TextSendMessage(text=f"{strReply_MSG}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'SJ_LOGO':
@@ -745,7 +736,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'SJ_MEMO':
-        reply = TextSendMessage(text=f"{get_message}")
+        reply = TextSendMessage(text=f"{strReply_MSG}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
     elif get_TYPE_message == 'TSVI樣版':
@@ -763,10 +754,46 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, reply)
 
     else:
-        reply = TextSendMessage(text=f"{get_message}")
+        reply = TextSendMessage(text=f"{strReply_MSG}")
         line_bot_api.reply_message(event.reply_token,  reply)
 
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【LOG】 ===== ===== ===== ===== =====
 
+    # SQL_LOG紀錄
+    strEventMSG = strEventMSG.replace("'", '')
+    strEventMSG = strEventMSG.replace('"', '')
+    strReply_MSG = strReply_MSG.replace("'", '')
+    strReply_MSG = strReply_MSG.replace('"', '')
+    strSQLReturn = RS_Line_LOG_ADD(strLineDisplayName, strLineUserID, strEventMSG, strReply_MSG)
+
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
+# ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
 # ===== ===== ===== ===== ===== 【子程式區域】 ===== ===== ===== ===== =====
 
 # 推播相關部分
@@ -793,5 +820,74 @@ def RS_DateTime_2_HHNN():
         strMinute = '0' + strMinute
     RS_DateTime_2_HH_NN = strHour + strMinute
     return RS_DateTime_2_HH_NN
-    # ***** ***** ***** ***** *****    
+    # ***** ***** ***** ***** *****
+
+
+    ##### 字串處理 ######
+def RS_LEFT_String_StrNum(strTemp, intNum):
+    return strTemp[:intNum]
+
+def RS_RIGHT_String_StrNum(strTemp, intNum):
+    return strTemp[-intNum:]
+
+def RS_RIGHT_String_NotLeftStrNum(strTemp, intNum):    
+    return strTemp[-(len(strTemp)-intNum):]
+
+def RS_MID_String_Start_StrNum(strTemp, intStart, intNum):
+    return strTemp[intStart:intStart+intNum]
+    # ***** ***** ***** ***** *****
+
+
+    ##### 權限查詢 ######
+def RS_CHECK_KWAUTH_by_UserId(strCondUserId, strCondQueryKW):
+    RS_CHECK_KWAUTH_by_UserId = 'INITIAL_STATE'
+    #查詢資料
+    if strSQL_FW_Switch == 'ON':
+        ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+        strSQL = ' SELECT [AUTH_UnitName],[AUTH_MemName],[AUTH_KW_List] ' + \
+                    ' FROM [TIM_DB].[dbo].[tblAPP_SJ_Auth_List] ' + \
+                    ' WHERE ( [AUTH_UserID] = \'' + str(strCondUserId) + '\')'
+        resList = ms.RS_SQL_ExecQuery(strSQL)
+        strAuthUnitName = 'INI_A'
+        strAuthMemName = 'INI_B'
+        strAuthKWList = 'INI_C'
+        for (AUTH_UnitName, AUTH_MemName, AUTH_KW_List) in resList:
+            strAuthUnitName = str(AUTH_UnitName)
+            strAuthMemName = str(AUTH_MemName)
+            strAuthKWList = str(AUTH_KW_List)
+
+        if ('ALL' in strAuthKWList):
+            RS_CHECK_KWAUTH_by_UserId = 'GO' + ',(U)' + strAuthUnitName + ',(M)' + strAuthMemName + ',(A)' + strAuthKWList
+        elif (strCondQueryKW.upper() in strAuthKWList):
+            RS_CHECK_KWAUTH_by_UserId = 'GO' + ',(U)' + strAuthUnitName + ',(M)' + strAuthMemName + ',(A)' + strAuthKWList
+        else:
+            RS_CHECK_KWAUTH_by_UserId = 'NG' + ',(U)' + strAuthUnitName + ',(M)' + strAuthMemName + ',(A)' + strAuthKWList
+
+    return RS_CHECK_KWAUTH_by_UserId
+
+
+    ##### LineLOG ######
+def RS_Line_LOG_ADD(strLineName, strLineUserID, strKeyInMSG, strLineRpMSG):
+    #取得時間
+    datDT = datetime.now()
+    strDateTime = datDT.strftime("%Y-%m-%d %H:%M:%S")
+
+    #寫入LOG
+    if strSQL_FW_Switch == 'ON':
+        #Table Name
+        strDB_Table = '[TIM_DB].[dbo].[tblAPP_SJ_LineLog]'
+        #連線
+        ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+        strSQL = ' INSERT INTO [TIM_DB].[dbo].[tblAPP_SJ_LineLog] ' + \
+                    ' (EX01, EX02, EX03, TXT01, TXT02, EXDT01) ' + \
+                    ' VALUES (\'' + (strDateTime) + '\',\'' + (strLineName) + '\',\'' + (strLineUserID) + '\',\'' + (strKeyInMSG) + '\',\'' + (strLineRpMSG) + \
+                                '\',Convert(datetime, \'' + strDateTime + '\',111)) '
+        resList = ms.RS_SQL_ExecNonQuery(strSQL)
+        RS_Line_LOG = strDateTime + '：寫入DB OK!\n' + \
+                        strSQL
+        return RS_Line_LOG
+    else:
+        RS_Line_LOG = 'SQL_2'
+        return RS_Line_LOG
+    # ***** ***** ***** ***** *****
     
