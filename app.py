@@ -400,7 +400,6 @@ def handle_message(event):
 
     ##### 內部使用 #####
     elif (strEventMSG[0:2].upper() == 'SJ') and \
-            (strEventMSG[-3:] == '!55') and \
             ('MEMBER' in strEventMSG.upper() or \
             'DETAIL' in strEventMSG.upper() or \
             '內用名單' in strEventMSG.upper() or \
