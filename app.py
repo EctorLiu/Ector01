@@ -549,6 +549,30 @@ def handle_message(event):
     # ***** ***** ***** ***** *****
 
 
+    ##### 修改權限 #####
+    elif ('權限' in strEventMSG[0:4]) and ('修改' in strEventMSG[0:4]):
+        ##### 此項需有權限才能執行 #####
+        strAUTHKWQuery = 'SJPL'
+        strAUTH_CHK = RS_CHECK_KWAUTH_by_UserId(strLineUserID, strAUTHKWQuery)
+        if strAUTH_CHK[0:2] == 'GO':
+            # RS_Line_AUTH_MOD_ModUserDBName_ModAUTHItemName_YN(strLineName, strLineUserID, strModUserDBName, strModAUTHItemName, strModYN):
+            strEventMSG = RS_RIGHT_String_NotLeftStrNum(strEventMSG, 4)
+            strEventMSG = strEventMSG.replace('，', ',')
+            strEventMSG = strEventMSG.strip() + ',,'
+            lstCond = strEventMSG.split(',')
+            # strCHKUserDBName = 'ECTOR,宜庭,智弘,冠伶,昆霖,玉敏'
+            # strCHKAUTHItemName = '推播,全關鍵字,銀行狀態,零用金狀態,會員詳細資料'
+            strModName = lstCond[0].strip().upper()
+            strModAUTH = lstCond[1].strip().upper()
+            strModYN = lstCond[2].strip().upper()
+            strCall = RS_Line_AUTH_MOD_ModUserDBName_ModAUTHItemName_YN(strLineDisplayName, strLineUserID, strModName, strModAUTH, strModYN)
+            strReply_MSG = strCall
+        else:
+            strReply_MSG = '權限不足!'
+        # ***** ***** ***** ***** *****
+    # ***** ***** ***** ***** *****
+
+
     ##### 程式開發使用 #####
     elif (strEventMSG[0:5].upper() == 'ECTOR'):
         if len(strEventMSG) == 5:
