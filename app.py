@@ -188,10 +188,10 @@ def handle_message(event):
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = 'SELECT TOP (50) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
+            strSQL = 'SELECT TOP (20) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
                         ' WHERE [SJBTDelFlag] = 0 ' + \
-                        ' ORDER BY SJBTEditDate DESC, SJBTID '
+                        ' ORDER BY SJBTSEQ, SJBTEditDate DESC, SJBTID '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
@@ -199,7 +199,7 @@ def handle_message(event):
                 intCount += 1
                 strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJBTCode) + '】\n' + \
                             '  更新日期：[ ' + str(SJBTEditDate) + ' ]\n' + \
-                            '  ' + str(SJBTText) + '：\n' + \
+                            '  ' + str(SJBTText) + '\n' + \
                             '  ' + str(SJBTStatus) + '\n\n'
             strReply_MSG = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + FVstrNow  + '\n\n' + \
