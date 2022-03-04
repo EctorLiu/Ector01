@@ -31,7 +31,7 @@ strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '「LOGO」等..'
     # ***** ***** ***** ***** *****
 
-    ##### (TSVI)推播 ######
+    ##### (SJ)推播 ######
 import requests
     # ***** ***** ***** ***** *****
 
@@ -140,7 +140,7 @@ def handle_message(event):
         # (A)禮貌回覆
         strReply_MSG = '『臺南市新吉工業區廠協會』：您好' + event.message.text
 
-    ##### (TSVI)推播 #####
+    ##### (SJ)推播 #####
     elif (strEventMSG[0:4].upper() == 'SJ推播'):
         ##### 此項需有權限才能執行 #####
         strAUTHKWQuery = 'SJPUSH'
@@ -188,10 +188,10 @@ def handle_message(event):
         # ***** ***** ***** ***** *****
     # ***** ***** ***** ***** *****
     
-    ##### TSVI樣版 #####
-    elif (strEventMSG[0:4].upper() == 'TSVI') and \
+    ##### SJ樣版 #####
+    elif (strEventMSG[0:2].upper() == 'SJ') and \
             ('樣版' in strEventMSG.upper()):
-        get_TYPE_message = 'TSVI樣版'   
+        get_TYPE_message = 'SJ樣版'   
     # ***** ***** ***** ***** *****
 
 
@@ -790,7 +790,7 @@ def handle_message(event):
     # ***** ***** ***** ***** *****
 
 
-    elif get_TYPE_message == 'TSVI樣版':
+    elif get_TYPE_message == 'SJ樣版':
         reply = TemplateSendMessage(alt_text='樣版：需使用手機版方可顯示', \
                     template=ButtonsTemplate( \
                     title='標題：標題說明', \
