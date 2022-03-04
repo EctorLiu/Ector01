@@ -74,6 +74,7 @@ from datetime import datetime
 from rs_function_01 import * 
     # ***** ***** ***** ***** *****
 
+    ##### Line Callback ######
 @app.route("/", methods=["GET", "POST"])
 def callback():
 
@@ -89,6 +90,7 @@ def callback():
             abort(400)
 
         return "OK"
+    # ***** ***** ***** ***** *****
 
 # ===== ===== ===== ===== ===== 【程式區域】 ===== ===== ===== ===== =====
 # ===== ===== ===== ===== ===== 【程式區域】 ===== ===== ===== ===== =====
