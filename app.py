@@ -378,7 +378,7 @@ def handle_message(event):
             strSQL = ' SELECT SJCTType, SJCTCTMain, SJCTCTUnit, SJCTCTTel, SJCTCTWindow, ' + \
                         ' SJCTCTAddress, SJCTCTUrl ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJCT_ContactTelList] ' + \
-                        ' WHERE SJCTDelFlag = 0 '
+                        ' WHERE SJCTDelFlag = 0 ' + \
                         ' ORDER BY SJCTSeq '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
