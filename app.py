@@ -388,7 +388,7 @@ def handle_message(event):
                 strTemp += '[ ' + str(intCount) + ' ] ' + str(SJCTType) + '：\n' + \
                             '  ' + str(SJCTCTMain) + ':' + str(SJCTCTUnit) + '\n'
                 if len(str(SJCTCTTel)) > 0:
-                    strTemp += '  【電話】' + str(SJCTCorpTel) + '' + '\n'
+                    strTemp += '  【電話】' + str(SJCTCTTel) + '' + '\n'
                 if len(str(SJCTCTUrl)) > 0:
                     strTemp += '  【網址】' + str(SJCTCTUrl) + '' + '\n'
                 if len(str(SJCTCTWindow)) > 0:
