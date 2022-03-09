@@ -2,7 +2,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M309)0952'
+strVer = '(M309)1005'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -23,6 +23,7 @@ strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
                 '「最新訊息」\n' + \
                 '「成立資訊」\n' + \
                 '「如何加入會員」\n' + \
+                '「常用電話清單」\n' + \
                 '「會址」\n' + \
                 '「會員名單」\n' + \
                 '「理監事名單」\n' + \
@@ -670,50 +671,52 @@ def handle_message(event):
 #
 
     else:
-        strCond = strEventMSG.strip()
-        strTitle = '(Query)關鍵字查詢'
-        if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
-                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
-                        ' SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle ' + \
-                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
-                        ' WHERE [SJMBCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
-                            ' OR [SJMBPRName] LIKE ' + '\'%' + strCond + '%\'' + \
-                            ' OR [SJMBCorpPRName] LIKE ' + '\'%' + strCond + '%\'' + \
-                            ' OR [SJMBCorpProd] LIKE ' + '\'%' + strCond + '%\'' + \
-                        ' ORDER BY SEQ_TYPE, SJMBCode '
-            resList = ms.RS_SQL_ExecQuery(strSQL)
-            intCount=0
-            strTemp=''
-            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, \
-                    SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, \
-                    SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle) in resList:
-                intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
-                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
-                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
-                            '  成立：' + str(SJMBCorpSince) + '\n' + \
-                            '  廠址：' + str(SJMBCorpAddress) + '\n' + \
-                            '  電話：' + str(SJMBCorpTel) + '\n' + \
-                            '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n' + \
-                            '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
-            if len(strTemp) >= intMaxLineMSGString:
-                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
-            if intCount == 0:
-                get_TYPE_message = 'SYS_NOT_KW_INPUT_MSG'
-                strReply_MSG = strHowToUse
-            else:
-                get_TYPE_message = 'SYS_KW_INPUT_MSG'
-                strReply_MSG = strTitle + '：\n' + \
-                            '資料筆數：[ ' + str(intCount) + ' ] \n' + \
-                            '查詢時間：' + FVstrNow  + '\n\n' + \
-                            strTemp
-        else:
-            get_TYPE_message = 'SYS_KW_INPUT_MSG'
-            strReply_MSG = strTitle + '：\n' + \
-                            '目前ECTOR關閉防火牆\n' + \
-                            '暫停使用..有急用可找ECTOR'
+        get_TYPE_message = 'SYS_NOT_KW_INPUT_MSG'
+        strReply_MSG = strHowToUse
+#        strCond = strEventMSG.strip()
+#        strTitle = '(Query)關鍵字查詢'
+#        if strSQL_FW_Switch == 'ON':
+#            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+#            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
+#                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
+#                        ' SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle ' + \
+#                        ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
+#                        ' WHERE [SJMBCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
+#                            ' OR [SJMBPRName] LIKE ' + '\'%' + strCond + '%\'' + \
+#                            ' OR [SJMBCorpPRName] LIKE ' + '\'%' + strCond + '%\'' + \
+#                            ' OR [SJMBCorpProd] LIKE ' + '\'%' + strCond + '%\'' + \
+#                        ' ORDER BY SEQ_TYPE, SJMBCode '
+#            resList = ms.RS_SQL_ExecQuery(strSQL)
+#            intCount=0
+#            strTemp=''
+#            for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, \
+#                    SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, \
+#                    SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle) in resList:
+#                intCount += 1
+#                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
+#                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
+#                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+#                            '  成立：' + str(SJMBCorpSince) + '\n' + \
+#                            '  廠址：' + str(SJMBCorpAddress) + '\n' + \
+#                            '  電話：' + str(SJMBCorpTel) + '\n' + \
+#                            '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n' + \
+#                            '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
+#            if len(strTemp) >= intMaxLineMSGString:
+#                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+#            if intCount == 0:
+#                get_TYPE_message = 'SYS_NOT_KW_INPUT_MSG'
+#                strReply_MSG = strHowToUse
+#            else:
+#                get_TYPE_message = 'SYS_KW_INPUT_MSG'
+#                strReply_MSG = strTitle + '：\n' + \
+#                            '資料筆數：[ ' + str(intCount) + ' ] \n' + \
+#                            '查詢時間：' + FVstrNow  + '\n\n' + \
+#                            strTemp
+#        else:
+#            get_TYPE_message = 'SYS_KW_INPUT_MSG'
+#            strReply_MSG = strTitle + '：\n' + \
+#                            '目前ECTOR關閉防火牆\n' + \
+#                            '暫停使用..有急用可找ECTOR'
 
 
 # ===== ===== ===== ===== ===== 【Line區域】 ===== ===== ===== ===== =====
