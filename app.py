@@ -375,16 +375,27 @@ def handle_message(event):
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
             ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
-            strSQL = ' SELECT SJCTCorpName, SJCTPRName, SJCTCorpTel ' + \
+            strSQL = ' SELECT SJCTType, SJCTCTMain, SJCTCTUnit, SJCTCTTel, SJCTCTWindow, ' + \
+                        ' SJCTCTAddress, SJCTCTUrl ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJCT_ContactTelList] ' + \
-                        ' ORDER BY SJCTCode DESC '
+                        ' WHERE SJCTDelFlag = 0 '
+                        ' ORDER BY SJCTSeq '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             strTemp=''
-            for (SJCTCorpName, SJCTPRName, SJCTCorpTel) in resList:
+            for (SJCTType, SJCTCTMain, SJCTCTUnit, SJCTCTTel, SJCTCTWindow, SJCTCTAddress, SJCTCTUrl) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] ' + str(SJCTCorpName) + '：' + str(SJCTPRName) + '\n' + \
-                            '  【' + str(SJCTCorpTel) + '】' + '\n\n'
+                strTemp += '[ ' + str(intCount) + ' ] ' + str(SJCTType) + '：\n' + \
+                            '  ' + str(SJCTCTUnit) + ':' + str(SJCTCTUnit) + '\n'
+                if len(str(SJCTCorpTel)) > 0:
+                    strTemp += '  【' + str(SJCTCorpTel) + '】' + '\n'
+                if len(str(SJCTCTUrl)) > 0:
+                    strTemp += '  【' + str(SJCTCTUrl) + '】' + '\n'
+                if len(str(SJCTCTWindow)) > 0:
+                    strTemp += '  【' + str(SJCTCTWindow) + '】' + '\n'
+                if len(str(SJCTCTAddress)) > 0:
+                    strTemp += '  【' + str(SJCTCTAddress) + '】' + '\n'
+                strTemp += '\n'
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
             strReply_MSG = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
