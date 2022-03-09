@@ -385,8 +385,8 @@ def handle_message(event):
             strTemp=''
             for (SJCTType, SJCTCTMain, SJCTCTUnit, SJCTCTTel, SJCTCTWindow, SJCTCTAddress, SJCTCTUrl) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] ' + str(SJCTType) + '：\n' + \
-                            '  ' + str(SJCTCTMain) + ':' + str(SJCTCTUnit) + '\n'
+                strTemp += '[ ' + str(intCount) + ' ] ' + str(SJCTType) + '：' + \
+                            '  ' + str(SJCTCTMain) + '-' + str(SJCTCTUnit) + '\n'
                 if len(str(SJCTCTTel)) > 0:
                     strTemp += '  【電話】' + str(SJCTCTTel) + '' + '\n'
                 if len(str(SJCTCTUrl)) > 0:
