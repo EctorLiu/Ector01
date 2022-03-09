@@ -72,9 +72,11 @@ from datetime import datetime
     # ***** ***** ***** ***** *****
 
     ##### 自訂函數功能 ######
+from rm_initial import * 
 from rf_string_01 import * 
 from rf_string_02 import * 
 from rf_datetime_01 import * 
+import rf_sqldb_01 as pymsdb
     # ***** ***** ***** ***** *****
 
     ##### Line Callback ######
@@ -208,7 +210,7 @@ def handle_message(event):
         strTitle = '最近訊息/新聞'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = 'SELECT TOP (20) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
                         ' WHERE [SJBTDelFlag] = 0 ' + \
@@ -306,7 +308,7 @@ def handle_message(event):
         strTitle = '(SJ)臺南市新吉工業區廠商協進會'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
@@ -339,7 +341,7 @@ def handle_message(event):
         strTitle = '(SJ)新吉廠協會理監事名單'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel, SJMBCorpProd ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_LeaderList] ' + \
@@ -376,7 +378,7 @@ def handle_message(event):
         strTitle = '(SJ)常用電話網址清單'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJCTType, SJCTCTMain, SJCTCTUnit, SJCTCTTel, SJCTCTWindow, ' + \
                         ' SJCTCTAddress, SJCTCTUrl ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJCT_ContactTelList] ' + \
@@ -424,7 +426,7 @@ def handle_message(event):
         strTitle = '(Query)查詢會員公司營業資料'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
                         ' SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle ' + \
@@ -470,7 +472,7 @@ def handle_message(event):
         strTitle = '(SJ)臺南市新吉工業區廠商協進會'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum ' + \
                         ' FROM [TIM_DB].[dbo].[VIEW_0A_SJ_MemList] ' + \
@@ -511,7 +513,7 @@ def handle_message(event):
         strTitle = '零用金使用狀況'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT TOP (50) SJCSCode, CONVERT(nvarchar, [SJCSEditDate], 111), SJCSText, SJCSStatus, SJCSNum, ' + \
                         ' SJCSPrice, SJCSNow ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJCS_CashUseList] ' + \
@@ -550,7 +552,7 @@ def handle_message(event):
         strTitle = '銀行帳戶資訊'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if strSQL_FW_Switch == 'ON':
-            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT TOP (50) SJBKCode, CONVERT(nvarchar, [SJBKEditDate], 111) , SJBKText, SJBKStatus, SJBKNum, ' + \
                         ' SJBKPrice, SJBKNow ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBK_BankUseList] ' + \
@@ -693,7 +695,7 @@ def handle_message(event):
 #        strCond = strEventMSG.strip()
 #        strTitle = '(Query)關鍵字查詢'
 #        if strSQL_FW_Switch == 'ON':
-#            ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+#            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
 #            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
 #                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
 #                        ' SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle ' + \
@@ -922,7 +924,7 @@ def RS_CHECK_KWAUTH_by_UserId(strCondUserId, strCondQueryKW):
     RS_CHECK_KWAUTH_by_UserId = 'INITIAL_STATE'
     #查詢資料
     if strSQL_FW_Switch == 'ON':
-        ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+        ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
         strSQL = ' SELECT [AUTH_UnitName],[AUTH_MemName],[AUTH_KW_List] ' + \
                     ' FROM [TIM_DB].[dbo].[tblAPP_SJ_Auth_List] ' + \
                     ' WHERE ( [AUTH_UserID] = \'' + str(strCondUserId) + '\')'
@@ -1061,7 +1063,7 @@ def RS_Line_AUTH_MOD_ModUserDBName_ModAUTHItemName_YN(strLineName, strLineUserID
         #Table Name
         strDB_Table = '[TIM_DB].[dbo].[tblAPP_SJ_Auth_List]'
         #連線
-        ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+        ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
         strSQL = ' UPDATE [TIM_DB].[dbo].[tblAPP_SJ_Auth_List] ' + \
                     ' SET [AUTH_KW_List] = \'' + strToAUTHItemList + '\', ' + \
                     ' [AUTH_Update] = Convert(nvarchar, \'' + strDateTime + '\', 120), ' + \
@@ -1084,7 +1086,7 @@ def RS_Get_AUTHList_by_UserDBName(strQueryUserDBName):
     if strSQL_FW_Switch == 'ON':
         #Table Name
         strDB_Table = '[TIM_DB].[dbo].[tblAPP_SJ_Auth_List]'
-        ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+        ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
         strSQL = ' SELECT [AUTH_KW_List] ' + \
                     ' FROM [TIM_DB].[dbo].[tblAPP_SJ_Auth_List] ' + \
                     ' WHERE [AUTH_MemName] = \'' + strQueryUserDBName + '\''
@@ -1115,7 +1117,7 @@ def RS_Line_LOG_ADD(strLineName, strLineUserID, strKeyInMSG, strLineRpMSG):
         #Table Name
         strDB_Table = '[TIM_DB].[dbo].[tblAPP_SJ_LineLog]'
         #連線
-        ms = MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+        ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
         strSQL = ' INSERT INTO [TIM_DB].[dbo].[tblAPP_SJ_LineLog] ' + \
                     ' (EX01, EX02, EX03, TXT01, TXT02, EXDT01) ' + \
                     ' VALUES (\'' + (strDateTime) + '\',\'' + (strLineName) + '\',\'' + (strLineUserID) + '\',\'' + (strKeyInMSG) + '\',\'' + (strLineRpMSG) + \
