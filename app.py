@@ -72,7 +72,8 @@ from datetime import datetime
     # ***** ***** ***** ***** *****
 
     ##### 自訂函數功能 ######
-from rs_function_01 import * 
+from rf_string_01 import * 
+from rf_string_02 import * 
     # ***** ***** ***** ***** *****
 
     ##### Line Callback ######
