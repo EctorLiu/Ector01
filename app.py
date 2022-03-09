@@ -257,8 +257,8 @@ def handle_message(event):
             '感謝您的支持！'
 
     elif ('會址' in strEventMSG or '地址' in strEventMSG or '位置' in strEventMSG or \
-             '住址' in strEventMSG or '在哪' in strEventMSG or '在那' in strEventMSG or \
-             '電話' in strEventMSG or '聯絡' in strEventMSG):
+             '住址' in strEventMSG or '電話' in strEventMSG) and ('在哪' in strEventMSG or '在那' in strEventMSG or \
+              or '聯絡' in strEventMSG):
         strReply_MSG = '『臺南市新吉工業區廠協會』地址/電話：\n' + \
             '臺南市新吉工業區新吉三路55號\n' + \
             '(06)202-1347 #總機6828 \n' + \
