@@ -386,15 +386,15 @@ def handle_message(event):
             for (SJCTType, SJCTCTMain, SJCTCTUnit, SJCTCTTel, SJCTCTWindow, SJCTCTAddress, SJCTCTUrl) in resList:
                 intCount += 1
                 strTemp += '[ ' + str(intCount) + ' ] ' + str(SJCTType) + '：\n' + \
-                            '  ' + str(SJCTCTUnit) + ':' + str(SJCTCTUnit) + '\n'
-                if len(str(SJCTCorpTel)) > 0:
-                    strTemp += '  【' + str(SJCTCorpTel) + '】' + '\n'
+                            '  ' + str(SJCTCTMain) + ':' + str(SJCTCTUnit) + '\n'
+                if len(str(SJCTCTTel)) > 0:
+                    strTemp += '  【電話】' + str(SJCTCorpTel) + '' + '\n'
                 if len(str(SJCTCTUrl)) > 0:
-                    strTemp += '  【' + str(SJCTCTUrl) + '】' + '\n'
+                    strTemp += '  【網址】' + str(SJCTCTUrl) + '' + '\n'
                 if len(str(SJCTCTWindow)) > 0:
-                    strTemp += '  【' + str(SJCTCTWindow) + '】' + '\n'
+                    strTemp += '  【聯絡窗口】' + str(SJCTCTWindow) + '' + '\n'
                 if len(str(SJCTCTAddress)) > 0:
-                    strTemp += '  【' + str(SJCTCTAddress) + '】' + '\n'
+                    strTemp += '  【地址】' + str(SJCTCTAddress) + '' + '\n'
                 strTemp += '\n'
             if len(strTemp) >= intMaxLineMSGString:
                 strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
