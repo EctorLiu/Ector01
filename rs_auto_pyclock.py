@@ -1,4 +1,10 @@
     ##### 匯入函式庫 ######
+# 0750-0920
+# 1150-1420
+# 1450-1550
+    # ***** ***** ***** ***** *****
+
+    ##### 匯入函式庫 ######
 from datetime import datetime
 
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -9,15 +15,76 @@ import urllib.request
 
 
     ##### 自動執行程式 ######
-@sched.scheduled_job('cron', day_of_week='mon-fri', minute='*/25')
-
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 07,minute = 50)
 def scheduled_job():
     url = 'https://ector01.herokuapp.com/'
     conn = urllib.request.urlopen(url)
     for key, value in conn.getheaders():
         print(key, value)
-
-sched.start()
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 08,minute = 20)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 08,minute = 50)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 11,minute = 50)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 12,minute = 20)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 12,minute = 50)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 13,minute = 20)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 13,minute = 50)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 14,minute = 50)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
+@sched.scheduled_job('cron', day_of_week='mon-fri',hour = 15,minute = 20)
+def scheduled_job():
+    url = 'https://ector01.herokuapp.com/'
+    conn = urllib.request.urlopen(url)
+    for key, value in conn.getheaders():
+        print(key, value)
+    sched.start()
     # ***** ***** ***** ***** *****
 
 
