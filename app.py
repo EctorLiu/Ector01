@@ -1,8 +1,7 @@
-
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M309)1802'
+strVer = '(M310)1142'
 
     # 切換【SQL】功能選擇：ON/OFF
 strSQL_FW_Switch = 'ON'
@@ -13,23 +12,6 @@ strPush_NotKeyWord2All_Switch = 'OFF'
     ##### 限制 ######
 intMaxLineMSGString = 4900
 intMaxItemString = 200
-    # ***** ***** ***** ***** *****
-
-    ##### 預設留言 ######
-strHowToUse = '『臺南市新吉工業區廠協會』：\n' + \
-                '您好！這是廠協會之官方帳號！\n謝謝您的訊息！\n我們會儘速以Line與您聯絡！\n\n' + \
-                '也許您可用下述常用關鍵字查詢：\n' + \
-                '「如何使用」\n' + \
-                '「最新訊息」\n' + \
-                '「成立資訊」\n' + \
-                '「如何加入會員」\n' + \
-                '「常用電話清單」\n' + \
-                '「會址」\n' + \
-                '「會員名單」\n' + \
-                '「理監事名單」\n' + \
-                '「理事長由誰擔任」\n' + \
-                '「找」+公司或人或產品名\n' + \
-                '「LOGO」等..'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -204,7 +186,7 @@ def handle_message(event):
     ##### 關鍵字 #####
     elif ('如何使用' in strEventMSG or 'HELP' in strEventMSG.upper() or '?' in strEventMSG.strip() or '？' in strEventMSG.strip()):
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        strReply_MSG = strHowToUse
+        strReply_MSG = GVstrHowToUse
 
     elif ('最近' in strEventMSG or '最新' in strEventMSG) and \
             ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG):
@@ -692,7 +674,7 @@ def handle_message(event):
 
     else:
         get_TYPE_message = 'SYS_NOT_KW_INPUT_MSG'
-        strReply_MSG = strHowToUse
+        strReply_MSG = GVstrHowToUse
 #        strCond = strEventMSG.strip()
 #        strTitle = '(Query)關鍵字查詢'
 #        if strSQL_FW_Switch == 'ON':
@@ -725,7 +707,7 @@ def handle_message(event):
 #                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
 #            if intCount == 0:
 #                get_TYPE_message = 'SYS_NOT_KW_INPUT_MSG'
-#                strReply_MSG = strHowToUse
+#                strReply_MSG = GVstrHowToUse
 #            else:
 #                get_TYPE_message = 'SYS_KW_INPUT_MSG'
 #                strReply_MSG = strTitle + '：\n' + \
