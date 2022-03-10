@@ -2,16 +2,6 @@
 
     ##### 版本 ######
 strVer = '(M310)1142'
-
-    # 切換【SQL】功能選擇：ON/OFF
-strSQL_FW_Switch = 'ON'
-    # 切換【非關鍵字通知】同仁推播功能選擇：ON/OFF
-strPush_NotKeyWord2All_Switch = 'OFF'
-    # ***** ***** ***** ***** *****
-
-    ##### 限制 ######
-intMaxLineMSGString = 4900
-intMaxItemString = 200
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -56,10 +46,12 @@ from datetime import datetime
     ##### 自訂函數功能 ######
 from rm_initial import *
 from ri_text_01 import *
+from ri_parameters_01 import *
 from rf_string_01 import *
 from rf_string_02 import *
 from rf_datetime_01 import *
 import rf_sqldb_01 as pymsdb
+from rf_sqldb_02 import *
     # ***** ***** ***** ***** *****
 
     ##### Line Callback ######
@@ -192,7 +184,7 @@ def handle_message(event):
             ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG):
         strTitle = '最近訊息/新聞'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
+        if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = 'SELECT TOP (20) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
@@ -290,7 +282,7 @@ def handle_message(event):
             ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG or '會員' in strEventMSG):
         strTitle = '(SJ)臺南市新吉工業區廠商協進會'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
+        if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle ' + \
@@ -309,8 +301,8 @@ def handle_message(event):
                     strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
                                 '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
-            if len(strTemp) >= intMaxLineMSGString:
-                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+            if len(strTemp) >= GVintMaxLineMSGString:
+                strTemp = strTemp[0:GVintMaxLineMSGString] + '...(資料過多)'
             strReply_MSG = strTitle + '：\n資料筆數：[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + FVstrNow  + '\n\n' + \
                             strTemp
@@ -323,7 +315,7 @@ def handle_message(event):
             ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
         strTitle = '(SJ)新吉廠協會理監事名單'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
+        if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel, SJMBCorpProd ' + \
@@ -335,8 +327,8 @@ def handle_message(event):
             for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, \
                     SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpTel, SJMBCorpProd) in resList:
                 intCount += 1
-                if len(SJMBCorpProd)>= intMaxItemString:
-                    strCorpProdText = SJMBCorpProd[0:intMaxItemString] + '...'
+                if len(SJMBCorpProd)>= GVintMaxItemString:
+                    strCorpProdText = SJMBCorpProd[0:GVintMaxItemString] + '...'
                 else:
                     strCorpProdText = SJMBCorpProd
                 strTemp += '[ ' + str(intCount) + ' ] ' + str(SJMBPRType) + '：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
@@ -345,8 +337,8 @@ def handle_message(event):
                             '  廠址：' + str(SJMBCorpAddress) + '\n' + \
                             '  電話：' + str(SJMBCorpTel) + '\n' + \
                             '  > 營業項目：' + str(strCorpProdText) + ' <\n\n'
-            if len(strTemp) >= intMaxLineMSGString:
-                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+            if len(strTemp) >= GVintMaxLineMSGString:
+                strTemp = strTemp[0:GVintMaxLineMSGString] + '...(資料過多)'
             strReply_MSG = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + FVstrNow  + '\n\n' + \
@@ -360,7 +352,7 @@ def handle_message(event):
             ('名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
         strTitle = '(SJ)常用電話網址清單'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
+        if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJCTType, SJCTCTMain, SJCTCTUnit, SJCTCTTel, SJCTCTWindow, ' + \
                         ' SJCTCTAddress, SJCTCTUrl ' + \
@@ -387,8 +379,8 @@ def handle_message(event):
                 if len(str(SJCTCTAddress)) > 0:
                     strTemp += '  【地址】' + str(SJCTCTAddress) + '' + '\n'
                 strTemp += '\n'
-            if len(strTemp) >= intMaxLineMSGString:
-                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+            if len(strTemp) >= GVintMaxLineMSGString:
+                strTemp = strTemp[0:GVintMaxLineMSGString] + '...(資料過多)'
             strReply_MSG = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + FVstrNow  + '\n\n' + \
@@ -408,7 +400,7 @@ def handle_message(event):
 
         strTitle = '(Query)查詢會員公司營業資料'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
+        if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
@@ -434,8 +426,8 @@ def handle_message(event):
                             '  電話：' + str(SJMBCorpTel) + '\n' + \
                             '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n' + \
                             '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
-            if len(strTemp) >= intMaxLineMSGString:
-                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+            if len(strTemp) >= GVintMaxLineMSGString:
+                strTemp = strTemp[0:GVintMaxLineMSGString] + '...(資料過多)'
             strReply_MSG = strTitle + '：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + FVstrNow  + '\n\n' + \
@@ -454,7 +446,7 @@ def handle_message(event):
             '詳細名單' in strEventMSG.upper()):
         strTitle = '(SJ)臺南市新吉工業區廠商協進會'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
+        if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
                         ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum ' + \
@@ -469,8 +461,8 @@ def handle_message(event):
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n\n'
-            if len(strTemp) >= intMaxLineMSGString:
-                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+            if len(strTemp) >= GVintMaxLineMSGString:
+                strTemp = strTemp[0:GVintMaxLineMSGString] + '...(資料過多)'
             strContent = strTitle + '(' + str(len(strTemp)) + ')：\n' + \
                             '資料筆數：[ ' + str(intCount) + ' ] \n' + \
                             '查詢時間：' + FVstrNow  + '\n\n' + \
@@ -495,7 +487,7 @@ def handle_message(event):
             '零用金' in strEventMSG.upper()):
         strTitle = '零用金使用狀況'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
+        if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT TOP (50) SJCSCode, CONVERT(nvarchar, [SJCSEditDate], 111), SJCSText, SJCSStatus, SJCSNum, ' + \
                         ' SJCSPrice, SJCSNow ' + \
@@ -534,7 +526,7 @@ def handle_message(event):
             '銀行' in strEventMSG):
         strTitle = '銀行帳戶資訊'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        if strSQL_FW_Switch == 'ON':
+        if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT TOP (50) SJBKCode, CONVERT(nvarchar, [SJBKEditDate], 111) , SJBKText, SJBKStatus, SJBKNum, ' + \
                         ' SJBKPrice, SJBKNow ' + \
@@ -677,7 +669,7 @@ def handle_message(event):
         strReply_MSG = GVstrHowToUse
 #        strCond = strEventMSG.strip()
 #        strTitle = '(Query)關鍵字查詢'
-#        if strSQL_FW_Switch == 'ON':
+#        if GVstrSQL_FW_Switch == 'ON':
 #            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
 #            strSQL = ' SELECT SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, ' + \
 #                        ' SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, ' + \
@@ -703,8 +695,8 @@ def handle_message(event):
 #                            '  電話：' + str(SJMBCorpTel) + '\n' + \
 #                            '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n' + \
 #                            '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
-#            if len(strTemp) >= intMaxLineMSGString:
-#                strTemp = strTemp[0:intMaxLineMSGString] + '...(資料過多)'
+#            if len(strTemp) >= GVintMaxLineMSGString:
+#                strTemp = strTemp[0:GVintMaxLineMSGString] + '...(資料過多)'
 #            if intCount == 0:
 #                get_TYPE_message = 'SYS_NOT_KW_INPUT_MSG'
 #                strReply_MSG = GVstrHowToUse
@@ -793,7 +785,7 @@ def handle_message(event):
         ##### 推播 #####
         # 修改為你要傳送的訊息內容
         push_message = '\n來自[' + strLineDisplayName + ']輸入訊息：\n' + strEventMSG
-        if strPush_NotKeyWord2All_Switch == 'ON': 
+        if GVstrPush_NotKeyWord2All_Switch == 'ON': 
             # EctorLiu權杖：
             token = strEctorToken
             lineNotifyMessage(token, push_message)
@@ -906,7 +898,7 @@ def lineNotifyMessage(token, msg):
 def RS_CHECK_KWAUTH_by_UserId(strCondUserId, strCondQueryKW):
     RS_CHECK_KWAUTH_by_UserId = 'INITIAL_STATE'
     #查詢資料
-    if strSQL_FW_Switch == 'ON':
+    if GVstrSQL_FW_Switch == 'ON':
         ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
         strSQL = ' SELECT [AUTH_UnitName],[AUTH_MemName],[AUTH_KW_List] ' + \
                     ' FROM [TIM_DB].[dbo].[tblAPP_SJ_Auth_List] ' + \
@@ -1042,7 +1034,7 @@ def RS_Line_AUTH_MOD_ModUserDBName_ModAUTHItemName_YN(strLineName, strLineUserID
     # ***** ***** ***** ***** *****
 
     # 設定權限開關
-    if strSQL_FW_Switch == 'ON':
+    if GVstrSQL_FW_Switch == 'ON':
         #Table Name
         strDB_Table = '[TIM_DB].[dbo].[tblAPP_SJ_Auth_List]'
         #連線
@@ -1066,7 +1058,7 @@ def RS_Line_AUTH_MOD_ModUserDBName_ModAUTHItemName_YN(strLineName, strLineUserID
     ##### LineLOG ######
 def RS_Get_AUTHList_by_UserDBName(strQueryUserDBName):
     #查詢AuthList
-    if strSQL_FW_Switch == 'ON':
+    if GVstrSQL_FW_Switch == 'ON':
         #Table Name
         strDB_Table = '[TIM_DB].[dbo].[tblAPP_SJ_Auth_List]'
         ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
@@ -1096,7 +1088,7 @@ def RS_Line_LOG_ADD(strLineName, strLineUserID, strKeyInMSG, strLineRpMSG):
     strDateTime = datDT.strftime("%Y-%m-%d %H:%M:%S")
 
     #寫入LOG
-    if strSQL_FW_Switch == 'ON':
+    if GVstrSQL_FW_Switch == 'ON':
         #Table Name
         strDB_Table = '[TIM_DB].[dbo].[tblAPP_SJ_LineLog]'
         #連線
