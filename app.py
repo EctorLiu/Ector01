@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M311)0954'
+strVer = '(M324)1032'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -208,61 +208,32 @@ def handle_message(event):
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
 
-    elif ('進度' in strEventMSG or '狀態' in strEventMSG or '成立' in strEventMSG):
-        strReply_MSG = '『臺南市新吉工業區廠協會』成立：\n' + \
-            '臺南市政府社會局2022/01/03(一)上午\n' + \
-            '通知協會立案通過！\n\n' + \
-            '成立歷程...\n' + \
-            '第一屆第一次會員成立大會\n' + \
-            '暨理監事聯席會議\n' + \
-            '於2021/11/18(四)14:00舉行\n' + \
-            '>同年 11/26(五)提出相關文件申請\n' + \
-            '>同年 12/10(五)社會局1st通知修改內容\n' + \
-            '>同年 12/24(一)社會局2nd通知修改內容\n' + \
-            '立案：南市社團字第1101543033號'
+    elif ('立案' in strEventMSG or '成立' in strEventMSG):
+        strReply_MSG = GVstrEstablish_Info_Text
 
     elif ('如何加入' in strEventMSG or '加入會員' in strEventMSG):
-        strReply_MSG = '『臺南市新吉工業區廠協會』加入：\n\n' + \
-            '(Step01)請下載並填寫『會員入會申請書』紙本\n' + \
-            'https://bit.ly/3GwQf4w\n' + \
-            '請填寫內容並用印(大小章)\n\n' + \
-            '(Step02)請用超連結：\n' + \
-            'https://forms.gle/bxDLMLgA2fSLCDia9\n' + \
-            '最上方處有廠協會帳戶資訊\n' + \
-            '匯款後請以手機或掃描方式留存匯款資料\n\n' + \
-            '(Step03)請用同超連結：\n' + \
-            'https://forms.gle/bxDLMLgA2fSLCDia9\n' + \
-            '上傳『會員入會申請書(用印)』之掃描檔\n' + \
-            '以及『匯款單』之照片或掃描檔\n\n' + \
-            '我們會盡快通知理事會並回覆！\n' + \
-            '感謝您的支持！'
+        strReply_MSG = GVstrHow_To_Join_Info_Text
 
     elif ('會址' in strEventMSG or '地址' in strEventMSG or '位置' in strEventMSG or \
              '住址' in strEventMSG or '電話' in strEventMSG) and ('在哪' in strEventMSG or '在那' in strEventMSG or \
              '聯絡' in strEventMSG):
-        strReply_MSG = '『臺南市新吉工業區廠協會』地址/電話：\n' + \
-            '臺南市新吉工業區新吉三路55號\n' + \
-            '(06)202-1347 #總機6828 \n' + \
-            '(預定遷至：臺南市新吉工業區安新二路99號)\n' + \
-            '(申請中..新吉工業區服務中心..未來會址)\n' + \
-            '歡迎您的蒞臨指教！'
+        strReply_MSG = GVstrLocation_Phone_Info_Text
 
     elif (strEventMSG.count('理事長') > 0) and \
             ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
-        strReply_MSG = '『臺南市新吉工業區廠協會』理事長：\n' + \
-            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n' + \
-            '選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！'
+        strReply_MSG = GVstrChairman_Info_Text
 
     elif ('總幹事' in strEventMSG) and \
             ('誰' in strEventMSG or '名單' in strEventMSG or '清單' in strEventMSG or '列表' in strEventMSG):
-        strReply_MSG = '『臺南市新吉工業區廠協會』總幹事：\n' + \
-            '第一屆第一次會員成立大會\n暨理監事聯席會議於2021/11/18(四)14:00舉行\n選舉理事長為：\n東佑達自動化科技股份有限公司\n林宗德董事長擔任！\n指派劉讃芳經理為總幹事！'
+        strReply_MSG = GVstrDirectorGeneral_Info_Text
 
     elif (('統編' in strEventMSG) or ('統一編號' in strEventMSG) or ('立案' in strEventMSG)):
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        strReply_MSG = '『臺南市新吉工業區廠協會』：\n' + \
-                        '立案(M103)：南市社團字第1101543033號\n' + \
-                        '統編(M112)：89038129'
+        strReply_MSG = GVstrUniNumber_Info_Text
+
+    elif (('廠協會' in strEventMSG) or ('下載' in strEventMSG)) and ('章程' in strEventMSG):
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        strReply_MSG = GVstrBylaws_DL_Info_Text
 
 
     ##### 下載 #####
