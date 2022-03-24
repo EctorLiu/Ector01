@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M324)1108'
+strVer = '(M324)1152'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -518,6 +518,7 @@ def handle_message(event):
                             '  餘額可用：' + str(SJBKNow) + '\n\n'
             strContent = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
                             '查詢時間：' + FVstrNow  + '\n\n' + \
+                            GVstrBankAccount_Info_Text + '\n' + \
                             strTemp
             ##### 此項需有權限才能執行 #####
             strAUTHKWQuery = 'SJBANK'
