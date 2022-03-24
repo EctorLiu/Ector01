@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M324)1032'
+strVer = '(M324)1108'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -231,10 +231,6 @@ def handle_message(event):
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         strReply_MSG = GVstrUniNumber_Info_Text
 
-    elif (('廠協會' in strEventMSG) or ('下載' in strEventMSG)) and ('章程' in strEventMSG):
-        get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        strReply_MSG = GVstrBylaws_DL_Info_Text
-
 
     ##### 下載 #####
     elif ('LOGO' in strEventMSG.upper()):
@@ -247,6 +243,10 @@ def handle_message(event):
     elif (('使用' in strEventMSG) or ('設定' in strEventMSG) or ('通話' in strEventMSG)) and ('VOWIFI' in strEventMSG):
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         strReply_MSG = GVstrVoWiFi_Info_Config
+
+    elif (('廠協會' in strEventMSG) or ('下載' in strEventMSG)) and ('章程' in strEventMSG):
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        strReply_MSG = GVstrBylaws_DL_Info_Text
 
 
     ##### 資料庫 #####
