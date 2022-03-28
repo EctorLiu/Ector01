@@ -177,10 +177,6 @@ def handle_message(event):
 
 
     ##### 關鍵字 #####
-    elif ('如何使用' in strEventMSG or 'HELP' in strEventMSG.upper() or '?' in strEventMSG.strip() or '？' in strEventMSG.strip()):
-        get_TYPE_message = 'SYS_KW_INPUT_MSG'
-        strReply_MSG = GVstrHowToUse
-
     elif ('最近' in strEventMSG or '最新' in strEventMSG) and \
             ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG or '消息' in strEventMSG):
         strTitle = '最近訊息/新聞(最近20筆)'
@@ -294,7 +290,7 @@ def handle_message(event):
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         strReply_MSG = GVstrNameCard_Info_Config
 
-    elif (('使用' in strEventMSG) or ('設定' in strEventMSG) or ('通話' in strEventMSG)) and ('VOWIFI' in strEventMSG):
+    elif (('使用' in strEventMSG) or ('設定' in strEventMSG) or ('通話' in strEventMSG)) and ('VOWIFI' in strEventMSG) :
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         strReply_MSG = GVstrVoWiFi_Info_Config
 
@@ -669,6 +665,13 @@ def handle_message(event):
         else:
             strReply_MSG = '權限不足!'
         # ***** ***** ***** ***** *****
+
+
+    ##### 如何使用 #####
+    elif ('如何使用' in strEventMSG or 'HELP' in strEventMSG.upper() or '?' in strEventMSG.strip() or '？' in strEventMSG.strip()):
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        strReply_MSG = GVstrHowToUse
+    # ***** ***** ***** ***** *****
 
 #
 #
