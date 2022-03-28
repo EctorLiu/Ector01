@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M324)1152'
+strVer = '(M328)1142'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -182,14 +182,68 @@ def handle_message(event):
         strReply_MSG = GVstrHowToUse
 
     elif ('最近' in strEventMSG or '最新' in strEventMSG) and \
-            ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG):
-        strTitle = '最近訊息/新聞'
+            ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG or '消息' in strEventMSG):
+        strTitle = '最近訊息/新聞(最近20筆)'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = 'SELECT TOP (20) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
                         ' WHERE [SJBTDelFlag] = 0 ' + \
+                        ' ORDER BY SJBTSEQ, SJBTEditDate DESC, SJBTID '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJBTCode, SJBTText, SJBTStatus, SJBTEditDate) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJBTCode) + '】\n' + \
+                            '  更新日期：[ ' + str(SJBTEditDate) + ' ]\n' + \
+                            '  ' + str(SJBTText) + '\n' + \
+                            '  ' + str(SJBTStatus) + '\n\n'
+            strReply_MSG = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
+                            strTemp
+        else:
+            strReply_MSG = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
+
+    elif ('最近' in strEventMSG or '最新' in strEventMSG) and \
+            ('公告' in strEventMSG):
+        strTitle = '最近公告(最近20筆)'
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        if GVstrSQL_FW_Switch == 'ON':
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = 'SELECT TOP (20) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
+                        ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
+                        ' WHERE [SJBTDelFlag] = 0 AND SJBTText LIKE %公告% ' + \
+                        ' ORDER BY SJBTSEQ, SJBTEditDate DESC, SJBTID '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJBTCode, SJBTText, SJBTStatus, SJBTEditDate) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJBTCode) + '】\n' + \
+                            '  更新日期：[ ' + str(SJBTEditDate) + ' ]\n' + \
+                            '  ' + str(SJBTText) + '\n' + \
+                            '  ' + str(SJBTStatus) + '\n\n'
+            strReply_MSG = strTitle + '：資料筆數[ ' + str(intCount) + ' ]\n' + \
+                            '查詢時間：' + FVstrNow  + '\n\n' + \
+                            strTemp
+        else:
+            strReply_MSG = strTitle + '：\n' + \
+                            '目前ECTOR關閉防火牆\n' + \
+                            '暫停使用..有急用可找ECTOR'
+
+    elif ('最近' in strEventMSG or '最新' in strEventMSG) and \
+            ('參考' in strEventMSG):
+        strTitle = '最近參考文件(最近20筆)'
+        get_TYPE_message = 'SYS_KW_INPUT_MSG'
+        if GVstrSQL_FW_Switch == 'ON':
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = 'SELECT TOP (20) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
+                        ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
+                        ' WHERE [SJBTDelFlag] = 0 AND SJBTText LIKE %參考% ' + \
                         ' ORDER BY SJBTSEQ, SJBTEditDate DESC, SJBTID '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
