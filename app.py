@@ -216,7 +216,7 @@ def handle_message(event):
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = 'SELECT TOP (20) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
-                        ' WHERE [SJBTDelFlag] = 0 AND SJBTText LIKE %公告% ' + \
+                        ' WHERE [SJBTDelFlag] = 0 AND SJBTText LIKE \'%公告%\' ' + \
                         ' ORDER BY SJBTSEQ, SJBTEditDate DESC, SJBTID '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
@@ -243,7 +243,7 @@ def handle_message(event):
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = 'SELECT TOP (20) [SJBTCode] ,[SJBTText] ,[SJBTStatus] , CONVERT(nvarchar, [SJBTEditDate], 111) ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJBT_NewsList] ' + \
-                        ' WHERE [SJBTDelFlag] = 0 AND SJBTText LIKE %參考% ' + \
+                        ' WHERE [SJBTDelFlag] = 0 AND SJBTText LIKE \'%參考%\' ' + \
                         ' ORDER BY SJBTSEQ, SJBTEditDate DESC, SJBTID '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
