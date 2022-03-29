@@ -472,8 +472,8 @@ def handle_message(event):
                 strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJVDCode) + '】 ' + '\n' + \
                             '  (' + str(SJMBPRType) + ') ' + str(SJVDCorpName) + '\n' + \
                             '  ' + str(SJVDPRName) + ' ' + str(SJVDPRTitle) + '\n' + \
-                            '  電話：' + str(SJVDCorpTel) + '\n'
-                            '  住址：' + str(SJVDCorpAddress) + '\n' + \
+                            '  電話：' + str(SJVDCorpTel) + '\n' + \
+                            '  住址：' + str(SJVDCorpAddress) + '\n'
                 ##### 選填項目 #####
                 if len(SJVDCorpEMail) > 0:
                     strTemp += '  郵件：' + str(SJVDCorpEMail) + '\n'
