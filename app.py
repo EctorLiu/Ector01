@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M328)1142'
+strVer = '(M329)08:26'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -448,6 +448,39 @@ def handle_message(event):
                             '  電話：' + str(SJMBCorpTel) + '\n' + \
                             '  公司負責人：' + str(SJMBCorpPRName) + ' ' + str(SJMBCorpPRTitle) + '\n' + \
                             '  > 營業項目：' + str(SJMBCorpProd) + ' <\n\n'
+
+
+            ##### 外部廠商 #####
+            strTemp += ' 下方為外部非會員廠商： \n '
+
+            ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
+            strSQL = ' SELECT [SJVDCode],[SJVDPRType],[SJVDCorpName],[SJVDPRName],[SJVDPRTitle], ' + \
+                        ' [SJVDCorpTel],[SJVDCorpEMail],[SJVDCorpAddress],[SJVDCorpGoodText],[SJVDCorpWeb], ' + \
+                        ' [SJVDCorpProd] ' + \
+                        ' FROM [TIM_DB].[dbo].[tbl0A_SJVD_VendorList] ' + \
+                        ' WHERE [SJVDCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJVDPRName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJVDCorpProd] LIKE ' + '\'%' + strCond + '%\'' + \
+                        ' ORDER BY SJMBCode '
+            resList = ms.RS_SQL_ExecQuery(strSQL)
+            intCount=0
+            strTemp=''
+            for (SJVDCode, SJVDPRType, SJVDCorpName, SJVDPRName, SJVDPRTitle, \
+                    SJVDCorpTel, SJVDCorpEMail, SJVDCorpAddress, SJVDCorpGoodText, SJVDCorpWeb, \
+                    SJVDCorpProd) in resList:
+                intCount += 1
+                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJVDCode) + '】 ' + \
+                            '  (' + str(SJMBPRType) + ') ' + str(SJVDCorpName) + '\n' + \
+                            '  ' + str(SJVDPRName) + ' ' + str(SJVDPRTitle) + '\n' + \
+                            '  電話：' + str(SJVDCorpTel) + '\n' + \
+                            '  郵件：' + str(SJVDCorpEMail) + '\n' + \
+                            '  網站：' + str(SJVDCorpWeb) + '\n' + \
+                            '  住址：' + str(SJVDCorpAddress) + '\n' + \
+                            '  優點描述：' + str(SJVDCorpGoodText) + '\n' + \
+                            '  > 營業項目：' + str(SJVDCorpProd) + ' <\n\n'
+            ##### ##### ##### ##### #####
+
+
             if len(strTemp) >= GVintMaxLineMSGString:
                 strTemp = strTemp[0:GVintMaxLineMSGString] + '...(資料過多)'
             strReply_MSG = strTitle + '：\n' + \
@@ -458,7 +491,6 @@ def handle_message(event):
             strReply_MSG = strTitle + '：\n' + \
                             '目前ECTOR關閉防火牆\n' + \
                             '暫停使用..有急用可找ECTOR'
-
 
     ##### 內部使用 #####
     elif (strEventMSG[0:2].upper() == 'SJ') and \
