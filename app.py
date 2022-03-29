@@ -460,6 +460,7 @@ def handle_message(event):
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJVD_VendorList] ' + \
                         ' WHERE [SJVDCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
                             ' OR [SJVDPRName] LIKE ' + '\'%' + strCond + '%\'' + \
+                            ' OR [SJVDPRType] LIKE ' + '\'%' + strCond + '%\'' + \
                             ' OR [SJVDCorpProd] LIKE ' + '\'%' + strCond + '%\'' + \
                         ' ORDER BY SJVDCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
@@ -470,7 +471,7 @@ def handle_message(event):
                     SJVDCorpProd,SJVDLastContact,SJVDCPPT,SJVDSVPT) in resList:
                 intCount += 1
                 strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJVDCode) + '】 ' + '\n' + \
-                            '  (' + str(SJMBPRType) + ') ' + str(SJVDCorpName) + '\n' + \
+                            '  (' + str(SJVDPRType) + ') ' + str(SJVDCorpName) + '\n' + \
                             '  ' + str(SJVDPRName) + ' ' + str(SJVDPRTitle) + '\n' + \
                             '  電話：' + str(SJVDCorpTel) + '\n' + \
                             '  住址：' + str(SJVDCorpAddress) + '\n'
