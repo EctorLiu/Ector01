@@ -481,9 +481,9 @@ def handle_message(event):
                     strTemp += '  網站：' + str(SJVDCorpWeb) + '\n'
                 if (SJVDLastContact) is not None:
                     strTemp += '  合作日期：' + str(SJVDLastContact) + '\n'
-                if len(SJVDCPPT) > 0:
+                if (SJVDCPPT) is not None:
                     strTemp += '  評分(性價比1-10)：' + str(SJVDCPPT) + '\n'
-                if len(SJVDSVPT) > 0:
+                if (SJVDSVPT) is not None:
                     strTemp += '  評分(服務  1-10)：' + str(SJVDSVPT) + '\n'
                 ##### ##### ##### ##### #####
                 strTemp += '  優點描述：' + str(SJVDCorpGoodText) + '\n' + \
