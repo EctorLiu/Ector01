@@ -461,7 +461,7 @@ def handle_message(event):
                         ' WHERE [SJVDCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
                             ' OR [SJVDPRName] LIKE ' + '\'%' + strCond + '%\'' + \
                             ' OR [SJVDCorpProd] LIKE ' + '\'%' + strCond + '%\'' + \
-                        ' ORDER BY SJMBCode '
+                        ' ORDER BY SJVDCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
             # strTemp=''
