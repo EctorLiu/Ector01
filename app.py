@@ -456,7 +456,7 @@ def handle_message(event):
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT [SJVDCode],[SJVDPRType],[SJVDCorpName],[SJVDPRName],[SJVDPRTitle], ' + \
                         ' [SJVDCorpTel],[SJVDCorpEMail],[SJVDCorpAddress],[SJVDCorpGoodText],[SJVDCorpWeb], ' + \
-                        ' [SJVDCorpProd] ' + \
+                        ' [SJVDCorpProd],[SJVDLastContact],[SJVDCPPT],[SJVDSVPT] ' + \
                         ' FROM [TIM_DB].[dbo].[tbl0A_SJVD_VendorList] ' + \
                         ' WHERE [SJVDCorpName] LIKE ' + '\'%' + strCond + '%\'' + \
                             ' OR [SJVDPRName] LIKE ' + '\'%' + strCond + '%\'' + \
@@ -467,19 +467,28 @@ def handle_message(event):
             # strTemp=''
             for (SJVDCode, SJVDPRType, SJVDCorpName, SJVDPRName, SJVDPRTitle, \
                     SJVDCorpTel, SJVDCorpEMail, SJVDCorpAddress, SJVDCorpGoodText, SJVDCorpWeb, \
-                    SJVDCorpProd) in resList:
+                    SJVDCorpProd,SJVDLastContact,SJVDCPPT,SJVDSVPT) in resList:
                 intCount += 1
                 strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJVDCode) + '】 ' + '\n' + \
                             '  (' + str(SJMBPRType) + ') ' + str(SJVDCorpName) + '\n' + \
                             '  ' + str(SJVDPRName) + ' ' + str(SJVDPRTitle) + '\n' + \
-                            '  電話：' + str(SJVDCorpTel) + '\n' + \
-                            '  郵件：' + str(SJVDCorpEMail) + '\n' + \
-                            '  網站：' + str(SJVDCorpWeb) + '\n' + \
+                            '  電話：' + str(SJVDCorpTel) + '\n'
                             '  住址：' + str(SJVDCorpAddress) + '\n' + \
-                            '  優點描述：' + str(SJVDCorpGoodText) + '\n' + \
+                ##### 選填項目 #####
+                if len(SJVDCorpEMail) > 0:
+                    strTemp += '  郵件：' + str(SJVDCorpEMail) + '\n'
+                if len(SJVDCorpWeb) > 0:
+                    strTemp += '  網站：' + str(SJVDCorpWeb) + '\n'
+                if len(SJVDLastContact) > 0:
+                    strTemp += '  合作日期：' + str(SJVDLastContact) + '\n'
+                if len(SJVDCPPT) > 0:
+                    strTemp += '  評分(性價比1-10)：' + str(SJVDCPPT) + '\n'
+                if len(SJVDSVPT) > 0:
+                    strTemp += '  評分(服務  1-10)：' + str(SJVDSVPT) + '\n'
+                ##### ##### ##### ##### #####
+                strTemp += '  優點描述：' + str(SJVDCorpGoodText) + '\n' + \
                             '  > 營業項目：' + str(SJVDCorpProd) + ' <\n\n'
             ##### ##### ##### ##### #####
-
 
             if len(strTemp) >= GVintMaxLineMSGString:
                 strTemp = strTemp[0:GVintMaxLineMSGString] + '...(資料過多)'
