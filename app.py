@@ -480,7 +480,7 @@ def handle_message(event):
                 if len(SJVDCorpWeb) > 0:
                     strTemp += '  網站：' + str(SJVDCorpWeb) + '\n'
                 if (SJVDLastContact) is not None:
-                    strTemp += '  合作日期：' + str(SJVDLastContact) + '\n'
+                    strTemp += '  合作日期：' + SJVDLastContact.strftime("%Y-%m-%d") + '\n'
                 if (SJVDCPPT is not None):
                     if (SJVDCPPT > 0):
                         strTemp += '  評分(性價比)：' + str(SJVDCPPT) + '\n'
