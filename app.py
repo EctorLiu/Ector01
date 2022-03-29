@@ -475,11 +475,13 @@ def handle_message(event):
                             '  電話：' + str(SJVDCorpTel) + '\n' + \
                             '  住址：' + str(SJVDCorpAddress) + '\n'
                 ##### 選填項目 #####
-                if len(SJVDCorpEMail) > 0:
-                    strTemp += '  郵件：' + str(SJVDCorpEMail) + '\n'
-                if len(SJVDCorpWeb) > 0:
-                    strTemp += '  網站：' + str(SJVDCorpWeb) + '\n'
-                if (SJVDLastContact) is not None:
+                if (SJVDCorpEMail is not None):
+                    if len(SJVDCorpEMail.strip()) > 0:
+                        strTemp += '  郵件：' + str(SJVDCorpEMail) + '\n'
+                if (SJVDCorpWeb is not None):
+                    if len(SJVDCorpWeb.strip()) > 0:
+                        strTemp += '  網站：' + str(SJVDCorpWeb) + '\n'
+                if (SJVDLastContact is not None):
                     strTemp += '  合作日期：' + SJVDLastContact.strftime("%Y-%m-%d") + '\n'
                 if (SJVDCPPT is not None):
                     if (SJVDCPPT > 0):
