@@ -420,7 +420,7 @@ def handle_message(event):
             strCond = strEventMSG[-(len(strEventMSG)-1):]
         strCond=strCond.strip()
 
-        strTitle = '(Query)查詢會員公司營業資料'
+        strTitle = '(Query)查詢廠區會員/優質供應商通訊錄'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if GVstrSQL_FW_Switch == 'ON':
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
@@ -482,9 +482,9 @@ def handle_message(event):
                 if (SJVDLastContact) is not None:
                     strTemp += '  合作日期：' + str(SJVDLastContact) + '\n'
                 if (SJVDCPPT) is not None:
-                    strTemp += '  評分(性價比1-10)：' + str(SJVDCPPT) + '\n'
+                    strTemp += '  評分(性價比)：' + str(SJVDCPPT) + '\n'
                 if (SJVDSVPT) is not None:
-                    strTemp += '  評分(服務  1-10)：' + str(SJVDSVPT) + '\n'
+                    strTemp += '  評分(服務)：' + str(SJVDSVPT) + '\n'
                 ##### ##### ##### ##### #####
                 strTemp += '  優點描述：' + str(SJVDCorpGoodText) + '\n' + \
                             '  > 營業項目：' + str(SJVDCorpProd) + ' <\n\n'
