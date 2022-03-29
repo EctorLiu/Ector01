@@ -479,7 +479,7 @@ def handle_message(event):
                     strTemp += '  郵件：' + str(SJVDCorpEMail) + '\n'
                 if len(SJVDCorpWeb) > 0:
                     strTemp += '  網站：' + str(SJVDCorpWeb) + '\n'
-                if len(SJVDLastContact) > 0:
+                if (SJVDLastContact) is not None:
                     strTemp += '  合作日期：' + str(SJVDLastContact) + '\n'
                 if len(SJVDCPPT) > 0:
                     strTemp += '  評分(性價比1-10)：' + str(SJVDCPPT) + '\n'
