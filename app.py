@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M329)08:26'
+strVer = '(M329)0836'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -451,7 +451,7 @@ def handle_message(event):
 
 
             ##### 外部廠商 #####
-            strTemp += ' 下方為外部非會員廠商： \n '
+            strTemp += ' ===== 下方為外部非會員廠商 ===== \n\n '
 
             ms = pymsdb.MSSQL(host=GVstr254_host, port=GVstr254_port, user=GVstr254_user, pwd=GVstr254_pwd, db=GVstr254_TIM_DB)
             strSQL = ' SELECT [SJVDCode],[SJVDPRType],[SJVDCorpName],[SJVDPRName],[SJVDPRTitle], ' + \
@@ -464,7 +464,7 @@ def handle_message(event):
                         ' ORDER BY SJMBCode '
             resList = ms.RS_SQL_ExecQuery(strSQL)
             intCount=0
-            strTemp=''
+            # strTemp=''
             for (SJVDCode, SJVDPRType, SJVDCorpName, SJVDPRName, SJVDPRTitle, \
                     SJVDCorpTel, SJVDCorpEMail, SJVDCorpAddress, SJVDCorpGoodText, SJVDCorpWeb, \
                     SJVDCorpProd) in resList:
