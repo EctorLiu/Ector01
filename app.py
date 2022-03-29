@@ -481,12 +481,12 @@ def handle_message(event):
                     strTemp += '  網站：' + str(SJVDCorpWeb) + '\n'
                 if (SJVDLastContact) is not None:
                     strTemp += '  合作日期：' + str(SJVDLastContact) + '\n'
-                # if (SJVDCPPT) is not None:
-                if (SJVDCPPT) > 0:
-                    strTemp += '  評分(性價比)：' + str(SJVDCPPT) + '\n'
-                # if (SJVDSVPT) is not None:
-                if (SJVDSVPT) > 0:
-                    strTemp += '  評分(服務)：' + str(SJVDSVPT) + '\n'
+                if (SJVDCPPT is not None):
+                    if (SJVDCPPT > 0):
+                        strTemp += '  評分(性價比)：' + str(SJVDCPPT) + '\n'
+                if (SJVDSVPT is not None):
+                    if (SJVDSVPT) > 0:
+                        strTemp += '  評分(服務)：' + str(SJVDSVPT) + '\n'
                 ##### ##### ##### ##### #####
                 strTemp += '  優點描述：' + str(SJVDCorpGoodText) + '\n' + \
                             '  > 營業項目：' + str(SJVDCorpProd) + ' <\n\n'
