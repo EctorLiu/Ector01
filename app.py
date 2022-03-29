@@ -469,7 +469,7 @@ def handle_message(event):
                     SJVDCorpTel, SJVDCorpEMail, SJVDCorpAddress, SJVDCorpGoodText, SJVDCorpWeb, \
                     SJVDCorpProd) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJVDCode) + '】 ' + \
+                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJVDCode) + '】 ' + '\n' + \
                             '  (' + str(SJMBPRType) + ') ' + str(SJVDCorpName) + '\n' + \
                             '  ' + str(SJVDPRName) + ' ' + str(SJVDPRTitle) + '\n' + \
                             '  電話：' + str(SJVDCorpTel) + '\n' + \
