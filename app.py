@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M329)1556'
+strVer = '(M526)1010'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -178,7 +178,7 @@ def handle_message(event):
 
     ##### 關鍵字 #####
     elif ('最近' in strEventMSG or '最新' in strEventMSG) and \
-            ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG or '消息' in strEventMSG):
+            ('訊息' in strEventMSG or '活動' in strEventMSG or '新聞' in strEventMSG or '消息' in strEventMSG or '資訊' in strEventMSG):
         strTitle = '最近訊息/新聞(最近20筆)'
         get_TYPE_message = 'SYS_KW_INPUT_MSG'
         if GVstrSQL_FW_Switch == 'ON':
