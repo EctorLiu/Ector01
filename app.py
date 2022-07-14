@@ -493,9 +493,9 @@ def handle_message(event):
                 if (SJVDCPPT is not None):
                     if (SJVDCPPT > 0):
                         if (SJVDSVPT > 1):
-                            strTemp += '⊚ 推薦評分(性價比)：【' + str(SJVDCPPT) + '】' + '（' + str(SJVDSVPT) + '則）\n'
+                            strTemp += '⊚ 推薦評分(5分最高)：【' + str(SJVDCPPT) + '】' + '（' + str(SJVDSVPT) + '則）\n'
                         else:
-                            strTemp += '⊚ 推薦評分(性價比)：【' + str(SJVDCPPT) + '】\n'
+                            strTemp += '⊚ 推薦評分(5分最高)：【' + str(SJVDCPPT) + '】\n'
                 if (SJVDCorpGoodText is not None):
                     if len(SJVDCorpGoodText.strip()) > 0:
                         strTemp += '\n※※ 優點描述 ※※\n'
