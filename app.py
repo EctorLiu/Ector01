@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M531)1746'
+strVer = '(M714)1414'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -472,7 +472,7 @@ def handle_message(event):
                     SJVDCorpProd,SJVDLastContact,SJVDCPPT,SJVDSVPT) in resList:
                 intCount += 1
                 strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJVDCode) + '】 ' + '\n' + \
-                            '  (' + str(SJVDPRType) + ') \n' + \
+                            '→ 類別：' + str(SJVDPRType) + '\n' + \
                             '【廠商名稱】' + str(SJVDCorpName) + '\n'
                 ##### 選填項目 #####
                 if (SJVDPRName is not None):
@@ -493,9 +493,15 @@ def handle_message(event):
                 if (SJVDCPPT is not None):
                     if (SJVDCPPT > 0):
                         strTemp += '>推薦評分(性價比)：' + str(SJVDCPPT) + '\n'
-                ##### ##### ##### ##### #####
-                strTemp += '  優點描述：' + str(SJVDCorpGoodText) + '\n' + \
-                            '  > 營業項目：' + str(SJVDCorpProd) + ' <\n\n'
+                if (SJVDCorpGoodText is not None):
+                    if (SJVDCorpGoodText > 0):
+                        strTemp += '..... 優點描述 .....'
+                        strTemp += str(SJVDCorpGoodText) + '\n'
+                if (SJVDCorpProd is not None):
+                    if (SJVDCorpProd > 0):
+                        strTemp += '..... 實績或合作經驗 .....'
+                        strTemp += str(SJVDCorpProd) + '\n'
+                strTemp += '..... ..... ..... .....\n\n'
             ##### ##### ##### ##### #####
 
             if len(strTemp) >= GVintMaxLineMSGString:
