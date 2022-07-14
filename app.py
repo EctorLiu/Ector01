@@ -493,16 +493,16 @@ def handle_message(event):
                 if (SJVDCPPT is not None):
                     if (SJVDCPPT > 0):
                         if (SJVDSVPT > 1):
-                            strTemp += '⊚ 推薦評分(性價比)：【' + str(SJVDCPPT) + '】' + '..（' + str(SJVDSVPT) + '則）\n'
+                            strTemp += '⊚ 推薦評分(性價比)：【' + str(SJVDCPPT) + '】' + '（' + str(SJVDSVPT) + '則）\n'
                         else:
                             strTemp += '⊚ 推薦評分(性價比)：【' + str(SJVDCPPT) + '】\n'
                 if (SJVDCorpGoodText is not None):
                     if len(SJVDCorpGoodText.strip()) > 0:
-                        strTemp += '\n..... 優點描述 .....\n'
+                        strTemp += '\n===== 優點描述 =====\n'
                         strTemp += str(SJVDCorpGoodText) + '\n'
                 if (SJVDCorpProd is not None):
                     if len(SJVDCorpProd.strip()) > 0:
-                        strTemp += '\n..... 實績或合作經驗 .....\n'
+                        strTemp += '\n===== 實績或合作經驗 =====\n'
                         strTemp += str(SJVDCorpProd) + '\n'
                 strTemp += '..... ..... ..... .....\n\n'
             ##### ##### ##### ##### #####
