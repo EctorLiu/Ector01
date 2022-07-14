@@ -1,7 +1,7 @@
 # ===== ===== ===== ===== ===== 【宣告區域】 ===== ===== ===== ===== =====
 
     ##### 版本 ######
-strVer = '(M714)1414'
+strVer = '(M714)1552'
     # ***** ***** ***** ***** *****
 
     ##### (SJ)推播 ######
@@ -193,7 +193,7 @@ def handle_message(event):
             strTemp=''
             for (SJBTCode, SJBTText, SJBTStatus, SJBTEditDate) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJBTCode) + '】\n' + \
+                strTemp += '(' + str(intCount) + ') 案號 【' + str(SJBTCode) + '】\n' + \
                             '  更新日期：[ ' + str(SJBTEditDate) + ' ]\n' + \
                             '  ' + str(SJBTText) + '\n' + \
                             '  ' + str(SJBTStatus) + '\n\n'
@@ -220,7 +220,7 @@ def handle_message(event):
             strTemp=''
             for (SJBTCode, SJBTText, SJBTStatus, SJBTEditDate) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJBTCode) + '】\n' + \
+                strTemp += '(' + str(intCount) + ') 案號 【' + str(SJBTCode) + '】\n' + \
                             '  更新日期：[ ' + str(SJBTEditDate) + ' ]\n' + \
                             '  ' + str(SJBTText) + '\n' + \
                             '  ' + str(SJBTStatus) + '\n\n'
@@ -247,7 +247,7 @@ def handle_message(event):
             strTemp=''
             for (SJBTCode, SJBTText, SJBTStatus, SJBTEditDate) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJBTCode) + '】\n' + \
+                strTemp += '(' + str(intCount) + ') 案號 【' + str(SJBTCode) + '】\n' + \
                             '  更新日期：[ ' + str(SJBTEditDate) + ' ]\n' + \
                             '  ' + str(SJBTText) + '\n' + \
                             '  ' + str(SJBTStatus) + '\n\n'
@@ -317,11 +317,11 @@ def handle_message(event):
             for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle) in resList:
                 intCount += 1
                 if SJMBPRType == '一般會員':
-                    strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 \n' + \
+                    strTemp += '(' + str(intCount) + ') 編號【' + str(SJMBCode) + '】 \n' + \
                                 '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
                 else:
-                    strTemp += '[ ' + str(intCount) + ' ] 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
+                    strTemp += '(' + str(intCount) + ') 編號【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + '\n' + \
                                 '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                                 '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n\n'
             if len(strTemp) >= GVintMaxLineMSGString:
@@ -354,7 +354,7 @@ def handle_message(event):
                     strCorpProdText = SJMBCorpProd[0:GVintMaxItemString] + '...'
                 else:
                     strCorpProdText = SJMBCorpProd
-                strTemp += '[ ' + str(intCount) + ' ] ' + str(SJMBPRType) + '：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
+                strTemp += '(' + str(intCount) + ') ' + str(SJMBPRType) + '：' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  編號 【' + str(SJMBCode) + '】' + '\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n' + \
@@ -387,7 +387,7 @@ def handle_message(event):
             strTemp=''
             for (SJCTType, SJCTCTMain, SJCTCTUnit, SJCTCTTel, SJCTCTWindow, SJCTCTAddress, SJCTCTUrl) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] ' + str(SJCTType) + '：' + \
+                strTemp += '(' + str(intCount) + ') ' + str(SJCTType) + '：' + \
                             '' + str(SJCTCTMain)
                 if len(str(SJCTCTUnit)) > 0:
                     strTemp += '-' + str(SJCTCTUnit)
@@ -441,7 +441,7 @@ def handle_message(event):
                     SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, \
                     SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
+                strTemp += '(' + str(intCount) + ') 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  成立：' + str(SJMBCorpSince) + '\n' + \
@@ -537,7 +537,7 @@ def handle_message(event):
             strTemp=''
             for (SJMBCode, SJMBPRType, SJMBCorpUniNum, SJMBCorpName, SJMBPRName, SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
+                strTemp += '(' + str(intCount) + ') 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
                             '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
                             '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
                             '  廠址：' + str(SJMBCorpAddress) + '\n\n'
@@ -579,7 +579,7 @@ def handle_message(event):
             strTemp=''
             for (SJCSCode, SJCSEditDate, SJCSText, SJCSStatus, SJCSNum, SJCSPrice, SJCSNow) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJCSCode) + '】\n' + \
+                strTemp += '(' + str(intCount) + ') 案號 【' + str(SJCSCode) + '】\n' + \
                             '  更新日期：[ ' + str(SJCSEditDate) + ' ]\n' + \
                             '  ' + str(SJCSText) + '：\n' + \
                             '  ' + str(SJCSStatus) + '：\n' + \
@@ -618,7 +618,7 @@ def handle_message(event):
             strTemp=''
             for (SJBKCode, SJBKEditDate, SJBKText, SJBKStatus, SJBKNum, SJBKPrice, SJBKNow) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 案號 【' + str(SJBKCode) + '】\n' + \
+                strTemp += '(' + str(intCount) + ') 案號 【' + str(SJBKCode) + '】\n' + \
                             '  更新日期：[ ' + str(SJBKEditDate) + ' ]\n' + \
                             '  ' + str(SJBKText) + '：\n' + \
                             '  ' + str(SJBKStatus) + '：\n' + \
@@ -775,7 +775,7 @@ def handle_message(event):
 #                    SJMBPRTitle, SJMBCorpAddress, SJMBCorpEmpNum, SJMBCorpProd, SJMBCorpTel, \
 #                    SJMBCorpSince, SJMBCorpPRName, SJMBCorpPRTitle) in resList:
 #                intCount += 1
-#                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
+#                strTemp += '(' + str(intCount) + ') 編號 【' + str(SJMBCode) + '】 ' + str(SJMBPRType) + ' (' + str(SJMBCorpEmpNum) + '人)\n' + \
 #                            '  (' + str(SJMBCorpUniNum) + ') ' + str(SJMBCorpName) + '\n' + \
 #                            '  ' + str(SJMBPRName) + ' ' + str(SJMBPRTitle) + '\n' + \
 #                            '  成立：' + str(SJMBCorpSince) + '\n' + \
