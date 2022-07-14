@@ -471,7 +471,7 @@ def handle_message(event):
                     SJVDCorpTel, SJVDCorpEMail, SJVDCorpAddress, SJVDCorpGoodText, SJVDCorpWeb, \
                     SJVDCorpProd,SJVDLastContact,SJVDCPPT,SJVDSVPT) in resList:
                 intCount += 1
-                strTemp += '[ ' + str(intCount) + ' ] 編號 【' + str(SJVDCode) + '】 ' + '\n' + \
+                strTemp += '(' + str(intCount) + ') 編號 【' + str(SJVDCode) + '】 ' + '\n' + \
                             '→ 類別：' + str(SJVDPRType) + '\n' + \
                             '【廠商名稱】' + str(SJVDCorpName) + '\n'
                 ##### 選填項目 #####
@@ -498,11 +498,11 @@ def handle_message(event):
                             strTemp += '⊚ 推薦評分(性價比)：【' + str(SJVDCPPT) + '】\n'
                 if (SJVDCorpGoodText is not None):
                     if len(SJVDCorpGoodText.strip()) > 0:
-                        strTemp += '\n===== 優點描述 =====\n'
+                        strTemp += '\n※※ 優點描述 ※※\n'
                         strTemp += str(SJVDCorpGoodText) + '\n'
                 if (SJVDCorpProd is not None):
                     if len(SJVDCorpProd.strip()) > 0:
-                        strTemp += '\n===== 實績或合作經驗 =====\n'
+                        strTemp += '\n※※※ 實績或合作經驗 ※※※\n'
                         strTemp += str(SJVDCorpProd) + '\n'
                 strTemp += '..... ..... ..... .....\n\n'
             ##### ##### ##### ##### #####
