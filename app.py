@@ -504,7 +504,7 @@ def handle_message(event):
                     if len(SJVDCorpProd.strip()) > 0:
                         strTemp += '\n※※※ 實績或合作經驗 ※※※\n'
                         strTemp += str(SJVDCorpProd) + '\n'
-                strTemp += '..... ..... ..... .....\n\n'
+                strTemp += '..... ..... ..... .....\n\n\n'
             ##### ##### ##### ##### #####
 
             if len(strTemp) >= GVintMaxLineMSGString:
