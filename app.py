@@ -477,28 +477,31 @@ def handle_message(event):
                 ##### 選填項目 #####
                 if (SJVDPRName is not None):
                     if len(SJVDPRName.strip()) > 0:
-                        strTemp += '>廠商窗口：' + str(SJVDPRName) + '\n'
+                        strTemp += '⊚廠商窗口：' + str(SJVDPRName) + '\n'
                 if (SJVDCorpTel is not None):
                     if len(SJVDCorpTel.strip()) > 0:
-                        strTemp += '>聯絡方式：' + str(SJVDCorpTel) + '\n'
+                        strTemp += '⊚聯絡方式：' + str(SJVDCorpTel) + '\n'
                 if (SJVDCorpAddress is not None):
                     if len(SJVDCorpAddress.strip()) > 0:
-                        strTemp += '>廠商住址：' + str(SJVDCorpAddress) + '\n'
+                        strTemp += '⊚廠商住址：' + str(SJVDCorpAddress) + '\n'
                 if (SJVDCorpEMail is not None):
                     if len(SJVDCorpEMail.strip()) > 0:
-                        strTemp += '>郵件：' + str(SJVDCorpEMail) + '\n'
+                        strTemp += '⊚郵件：' + str(SJVDCorpEMail) + '\n'
                 if (SJVDCorpWeb is not None):
                     if len(SJVDCorpWeb.strip()) > 0:
-                        strTemp += '>網站：' + str(SJVDCorpWeb) + '\n'
+                        strTemp += '⊚網站：' + str(SJVDCorpWeb) + '\n'
                 if (SJVDCPPT is not None):
                     if (SJVDCPPT > 0):
-                        strTemp += '>推薦評分(性價比)：' + str(SJVDCPPT) + '\n'
+                        if (SJVDSVPT > 1):
+                            strTemp += '⊚推薦評分(性價比)：【' + str(SJVDCPPT) + '】' + '..『' + str(SJVDSVPT) + '』則\n'
+                        else:
+                            strTemp += '⊚推薦評分(性價比)：【' + str(SJVDCPPT) + '】\n'
                 if (SJVDCorpGoodText is not None):
-                    if (SJVDCorpGoodText > 0):
+                    if len(SJVDCorpGoodText.strip()) > 0:
                         strTemp += '..... 優點描述 .....'
                         strTemp += str(SJVDCorpGoodText) + '\n'
                 if (SJVDCorpProd is not None):
-                    if (SJVDCorpProd > 0):
+                    if len(SJVDCorpProd.strip()) > 0:
                         strTemp += '..... 實績或合作經驗 .....'
                         strTemp += str(SJVDCorpProd) + '\n'
                 strTemp += '..... ..... ..... .....\n\n'
